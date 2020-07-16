@@ -1,0 +1,14 @@
+
+spring:
+    datasource:
+        name: test  #���ݿ���
+        url: jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC #url
+        username: root  #�û���
+        password: 123456  #����
+        driver-class-name: com.mysql.cj.jdbc.Driver  #���ݿ���������
+server:
+    port: 8089
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml  #����ӳ���ļ�
+#    type-aliases-package: com.example.demo.entity #����ʵ����

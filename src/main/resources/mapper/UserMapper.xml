@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.UserEntity">
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"></result>
+        <result column="user_age" property="userAge" jdbcType="VARCHAR"></result>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"></result>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id,user_name,user_age,user_password
+    </sql>
+
+    <select id="getInfo" parameterType="String" resultType="com.example.demo.entity.UserEntity">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_user
+        WHERE user_name = #{userName} AND user_password = #{userPassword}
+    </select>
+
+</mapper>

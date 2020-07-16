@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ScoreEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.ScoreEntity" >
+    <id column="score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="score_subject" property="scoreSubject" jdbcType="VARCHAR" />
+    <result column="score_num" property="scoreNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    score_id, score_subject, score_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.ScoreEntity" >
+    insert into t_score (score_id, score_subject, score_num
+      )
+    values (#{scoreId,jdbcType=INTEGER}, #{scoreSubject,jdbcType=VARCHAR}, #{scoreNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.ScoreEntity" >
+    insert into t_score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        score_id,
+      </if>
+      <if test="scoreSubject != null" >
+        score_subject,
+      </if>
+      <if test="scoreNum != null" >
+        score_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreSubject != null" >
+        #{scoreSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreNum != null" >
+        #{scoreNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.ScoreEntity" >
+    update t_score
+    <set >
+      <if test="scoreSubject != null" >
+        score_subject = #{scoreSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreNum != null" >
+        score_num = #{scoreNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.ScoreEntity" >
+    update t_score
+    set score_subject = #{scoreSubject,jdbcType=VARCHAR},
+      score_num = #{scoreNum,jdbcType=VARCHAR}
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+</mapper>
