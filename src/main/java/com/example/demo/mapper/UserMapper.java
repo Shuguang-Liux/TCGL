@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.entity.UserEntity;
 
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,5 +16,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(UserEntity record);
 
-    UserEntity getInfo(String userName,String userPassword);
+    UserEntity getInfo(UserEntity userEntity);
 }

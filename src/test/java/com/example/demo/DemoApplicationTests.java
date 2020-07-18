@@ -20,7 +20,7 @@ class DemoApplicationTests {
     @Test
     public void test(){
         UserEntity userEntity = new UserEntity();
-        userEntity = userService.getInfo("admin","admin");
+        userEntity = userService.getInfo(userEntity);
         System.out.println("该用户ID是：");
         System.out.println(userEntity.getId());
     }

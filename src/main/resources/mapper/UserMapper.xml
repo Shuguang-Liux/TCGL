@@ -10,6 +10,21 @@
   <sql id="Base_Column_List">
     id, user_name, user_age, user_password
   </sql>
+  <sql id="Base_Column_Condition">
+    1 = 1
+    <if test="id != null and id != ''">
+      and id = #{userName,jdbcType=INTEGER}
+    </if>
+    <if test="userName != null and userName != ''">
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="userAge != null and userAge != ''" >
+      and user_age = #{userAge,jdbcType=INTEGER}
+    </if>
+    <if test="userPassword != null and userPassword != ''">
+      and user_password = #{userPassword,jdbcType=VARCHAR}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -81,9 +96,11 @@
   </update>
     <select id="getInfo" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         FROM t_user
-        WHERE user_name = #{userName} AND user_password = #{userPassword}
+      <where>
+        <include refid="Base_Column_Condition"/>
+      </where>
     </select>
 
 </mapper>

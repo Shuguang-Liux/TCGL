@@ -5,8 +5,7 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @package com.example.demo.service.impl
@@ -21,7 +20,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserEntity getInfo(String userName,String userPassword){
-        return userMapper.getInfo(userName,userPassword);
+    public UserEntity getInfo(UserEntity userEntity){
+        if (userEntity != null){
+            return userMapper.getInfo(userEntity);
+        }
+        return null;
+
     }
 }

@@ -1,29 +1,35 @@
 package com.example.demo.controller;
 
+
+
 import com.example.demo.entity.UserEntity;
 import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.HtmlUtils;
 
-import java.util.List;
-import java.util.Objects;
-
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
     @CrossOrigin
     @RequestMapping(value = "api/sysUser/getSomething")
-    @ResponseBody
-
-    public UserEntity getUserInfo(){
-        UserEntity userEntity = userService.getInfo("admin","admin");
-        return userEntity;
+//    @ResponseBody
+    public Result getUserInfo(@RequestBody UserEntity requestUser){
+//        String userName = requestUser.getUserName();
+//        String userPassword = requestUser.getUserPassword();
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setUserName();
+        UserEntity userEntity = userService.getInfo(requestUser);
+        if (null != userEntity){
+            System.out.println("存在此用户，正常登录操作");
+            return new Result(200);
+        }else {
+            return new Result(400);
+        }
     }
+
 //    public Result login(@RequestBody UserEntity requestUser) {
 //        // 对 html 标签进行转义，防止 XSS 攻击
 //        String username = requestUser.getUserName();

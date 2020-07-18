@@ -13,5 +13,6 @@ import javax.annotation.Resource;
  * @Date 2020/7/15 17:31
  **/
 public interface UserService {
-    UserEntity getInfo(String userName,String userPassword);
+
+    UserEntity getInfo(UserEntity userEntity);
 }

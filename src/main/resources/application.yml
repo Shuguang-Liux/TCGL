@@ -1,14 +1,20 @@
-
+debug: true
 spring:
+#    热部署配置
+    devtools:
+      restart:
+          enabled: true
     datasource:
-        name: test  #���ݿ���
+        name: test  #数据库名称
         url: jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC #url
-        username: root  #�û���
-        password: 123456  #����
-        driver-class-name: com.mysql.cj.jdbc.Driver  #���ݿ���������
+        username: root  #数据库用户名
+        password: 123456  #用户密码
+        driver-class-name: com.mysql.cj.jdbc.Driver  #驱动名称
 server:
     port: 8082
 
 mybatis:
     mapper-locations: classpath:mapper/*.xml  #����ӳ���ļ�
 #    type-aliases-package: com.example.demo.entity #����ʵ����
+
+
