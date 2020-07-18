@@ -1,0 +1,45 @@
+<script type="application/javascript">
+    //发送表单ajax请求
+    function login(){
+        var formObject = {};
+        var formArray =$("#registerForm").serializeArray();
+        $.each(formArray,function(i,item){
+            formObject[item.name] = item.value;
+        });
+
+        $.ajax({
+            url:"/user",
+            type:"POST",
+            data:JSON.stringify(formObject),
+            contentType:"application/json; charset=utf-8",  //缺失会出现URL编码，无法转成json对象
+            success:function(data){
+                alert(data.message);
+            },
+        });
+    }
+</script>
+
+=======================================================
+<form id="registerForm" class="p-4 bg-dark-opaque" method="post" action="localhost:8089/user">
+    <h4 class="mb-4 text-center">Sign Up</h4>
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" required="required" name="name"></div>
+<!--    <div class="form-group">-->
+<!--        <label>Student ID</label>-->
+<!--        <input class="form-control" type="text" required="required" name="userId"></div>-->
+    <div class="form-group">
+        <label>Passsword</label>
+        <input class="form-control" required="required" type="password" name="pwdHash"></div>
+<!--    <div class="form-group">-->
+<!--        <label>Phone Number</label>-->
+<!--        <input class="form-control" required="required" type="text" name="email"></div>-->
+    <button  onclick="login()" class="btn mt-4 btn-block p-2 btn-outline-primary">
+        <b>Submit
+            <br>
+        </b>
+    </button>
+    <button class="btn mt-4 btn-block btn-outline-primary p-2">
+        <b><a href="">Go Back</a></b>
+    </button>
+</form>

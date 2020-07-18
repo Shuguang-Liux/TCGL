@@ -56,8 +56,8 @@
         </javaClientGenerator>
 
         <!-- 设置数据库的表名和实体类名 -->
-        <table schema="test" tableName="t_score" enableSelectByPrimaryKey="true"
-               domainObjectName="ScoreEntity" enableCountByExample="false"
+        <table schema="test" tableName="t_user" enableSelectByPrimaryKey="true"
+               domainObjectName="User" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

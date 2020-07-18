@@ -1,16 +1,19 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.UserEntity;
-import org.apache.ibatis.annotations.Mapper;
 
-/**
- * @package com.example.demo.mapper
- * @Description ToDo
- * @Editor liuxiao
- * @Date 2020/7/15 13:52
- **/
-//@Mapper
-//@Repository
 public interface UserMapper {
-    UserEntity getInfo(String userName, String userPassword);
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(UserEntity record);
+
+    int insertSelective(UserEntity record);
+
+    UserEntity selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(UserEntity record);
+
+    int updateByPrimaryKey(UserEntity record);
+
+    UserEntity getInfo(String userName,String userPassword);
 }

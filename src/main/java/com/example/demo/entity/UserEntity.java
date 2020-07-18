@@ -14,11 +14,11 @@ import lombok.Setter;
 public class UserEntity {
 
 
-    private int id;
+    private Integer id;
 
     private String userName;
 
-    private int userAge;
+    private Integer userAge;
 
     private String userPassword;
 
