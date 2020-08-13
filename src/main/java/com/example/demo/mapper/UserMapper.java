@@ -1,20 +1,25 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.User;
 
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(UserEntity record);
+    int insert(User record);
 
-    int insertSelective(UserEntity record);
+    int insertSelective(User record);
 
-    UserEntity selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(UserEntity record);
+    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(UserEntity record);
+    int updateByPrimaryKey(User record);
 
-    UserEntity getInfo(UserEntity userEntity);
+    User getInfo(User user);
+
+    int updateUserInfo(User user);
+
+    List<User> getAllUserByUsername(User user);
 }

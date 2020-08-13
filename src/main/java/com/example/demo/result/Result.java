@@ -11,12 +11,15 @@ import lombok.Setter;
  **/
 @Setter
 @Getter
-public class Result {
+public class Result{
 
-        //响应码
-        private int code;
+    //响应码
+    private int code;
 
-        public Result(int code) {
-            this.code = code;
-        }
+    private String message;
+
+    public Result() {
+        this.code = code;
+        this.message = message;
+    }
 }

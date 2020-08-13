@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 指定数据库驱动的jdbc驱动jar包的位置 -->
-    <classPathEntry location="C:\Users\17554\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar" />
+    <classPathEntry location="C:\Users\Shuguang_Liux\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar" />
 
     <!-- <context id="mysql" defaultModelType="hierarchical" targetRuntime="MyBatis3Simple" >-->
     <context id="Tables" targetRuntime="MyBatis3">
@@ -21,7 +21,7 @@
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
             <!--是否生成注释-->
-            <!--<property name="addRemarkComments" value="true"/>-->
+            <property name="addRemarkComments" value="true"/>
         </commentGenerator>
 
         <!-- JDBC连接 链接URL加时区限制-->
@@ -56,8 +56,8 @@
         </javaClientGenerator>
 
         <!-- 设置数据库的表名和实体类名 -->
-        <table schema="test" tableName="t_user" enableSelectByPrimaryKey="true"
-               domainObjectName="User" enableCountByExample="false"
+        <table schema="test" tableName="t_record" enableSelectByPrimaryKey="true"
+               domainObjectName="Record" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

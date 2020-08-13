@@ -1,8 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.entity.ScoreEntity;
-import com.example.demo.entity.UserEntity;
-import com.example.demo.mapper.ScoreEntityMapper;
+import com.example.demo.entity.User;
+import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +14,36 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 class DemoApplicationTests {
 
-    @Autowired
-    private UserService userService;
-    @Test
-    public void test(){
-        UserEntity userEntity = new UserEntity();
-        userEntity = userService.getInfo(userEntity);
-        System.out.println("该用户ID是：");
-        System.out.println(userEntity.getId());
-    }
 
     @Autowired
-    private ScoreEntityMapper scoreEntityMapper;
+    UserService userService;
     @Test
-    @Rollback(false)
-    public void testInsertScore(){
-        ScoreEntity scoreEntity = new ScoreEntity();
-        scoreEntity.setScoreNum("99");
-        scoreEntity.setScoreSubject("数学");
-        scoreEntityMapper.insert(scoreEntity);
-        System.out.println("插入成功");
+    public void test(){
+        User user = new User();
+        user.setUserName(null);
+        user.setUserPassword("123456");
+        Result result = userService.getInfo(user);
+        System.out.println(result.getMessage());
     }
+
+
+//    @Test
+//    @Rollback(false)
+//    public void testUpdateUserInfo(){
+//        User user = new User();
+//        user.setUserName("admin");
+//        user.setUserPassword("admin");
+//        int count = userService.updateUserInfo(user);
+//        if (count == 1){
+//            System.out.println("更新成功");
+//        }
+//    }
+
+//    @Test
+//    public void testDeleteUserInfo(){
+//        User user = new User();
+//        user.setUserName("1");
+//        String retLog = userService.deleteUserInfo(user);
+//        System.out.println(retLog);
+//    }
 }

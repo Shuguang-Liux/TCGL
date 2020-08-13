@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.mapper.UserMapper;
-import com.example.demo.entity.UserEntity;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
+import com.example.demo.entity.User;
+import com.example.demo.result.Result;
 
 /**
  * @package com.example.demo.service
@@ -14,5 +11,9 @@ import javax.annotation.Resource;
  **/
 public interface UserService {
 
-    UserEntity getInfo(UserEntity userEntity);
+    Result getInfo(User user);
+
+    Result updateUserInfo(User user);
+
+    Result deleteUserInfo(User user);
 }
