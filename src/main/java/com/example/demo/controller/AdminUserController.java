@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserController {
+@RequestMapping("/admin")
+public class AdminUserController {
     @Autowired
     private UserService userService;
 
     @CrossOrigin
     /**
-     * 登录用户验证
+     * 管理员用户登录
      */
-    @RequestMapping(value = "api/login")
+    @RequestMapping(value = "/login")
     public Result getUserInfo(@RequestBody User requestUser){
         Result result = userService.getInfo(requestUser);
         return result;
@@ -27,7 +28,7 @@ public class UserController {
      * 根据用户名称更新用户信息
      * @param requestUser
      */
-    @RequestMapping(value = "updateUserInfo")
+    @RequestMapping(value = "/updateUserInfo")
     public Result updateUserInfo(@RequestBody User requestUser){
         Result result = userService.updateUserInfo(requestUser);
         return result;
@@ -38,9 +39,20 @@ public class UserController {
      * @param requestUser
      * @return
      */
-    @RequestMapping(value = "deleteUser")
+    @RequestMapping(value = "/deleteUser")
     public Result deleteUserInfo(@RequestBody User requestUser){
         Result result = userService.deleteUserInfo(requestUser);
+        return result;
+    }
+
+    /**
+     * 管理员添加用户信息（默认为普通用户）
+     * @param requestUser
+     * @return
+     */
+    @RequestMapping(value = "/insertUseInfo")
+    public Result insertUseInfo(@RequestBody User requestUser){
+        Result result = userService.insertUserInfo(requestUser);
         return result;
     }
 

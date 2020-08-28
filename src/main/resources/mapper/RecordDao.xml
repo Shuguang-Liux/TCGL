@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.RecordDao">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Record">
+    <id column="source_id" jdbcType="INTEGER" property="sourceId" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+    <result column="time_count" jdbcType="DECIMAL" property="timeCount" />
+    <result column="billing_price" jdbcType="DECIMAL" property="billingPrice" />
+    <result column="is_out" jdbcType="VARCHAR" property="isOut" />
+    <result column="access_times" jdbcType="INTEGER" property="accessTimes" />
+    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    source_id, license_plate, owner_name, enter_time, out_time, time_count, billing_price, 
+    is_out, access_times, delete_state
+  </sql>
+  <sql id="Base_Where">
+    <if test="sourceId !=null">
+      source_id = #{sourceId}
+    </if>
+    <if test="licensePlate != null">
+      and license_plate = #{licensePlate}
+    </if>
+    <if test="ownerName != null">
+      and owner_name = #{ownerName}
+    </if>
+    <if test="enterTime != null">
+      and enter_time = #{enterTime}
+    </if>
+    <if test="billingPrice != null">
+      and billing_price = #{billingPrice}
+    </if>
+    <if test="accessTimes != null">
+      and access_times = #{accessTimes}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_record
+    where source_id = #{sourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_record
+    where source_id = #{sourceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="source_id" keyProperty="sourceId" parameterType="com.example.demo.entity.Record" useGeneratedKeys="true">
+    insert into t_record (license_plate, owner_name, enter_time, 
+      out_time, time_count, billing_price, 
+      is_out, access_times, delete_state
+      )
+    values (#{licensePlate,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, #{enterTime,jdbcType=TIMESTAMP}, 
+      #{outTime,jdbcType=TIMESTAMP}, #{timeCount,jdbcType=DECIMAL}, #{billingPrice,jdbcType=DECIMAL}, 
+      #{isOut,jdbcType=VARCHAR}, #{accessTimes,jdbcType=INTEGER}, #{deleteState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="source_id" keyProperty="sourceId" parameterType="com.example.demo.entity.Record" useGeneratedKeys="true">
+    insert into t_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="licensePlate != null">
+        license_plate,
+      </if>
+      <if test="ownerName != null">
+        owner_name,
+      </if>
+      <if test="enterTime != null">
+        enter_time,
+      </if>
+      <if test="outTime != null">
+        out_time,
+      </if>
+      <if test="timeCount != null">
+        time_count,
+      </if>
+      <if test="billingPrice != null">
+        billing_price,
+      </if>
+      <if test="isOut != null">
+        is_out,
+      </if>
+      <if test="accessTimes != null">
+        access_times,
+      </if>
+      <if test="deleteState != null">
+        delete_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="licensePlate != null">
+        #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null">
+        #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeCount != null">
+        #{timeCount,jdbcType=DECIMAL},
+      </if>
+      <if test="billingPrice != null">
+        #{billingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isOut != null">
+        #{isOut,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTimes != null">
+        #{accessTimes,jdbcType=INTEGER},
+      </if>
+      <if test="deleteState != null">
+        #{deleteState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Record">
+    update t_record
+    <set>
+      <if test="licensePlate != null">
+        license_plate = #{licensePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null">
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null">
+        out_time = #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeCount != null">
+        time_count = #{timeCount,jdbcType=DECIMAL},
+      </if>
+      <if test="billingPrice != null">
+        billing_price = #{billingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isOut != null">
+        is_out = #{isOut,jdbcType=VARCHAR},
+      </if>
+      <if test="accessTimes != null">
+        access_times = #{accessTimes,jdbcType=INTEGER},
+      </if>
+      <if test="deleteState != null">
+        delete_state = #{deleteState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where source_id = #{sourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Record">
+    update t_record
+    set license_plate = #{licensePlate,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      out_time = #{outTime,jdbcType=TIMESTAMP},
+      time_count = #{timeCount,jdbcType=DECIMAL},
+      billing_price = #{billingPrice,jdbcType=DECIMAL},
+      is_out = #{isOut,jdbcType=VARCHAR},
+      access_times = #{accessTimes,jdbcType=INTEGER},
+      delete_state = #{deleteState,jdbcType=VARCHAR}
+    where source_id = #{sourceId,jdbcType=INTEGER}
+  </update>
+  <!--  分页查询-->
+  <select id="selectInfoByPage" parameterType="com.example.demo.entity.Record" resultType="com.example.demo.entity.Record">
+    select
+    <include refid="Base_Column_List"/>
+    from t_record
+    <where>
+      <include refid="Base_Where"/>
+    </where>
+  </select>
+  <!--  信息存在判断-->
+  <select id="isExistRecord" resultType="java.lang.Integer">
+    SELECT
+      count(*)
+    FROM
+      t_record
+    WHERE
+      license_plate = #{licensePlate}
+  </select>
+</mapper>

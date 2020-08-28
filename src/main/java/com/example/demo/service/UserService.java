@@ -16,4 +16,14 @@ public interface UserService {
     Result updateUserInfo(User user);
 
     Result deleteUserInfo(User user);
+
+    Result insertUserInfo(User user);
+
+    /**
+     * 查询用户是否存在
+     * @param userName
+     * @param userRole
+     * @return
+     */
+    boolean countUser(String userName, int userRole);
 }

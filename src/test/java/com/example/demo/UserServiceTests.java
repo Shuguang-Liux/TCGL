@@ -5,6 +5,7 @@ import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class DemoApplicationTests {
+class UserServiceTests {
 
 
     @Autowired
@@ -26,24 +27,25 @@ class DemoApplicationTests {
         System.out.println(result.getMessage());
     }
 
+    /**
+     * 用户存在测试
+     */
+    @Test
+    public void testUserIsExist(){
+        boolean a = userService.countUser("admin",0);
+        System.out.println(a);
+    }
 
-//    @Test
-//    @Rollback(false)
-//    public void testUpdateUserInfo(){
-//        User user = new User();
-//        user.setUserName("admin");
-//        user.setUserPassword("admin");
-//        int count = userService.updateUserInfo(user);
-//        if (count == 1){
-//            System.out.println("更新成功");
-//        }
-//    }
-
-//    @Test
-//    public void testDeleteUserInfo(){
-//        User user = new User();
-//        user.setUserName("1");
-//        String retLog = userService.deleteUserInfo(user);
-//        System.out.println(retLog);
-//    }
+    /**
+     * 用户信息插入测试
+     */
+    @Test
+    @Rollback
+    public void testInsertUserInfo(){
+        User user = new User();
+        user.setUserName("liu");
+        user.setUserPassword("123456");
+        Result result = userService.insertUserInfo(user);
+        System.out.println(result.getMessage());
+    }
 }

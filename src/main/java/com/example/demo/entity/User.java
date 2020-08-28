@@ -13,8 +13,6 @@ public class User {
 
     private String userName;
 
-    private Integer userAge;
-
     private String userPassword;
 
     private Integer userRole;

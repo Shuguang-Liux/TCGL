@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.UserMapper">
+<!--suppress ALL -->
+<mapper namespace="com.example.demo.mapper.UserDao">
   <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_age" jdbcType="INTEGER" property="userAge" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_role" jdbcType="INTEGER" property="userRole" />
     <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
@@ -18,9 +18,6 @@
     </if>
     <if test="userName != null and userName != ''">
       and user_name = #{userName,jdbcType=VARCHAR}
-    </if>
-    <if test="userAge != null and userAge != ''" >
-      and user_age = #{userAge,jdbcType=INTEGER}
     </if>
     <if test="userPassword != null and userPassword != ''">
       and user_password = #{userPassword,jdbcType=VARCHAR}
@@ -43,10 +40,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.demo.entity.User">
-    insert into t_user (id, user_name, user_age, 
+    insert into t_user (id, user_name,
       user_password, user_role, delete_state
       )
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
       #{userPassword,jdbcType=VARCHAR}, #{userRole,jdbcType=INTEGER}, #{deleteState,jdbcType=VARCHAR}
       )
   </insert>
@@ -58,9 +55,6 @@
       </if>
       <if test="userName != null">
         user_name,
-      </if>
-      <if test="userAge != null">
-        user_age,
       </if>
       <if test="userPassword != null">
         user_password,
@@ -79,9 +73,6 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userAge != null">
-        #{userAge,jdbcType=INTEGER},
-      </if>
       <if test="userPassword != null">
         #{userPassword,jdbcType=VARCHAR},
       </if>
@@ -99,9 +90,6 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userAge != null">
-        user_age = #{userAge,jdbcType=INTEGER},
-      </if>
       <if test="userPassword != null">
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
@@ -117,7 +105,6 @@
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.User">
     update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
-      user_age = #{userAge,jdbcType=INTEGER},
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_role = #{userRole,jdbcType=INTEGER},
       delete_state = #{deleteState,jdbcType=VARCHAR}
@@ -148,13 +135,27 @@
       <if test="userPassword!= null and userPassword != ''">
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="userAge != null and userAge != ''">
-       user_age = #{userAge,jdbcType=INTEGER},
-      </if>
       <if test="deleteState != null and deleteState != ''">
         delete_state = #{deleteState,jdbcType=VARCHAR},
       </if>
     </set>
     where user_name = #{userName,jdbcType=VARCHAR}
   </update>
+<!--  管理员插入用户信息-->
+  <insert id="insertUserInfo" parameterType="com.example.demo.entity.User">
+    INSERT INTO t_user ( user_name, user_password, user_role, delete_state )
+    VALUES
+      (#{userName},#{userPassword},'1','N')
+  </insert>
+<!--  根据用户名和角色查看用户是否存在-->
+  <select id="countUser" resultType="java.lang.Integer">
+    SELECT
+      count(*)
+    FROM
+      t_user
+    WHERE
+      user_name = #{userName}
+      and user_role = #{userRole}
+      and delete_state = 'N'
+  </select>
 </mapper>
