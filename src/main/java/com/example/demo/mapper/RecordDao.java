@@ -1,12 +1,16 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.Record;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author Shuguang_Liux
  */
+@Mapper
+@Repository("RecordDao")
 public interface RecordDao {
     /**
      * 主键删除
@@ -43,4 +47,11 @@ public interface RecordDao {
      * @return
      */
     int isExistRecord(String licensePlate);
+
+    /**
+     * 取单条
+     * @param licensePlate
+     * @return
+     */
+    Record selectRecordByOne(String licensePlate);
 }

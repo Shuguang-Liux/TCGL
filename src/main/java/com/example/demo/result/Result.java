@@ -1,25 +1,41 @@
 package com.example.demo.result;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
+ * @author Shuguang_Liux
  * @package com.example.demo.result
  * @Description ToDo
- * @Editor liuxiao
  * @Date 2020/7/16 17:39
  **/
-@Setter
-@Getter
-public class Result{
+@Data
+public class Result<T> implements Serializable {
 
-    //响应码
+    private static final long serialVersionUID = -1409598320516446621L;
+    /**
+     * 响应码
+     */
     private int code;
 
-    private String message;
+    /**
+     * 初始信息
+     */
+    private String message ="";
 
-    public Result() {
-        this.code = code;
-        this.message = message;
+    private T result;
+
+    /**
+     * 初始化布尔值
+     */
+    private boolean success = true;
+
+    public void setError(int code,String message){
+        this.code=code;
+        this.message=message;
     }
+
 }

@@ -15,10 +15,10 @@ import java.util.List;
 public interface RecordService {
     /**
      * 信息存在性判断
-     * @param record
+     * @param licensePlate
      * @return
      */
-    boolean isExistRecord(Record record);
+    boolean isExistRecord(String licensePlate);
 
     /**
      * 列表查询
@@ -32,19 +32,26 @@ public interface RecordService {
      * @param record
      * @return
      */
-    Result insertRecordInfo(Record record);
+    int insertRecordInfo(Record record);
 
     /**
      * 记录信息更新
      * @param record
      * @return
      */
-    Result updateRecordInfo(Record record);
+    int updateRecordInfo(Record record);
 
     /**
-     * 根据前台传递信息更新数据
-     * @param record
+     * 扫描入口信息更新
+     * @param licensePlate
      * @return
      */
-    Result saveRecordByFront(Record record);
+    Result saveRecordByFront(String licensePlate);
+
+    /**
+     * 更具信息取数据
+     * @param licensePlate
+     * @return
+     */
+    Record selectRecordByOne(String licensePlate);
 }

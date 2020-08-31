@@ -182,4 +182,13 @@
     WHERE
       license_plate = #{licensePlate}
   </select>
+<!--  根据车牌取唯一数据-->
+  <select id="selectRecordByOne" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List"></include>
+    from t_record
+    where
+        license_plate = #{licensePlate}
+        and delete_state = 'N'
+  </select>
 </mapper>
