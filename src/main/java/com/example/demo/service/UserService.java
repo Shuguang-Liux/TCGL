@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.result.Result;
 
 /**
@@ -11,13 +11,13 @@ import com.example.demo.result.Result;
  **/
 public interface UserService {
 
-    Result getInfo(User user);
+    Result<String> getInfo(UserEntity userEntity);
 
-    Result updateUserInfo(User user);
+    Result updateUserInfo(UserEntity userEntity);
 
-    Result deleteUserInfo(User user);
+    Result deleteUserInfo(UserEntity userEntity);
 
-    Result insertUserInfo(User user);
+    Result insertUserInfo(UserEntity userEntity);
 
     /**
      * 查询用户是否存在

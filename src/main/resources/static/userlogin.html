@@ -8,7 +8,7 @@
         });
 
         $.ajax({
-            url:"/user",
+            url:"/userEntity",
             type:"POST",
             data:JSON.stringify(formObject),
             contentType:"application/json; charset=utf-8",  //缺失会出现URL编码，无法转成json对象
@@ -20,7 +20,7 @@
 </script>
 
 =======================================================
-<form id="registerForm" class="p-4 bg-dark-opaque" method="post" action="localhost:8089/user">
+<form id="registerForm" class="p-4 bg-dark-opaque" method="post" action="localhost:8089/userEntity">
     <h4 class="mb-4 text-center">Sign Up</h4>
     <div class="form-group">
         <label>Name</label>

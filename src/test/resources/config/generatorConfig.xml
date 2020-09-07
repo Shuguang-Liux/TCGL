@@ -51,7 +51,7 @@
         </sqlMapGenerator>
 
         <!-- 生成 Mapper 的实体类的位置 -->
-        <javaClientGenerator targetPackage="com.example.demo.mapper" type="XMLMAPPER" targetProject="src/main/java">
+        <javaClientGenerator targetPackage="com.example.demo.dao" type="XMLMAPPER" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 

@@ -12,10 +12,11 @@ import java.io.Serializable;
  * @Description ToDo
  * @Date 2020/7/16 17:39
  **/
-@Data
+
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -1409598320516446621L;
+
     /**
      * 响应码
      */
@@ -33,9 +34,50 @@ public class Result<T> implements Serializable {
      */
     private boolean success = true;
 
-    public void setError(int code,String message){
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public void setResult(T result) {
+        this.result = result;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setError(int code, String message){
         this.code=code;
         this.message=message;
     }
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                ", success=" + success +
+                '}';
+    }
 }

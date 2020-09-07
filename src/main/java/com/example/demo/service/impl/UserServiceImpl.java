@@ -1,16 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.User;
-import com.example.demo.mapper.UserDao;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.demo.dao.UserDao;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
-
 /**
  * @author Shuguang_Liux
  * @package com.example.demo.service.impl
@@ -29,40 +26,38 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 获取用户信息
-     * @param user
+     * @param userEntity
      * @return
      */
     @Override
-    public Result getInfo(User user){
-        Result result = new Result();
-        result.setMessage("信息有误");
-        if (StringUtils.isNotBlank(user.getUserName()) && StringUtils.isNotBlank(user.getUserPassword())){
-            User userNew = new User();
-            userNew.setUserName(user.getUserName());
-            userNew.setUserPassword(user.getUserPassword());
-            User userRes = userDao.getInfo(userNew);
-            if (null != userRes){
-                System.out.println("存在此用户，正常登录操作");
-                result.setMessage("存在此用户，正常登录操作");
-                result.setCode(200);
+    public Result<String> getInfo(UserEntity userEntity){
+        Result<String> mapResult = new Result<>();
+        if (StringUtils.isNotBlank(userEntity.getUserName()) && StringUtils.isNotBlank(userEntity.getUserPassword())){
+            QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("user_name",userEntity.getUserName());
+            queryWrapper.eq("user_password",userEntity.getUserPassword());
+            UserEntity userEntityRes = userDao.selectOne(queryWrapper);
+            if (null != userEntityRes){
+                mapResult.setCode(200);
             }else {
-                result.setMessage("账户密码不正确");
+                mapResult.setError(400,"用户不存在，不允许登录！");
             }
-            return result;
+        }else {
+            mapResult.setError(400,"用户名密码不能为空！");
         }
-        return result;
+        return mapResult;
     }
 
     /**
      * 更新用户信息
-     * @param user
+     * @param userEntity
      * @return
      */
     @Override
-    public Result updateUserInfo(User user){
-        Result result = new Result();
-        result.setMessage("更新失败");
-        int count = userDao.updateUserInfo(user);
+    public Result<String> updateUserInfo(UserEntity userEntity){
+        Result<String> result = new Result<>();
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        int count = userDao.update(userEntity,queryWrapper);
         if (count == 1){
             result.setMessage("更新成功");
             return result;
@@ -72,58 +67,44 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 跟新用户删除状态
-     * @param user
+     * @param userEntity
      * @return
      */
     @Override
-    public Result deleteUserInfo(User user) {
-        Result result = new Result();
-        result.setMessage("用户名不能为空");
-        if (StringUtils.isNotBlank(user.getUserName())){
-            User userNew = new User();
-            userNew.setUserName(user.getUserName());
-            List<User> list = userDao.getAllUserByUsername(user);
-            if (CollectionUtils.isEmpty(list)){
-                result.setMessage("用户不存在");
-            }else {
-                for (User user1 : list) {
-                    user1.setDeleteState("Y");
-                    userDao.updateByPrimaryKey(user1);
-                }
-                result.setMessage("更新成功");
-            }
-            return result;
+    public Result<String> deleteUserInfo(UserEntity userEntity) {
+        Result<String> result = new Result<>();
+        userEntity.setDeleteState("Y");
+        int count = userDao.updateById(userEntity);
+        if (count == 1){
+            result.setCode(200);
+        }else {
+            result.setError(400,"删除失败");
         }
         return result;
-
-    }
+     }
 
     /**
      * 管理员用户插入普通用户信息
-     * @param user
+     * @param userEntity
      * @return
      */
     @Override
-    public Result insertUserInfo(User user) {
-        Result result = new Result();
+    public Result<String> insertUserInfo(UserEntity userEntity) {
+        Result<String> result = new Result<>();
         //非空判断
-        if (StringUtils.isBlank(user.getUserName()) || StringUtils.isBlank(user.getUserPassword())) {
-            result.setCode(400);
-            result.setMessage("输入信息不能为空！");
+        if (StringUtils.isBlank(userEntity.getUserName()) || StringUtils.isBlank(userEntity.getUserPassword())) {
+            result.setError(400,"用户信息不能为空");
             return result;
         }
         //查询用户是否存在
-        if (userService.countUser(user.getUserName(),1)){
-            result.setCode(400);
-            result.setMessage("用户已存在！");
+        if (userService.countUser(userEntity.getUserName(),1)){
+            result.setError(400,"用户已存在！");
         }else {
-            int count = userDao.insertUserInfo(user);
+            int count = userDao.insert(userEntity);
             if (count == 1){
-                result.setCode(200);
                 result.setMessage("插入成功");
             }else {
-                result.setCode(500);
-                result.setMessage("插入失败");
+                result.setError(500,"插入失败");
             }
         }
         return result;
@@ -138,8 +119,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean countUser(String userName, int userRole) {
-        int count = userDao.countUser(userName,userRole);
-        return count > 0 ? true : false;
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name",userName);
+        queryWrapper.eq("user_role",userRole);
+        int count = userDao.selectCount(queryWrapper);
+        return count > 0;
     }
 
 }

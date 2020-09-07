@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Record;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.demo.entity.AccessRecordEntity;
 import com.example.demo.result.Result;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Shuguang_Liux
@@ -12,7 +13,7 @@ import java.util.List;
  * @Date 2020/8/27 17:11
  **/
 
-public interface RecordService {
+public interface AccessRecordService {
     /**
      * 信息存在性判断
      * @param licensePlate
@@ -22,24 +23,24 @@ public interface RecordService {
 
     /**
      * 列表查询
-     * @param record
+     * @param accessRecordEntity
      * @return
      */
-    List<Record> selectInfoByPage(Record record);
+    IPage<AccessRecordEntity> selectInfoByPage(Map<String,Object> params);
 
     /**
      * 信息插入
-     * @param record
+     * @param accessRecordEntity
      * @return
      */
-    int insertRecordInfo(Record record);
+    int insertRecordInfo(AccessRecordEntity accessRecordEntity);
 
     /**
      * 记录信息更新
-     * @param record
+     * @param accessRecordEntity
      * @return
      */
-    int updateRecordInfo(Record record);
+    int updateRecordInfo(AccessRecordEntity accessRecordEntity);
 
     /**
      * 扫描入口信息更新
@@ -53,5 +54,7 @@ public interface RecordService {
      * @param licensePlate
      * @return
      */
-    Record selectRecordByOne(String licensePlate);
+    AccessRecordEntity selectRecordByOne(String licensePlate);
+
+
 }
