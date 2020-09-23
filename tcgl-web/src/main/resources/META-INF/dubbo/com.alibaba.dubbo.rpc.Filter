@@ -1,0 +1,2 @@
+consumer=com.record.tcgl.filter.ConsumerRpcTraceFilter
+provider=com.record.tcgl.filter.ProviderRpcTraceFilter

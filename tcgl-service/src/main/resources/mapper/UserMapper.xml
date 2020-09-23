@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.record.tcgl.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.record.tcgl.entity.UserEntity">
+    <!--@mbg.generated-->
+    <!--@Table t_user-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_role" jdbcType="INTEGER" property="userRole" />
+    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_name, user_password, user_role, delete_state
+  </sql>
+  <sql id="Base_Column_Condition">
+    <if test="id != null and id != ''">
+      and id = #{userName,jdbcType=INTEGER}
+    </if>
+    <if test="userName != null and userName != ''">
+      and user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="userPassword != null and userPassword != ''">
+      and user_password = #{userPassword,jdbcType=VARCHAR}
+    </if>
+    <if test="userRole != null and userRole != ''">
+      and user_role = #{userRole,jdbcType=INTEGER}
+    </if>
+    <if test="deleteState != null and deleteState != ''">
+      and delete_state = #{deleteState,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="getInfo" resultMap="BaseResultMap">
+      SELECT
+      <include refid="Base_Column_List" />
+      FROM t_user
+    <where>
+      <include refid="Base_Column_Condition" />
+    </where>
+  </select>
+<!--  更新用户信息，标记删除用户-->
+  <select id="getAllUserByUsername" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where
+    user_name = #{userName,jdbcType=VARCHAR}
+    and delete_state = 'N'
+  </select>
+  <!--  根据用户名更新用户信息-->
+  <update id="updateUserInfo" parameterType="com.record.tcgl.entity.UserEntity">
+    update t_user
+    <set>
+      <if test="userPassword!= null and userPassword != ''">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteState != null and deleteState != ''">
+        delete_state = #{deleteState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </update>
+<!--  管理员插入用户信息-->
+  <insert id="insertUserInfo" parameterType="com.record.tcgl.entity.UserEntity">
+    INSERT INTO t_user ( user_name, user_password, user_role, delete_state )
+    VALUES
+      (#{userName},#{userPassword},'1','N')
+  </insert>
+<!--  根据用户名和角色查看用户是否存在-->
+  <select id="countUser" resultType="java.lang.Integer">
+    SELECT
+      count(*)
+    FROM
+      t_user
+    WHERE
+      user_name = #{userName}
+      and user_role = #{userRole}
+      and delete_state = 'N'
+  </select>
+</mapper>
