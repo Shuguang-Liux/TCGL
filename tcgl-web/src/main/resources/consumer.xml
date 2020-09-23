@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <dubbo:application name="${spring.dubbo.application.name}"/>
+    <dubbo:registry protocol="zookeeper" address="${spring.dubbo.registry.address}"/>
+    <dubbo:protocol name="dubbo" port="${spring.dubbo.protocal.port}"/>
+
+    <dubbo:reference interface="com.record.tcgl.api.UserRoleApi" id="userRoleApi" check="false" timeout="1000000"/>
+    <dubbo:reference interface="com.record.tcgl.api.AccessRecordApi" id="accessRecordApi" check="false" timeout="1000000"/>
+    <dubbo:reference interface="com.record.tcgl.api.PaymentRecordApi" id="paymentRecordApi" check="false" timeout="1000000"/>
+    <dubbo:reference interface="com.record.tcgl.api.VehicleOwnerApi" id="vehicleOwnerApi" check="false" timeout="1000000"/>
+
+</beans>

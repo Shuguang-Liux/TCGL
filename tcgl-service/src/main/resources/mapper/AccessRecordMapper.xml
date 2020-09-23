@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.record.tcgl.dao.AccessRecordDao">
+  <resultMap id="BaseResultMap" type="com.record.tcgl.entity.AccessRecordEntity">
+    <!--@mbg.generated-->
+    <!--@Table t_access_record-->
+    <id column="source_id" jdbcType="INTEGER" property="sourceId" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
+    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
+    <result column="time_count" jdbcType="DECIMAL" property="timeCount" />
+    <result column="billing_price" jdbcType="DECIMAL" property="billingPrice" />
+    <result column="is_out" jdbcType="VARCHAR" property="isOut" />
+    <result column="access_times" jdbcType="INTEGER" property="accessTimes" />
+    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+    <result column="is_prepayment" jdbcType="VARCHAR" property="isPrepayment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    source_id, license_plate, owner_name, enter_time, out_time, time_count, billing_price, 
+    is_out, access_times, delete_state, is_prepayment
+  </sql>
+  <sql id="Base_Where">
+    <if test="sourceId !=null">
+      source_id = #{sourceId}
+    </if>
+    <if test="licensePlate != null">
+      and license_plate = #{licensePlate}
+    </if>
+    <if test="ownerName != null">
+      and owner_name = #{ownerName}
+    </if>
+    <if test="enterTime != null">
+      and enter_time = #{enterTime}
+    </if>
+    <if test="billingPrice != null">
+      and billing_price = #{billingPrice}
+    </if>
+    <if test="accessTimes != null">
+      and access_times = #{accessTimes}
+    </if>
+    <if test="isPrepayment != null">
+      and is_prepayment = #{isPrepayment}
+    </if>
+  </sql>
+<!--  注意结果的映射关系，resultMap对应准化不能关系-->
+  <select id="getAccessRecordByLicensePlateSet" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_access_record
+    where
+    license_plate in
+    <foreach collection='licensePlateSet' item='licensePlate' open='(' separator=',' close=')'>
+    #{licensePlate}
+    </foreach>
+  </select>
+</mapper>

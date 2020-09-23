@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.record.tcgl.dao.VehicleOwnerDao">
+  <resultMap id="BaseResultMap" type="com.record.tcgl.entity.VehicleOwnerEntity">
+    <!--@mbg.generated-->
+    <!--@Table t_vehicle_owner-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="vehicle_owner" jdbcType="VARCHAR" property="vehicleOwner" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_person" jdbcType="VARCHAR" property="updatePerson" />
+    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+    <result column="is_valid" jdbcType="VARCHAR" property="isValid" />
+  </resultMap>
+
+  <resultMap id="UnionResultMap" type="com.record.tcgl.entity.VehicleOwnerEntity">
+    <!--@mbg.generated-->
+    <!--@Table t_vehicle_owner-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
+    <result column="vehicle_owner" jdbcType="VARCHAR" property="vehicleOwner" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_person" jdbcType="VARCHAR" property="updatePerson" />
+    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+    <result column="is_valid" jdbcType="VARCHAR" property="isValid" />
+
+    <collection property="accessRecordHistoryEntityList" ofType="com.record.tcgl.entity.AccessRecordHistoryEntity" column="sourceId">
+      <result column="sourceId" jdbcType="INTEGER" property="sourceId"/>
+      <result column="license_plate" jdbcType="VARCHAR" property="licensePlate"/>
+      <result column="owner_name" jdbcType="VARCHAR" property="ownerName"/>
+      <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime"/>
+      <result column="out_time" jdbcType="TIMESTAMP" property="outTime"/>
+      <result column="time_count" jdbcType="DECIMAL" property="timeCount"/>
+      <result column="billing_price" jdbcType="DECIMAL" property="billingPrice"/>
+      <result column="is_out" jdbcType="VARCHAR" property="isOut"/>
+      <result column="access_times" jdbcType="INTEGER" property="accessTimes"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, license_plate, vehicle_owner, create_time, create_person, update_time, update_person, 
+    delete_state,is_valid
+  </sql>
+  <sql id="Base_Where_List">
+    <if test="licensePlate != null and licensePlate!= ''">
+      and license_plate = #{licensePlate}
+    </if>
+    <if test="vehicleOwner != null and vehicleOwner!= ''">
+      and vehicle_owner = #{vehicleOwner}
+    </if>
+    <if test="isValid != null and isValid!= ''">
+      and is_valid = #{isValid}
+    </if>
+  </sql>
+  <select id="getVehicleOwnerAndAccessRecordHistory" resultMap="UnionResultMap">
+    SELECT
+      tvo.id,
+      tvo.license_plate,
+      tvo.create_person,
+      tvo.create_time,
+      tvo.update_person,
+      tvo.update_time,
+      tvo.is_valid,
+      tvo.vehicle_owner,
+      tarh.source_id,
+      tarh.license_plate,
+      tarh.owner_name,
+      tarh.enter_time,
+      tarh.out_time,
+      tarh.time_count,
+      tarh.billing_price,
+      tarh.is_out,
+      tarh.access_times,
+      tarh.delete_state
+    FROM
+      t_vehicle_owner tvo
+        LEFT JOIN t_access_record_history tarh ON tvo.license_plate = tarh.license_plate
+    WHERE
+      tvo.delete_state = 'N'
+      <if test="licensePlate != null and licensePlate != ''">
+        and tvo.license_plate = #{licensePlate}
+      </if>
+      <if test="vehicleOwner != null and vehicleOwner!= ''">
+        and tvo.vehicle_owner = #{vehicleOwner}
+      </if>
+      <if test="isValid != null and isValid!= ''">
+        and tvo.is_valid = #{isValid}
+      </if>
+  </select>
+</mapper>
