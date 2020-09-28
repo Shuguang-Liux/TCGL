@@ -1,0 +1,23 @@
+server:
+  port: 8089
+debug: true
+dubbo:
+  application:
+    name: dubbo-webservice
+#  protocal:
+#    id: dubbo
+#    name: dubbo
+#    port: 20880
+  registry:
+    address: zookeeper://127.0.0.1:2181
+cxf:
+  path: /service
+spring:
+  application:
+    name: dubbo-webservice-comsumer
+  datasource:
+    name: test
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai #url
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
