@@ -17,6 +17,9 @@ import java.util.Set;
  * @author Shuguang_Liux
  * @Date 2020/9/3 16:45
 **/
+//@mapper注解作用，可以节省写映射文件
+//@Select("select * from user where name = #{name}")
+//public User find(String name);
 @Mapper
 @Repository
 public interface AccessRecordDao extends BaseMapper<AccessRecordEntity> {

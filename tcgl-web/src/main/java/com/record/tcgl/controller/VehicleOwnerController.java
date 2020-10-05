@@ -39,7 +39,7 @@ public class VehicleOwnerController {
      */
     @RequestMapping("/insert")
     public ResultVo<String> insertVehicleOwner(@RequestBody JSONObject param){
-        return vehicleOwnerService.insertVehicleOwerAndPayment(param);
+        return vehicleOwnerService.insertVehicleOwnerAndPayment(param);
     }
 
     @RequestMapping("/exportVehicleOwner")

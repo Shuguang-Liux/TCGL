@@ -1,6 +1,7 @@
 package com.record.tcgl.service;
 
 import com.record.tcgl.vo.ResultVo;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 

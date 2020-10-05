@@ -1,8 +1,8 @@
 package com.record.tcgl.api;
 
+import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
-
-import java.util.Map;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Shuguang_Liux
@@ -19,4 +19,12 @@ public interface UserRoleApi {
      * @return
      */
     ResultVo<Boolean> checkAdminRole(String userName, Integer userRole,String passWord);
+
+    /**
+     * 根据用户名查询（webservice测试使用）
+     * @param userName
+     * @return
+     */
+    UserEntity getUserInfo(String userName);
+
 }

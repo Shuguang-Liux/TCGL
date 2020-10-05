@@ -3,7 +3,7 @@ package com.record.tcgl.service.impl;
 import com.record.tcgl.api.UserRoleApi;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -17,8 +17,9 @@ import org.springframework.util.StringUtils;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Reference()
     private UserRoleApi userRoleApi;
+
 
     @Override
     public ResultVo<Boolean> adminRoles(String userName, Integer userRole, String passWord) {

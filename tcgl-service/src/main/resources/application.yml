@@ -1,3 +1,5 @@
+server:
+  port: 8084
 spring:
   datasource:
     name: test  #数据库名称
@@ -19,19 +21,19 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
-  dubbo:
-    application:
-      name: dubbo-provider  #模块名称
-      version: liu
-    protocal:
-      name: dubbo
-      port: 20880
-    registry:
-      address: zookeeper://127.0.0.1:2181
-    scan:
-      base-packages: com.record.tcgl.service
-server:
-  port: 8082
+dubbo:
+  application:
+    name: dubbo-provider
+  protocal:
+    id: dubbo
+    name: dubbo
+    port: 20880
+  registry:
+    protocol: dubbo-provider-registry
+    address: zookeeper://127.0.0.1:2181
+  monitor:
+    protocol: registry
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

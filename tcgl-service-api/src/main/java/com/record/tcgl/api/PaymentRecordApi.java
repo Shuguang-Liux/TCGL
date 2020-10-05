@@ -2,6 +2,7 @@ package com.record.tcgl.api;
 
 import com.record.tcgl.vo.ResultVo;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Shuguang_Liux

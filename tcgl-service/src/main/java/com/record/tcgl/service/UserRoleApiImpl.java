@@ -5,11 +5,10 @@ import com.record.tcgl.api.UserRoleApi;
 import com.record.tcgl.dao.UserDao;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
 
 /**
  * @author Shuguang_Liux
@@ -17,8 +16,8 @@ import java.util.Map;
  * @Description ToDo
  * @Date 2020/9/9 17:02
  **/
-@Transactional
-@Service("userRoleApi")
+@Service
+@Component
 public class UserRoleApiImpl implements UserRoleApi {
 
     @Autowired
@@ -47,6 +46,18 @@ public class UserRoleApiImpl implements UserRoleApi {
             resultVo.setError(400,"用户不存在！");
         }
         return resultVo;
+    }
+
+    /**
+     * 根据用户名查询（webservice测试使用）
+     * @param userName
+     * @return
+     */
+    @Override
+    public UserEntity getUserInfo(String userName) {
+        QueryWrapper<UserEntity> userEntityQueryWrapper = new QueryWrapper<>();
+        userEntityQueryWrapper.eq("user_name",userName);
+        return userDao.selectOne(userEntityQueryWrapper);
     }
 
 }

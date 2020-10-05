@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -35,5 +35,7 @@
         <module>tcgl-service</module>
         <module>tcgl-service-api</module>
         <module>tcgl-job</module>
+        <module>tcgl-webservice</module>
+        <module>tcgl-web</module>
     </modules>
 </project>

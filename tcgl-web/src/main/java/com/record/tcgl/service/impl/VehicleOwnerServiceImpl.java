@@ -5,6 +5,7 @@ import com.record.tcgl.api.VehicleOwnerApi;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.service.VehicleOwnerService;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -20,7 +21,7 @@ import java.util.Map;
 @Service("vehicleOwerService")
 public class VehicleOwnerServiceImpl implements VehicleOwnerService {
 
-    @Autowired
+    @Reference
     private VehicleOwnerApi vehicleOwnerApi;
     /**
      * 插入用户信息并存入支付信息
@@ -28,7 +29,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public ResultVo<String> insertVehicleOwerAndPayment(JSONObject param) {
+    public ResultVo<String> insertVehicleOwnerAndPayment(JSONObject param) {
         return vehicleOwnerApi.insertVehicleOwner(param);
     }
 

@@ -11,9 +11,10 @@ import com.record.tcgl.entity.AccessRecordEntity;
 import com.record.tcgl.entity.AccessRecordHistoryEntity;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -24,7 +25,8 @@ import java.util.*;
  * @Description ToDo
  * @Date 2020/9/14 21:38
  **/
-@Service("accessRecordApi")
+@Service
+@Component
 public class AccessRecordApiImpl implements AccessRecordApi {
 
     @Autowired

@@ -1,33 +1,14 @@
 debug: true
 server:
   port: 8090
-spring:
-  dubbo:
-    application:
-      name: dubbo-consumer
-      version: liu
-    protocal:
-      name: dubbo
-      port: 20880
-    registry:
-      address: zookeeper://127.0.0.1:2181
-#  datasource:
-#    name: test  #数据库名称
-#    url: jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai #url
-#    username: root  #用户名
-#    password: 123456  #用户密码
-#    driver-class-name: com.mysql.cj.jdbc.Driver  #Mysql驱动
-#    druid:
-#      filters: stat
-#      maxActive: 20
-#      initialSize: 1
-#      maxWait: 60000
-#      minIdle: 1
-#      timeBetweenEvictionRunsMillis: 60000
-#      minEvictableIdleTimeMillis: 300000
-#      validationQuery: select '1'
-#      testWhileIdle: true
-#      testOnBorrow: false
-#      testOnReturn: false
-#      poolPreparedStatements: true
-#      maxOpenPreparedStatements: 20
+dubbo:
+  application:
+    name: dubbo-consumer
+#  protocal:
+#    id: dubbo
+#    name: dubbo
+#    port: 20880
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  monitor:
+    protocol: registry

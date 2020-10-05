@@ -3,6 +3,7 @@ package com.record.tcgl.service;
 import com.alibaba.fastjson.JSONObject;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface VehicleOwnerService {
      * @param param
      * @return
      */
-    ResultVo<String> insertVehicleOwerAndPayment(JSONObject param);
+    ResultVo<String> insertVehicleOwnerAndPayment(JSONObject param);
 
     /**
      * VehicleOwer导出

@@ -2,6 +2,7 @@ package com.record.tcgl.api;
 
 import com.record.tcgl.entity.AccessRecordEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Set;
@@ -22,7 +23,7 @@ public interface AccessRecordApi {
 
     /**
      * 根据licensePlate查询列表
-     * @param licensePlate
+     * @param licensePlateSet
      * @return
      */
     ResultVo<Map<String, AccessRecordEntity>> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet);

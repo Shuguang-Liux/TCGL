@@ -11,8 +11,9 @@ import com.record.tcgl.dao.VehicleOwnerDao;
 import com.record.tcgl.entity.AccessRecordEntity;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +25,8 @@ import java.util.*;
  * @Description ToDo
  * @Date 2020/9/15 0:08
  **/
-@Service("vehicleOwnerApi")
+@Service
+@Component
 public class VehicleOwnerApiImpl implements VehicleOwnerApi {
     @Autowired
     private VehicleOwnerDao vehicleOwnerDao;
