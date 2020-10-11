@@ -61,11 +61,4 @@ public class TaskService implements SchedulingConfigurer {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(11212);
-        list.add(21212);
-        list.add(33333);
-        list.forEach(e -> System.out.println(e));
-    }
 }

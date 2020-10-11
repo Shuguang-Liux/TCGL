@@ -27,4 +27,11 @@ public interface UserRoleApi {
      */
     UserEntity getUserInfo(String userName);
 
+    /**
+     * 根据用户名更新用户密码
+     * @param userName
+     * @param password
+     * @return
+     */
+    ResultVo<Boolean> updatePassword(String userName,String password);
 }

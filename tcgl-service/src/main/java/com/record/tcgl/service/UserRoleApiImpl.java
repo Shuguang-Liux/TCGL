@@ -1,6 +1,7 @@
 package com.record.tcgl.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.record.tcgl.api.UserRoleApi;
 import com.record.tcgl.dao.UserDao;
 import com.record.tcgl.entity.UserEntity;
@@ -58,6 +59,25 @@ public class UserRoleApiImpl implements UserRoleApi {
         QueryWrapper<UserEntity> userEntityQueryWrapper = new QueryWrapper<>();
         userEntityQueryWrapper.eq("user_name",userName);
         return userDao.selectOne(userEntityQueryWrapper);
+    }
+
+    /**
+     * 根据用户名更新用户密码
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    @Override
+    public ResultVo<Boolean> updatePassword(String userName, String password) {
+        UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
+//        updateWrapper.set("user_password",password);
+        UserEntity userEntity = new UserEntity();
+        updateWrapper.eq("user_name",userName);
+        userEntity.setUserPassword(password);
+        //mybatisplus使用构造求更新需要一个实体
+        userDao.update(userEntity,updateWrapper);
+        return null;
     }
 
 }

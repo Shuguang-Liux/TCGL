@@ -34,4 +34,11 @@ public class UserController {
         String passWord = param.getString("passWord");
         return userService.adminRoles(userName,userRole,passWord);
     }
+
+    @RequestMapping("/adminPassword")
+    public ResultVo<Boolean> updatePassword(@RequestBody JSONObject param){
+        String userName = param.getString("userName");
+        String passWord = param.getString("passWord");
+        return userService.updatePassword(userName,passWord);
+    }
 }

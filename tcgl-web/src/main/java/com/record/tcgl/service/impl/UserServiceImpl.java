@@ -21,6 +21,13 @@ public class UserServiceImpl implements UserService {
     private UserRoleApi userRoleApi;
 
 
+    /**
+     * 根据角色判断用户登录
+     * @param userName
+     * @param userRole
+     * @param passWord
+     * @return
+     */
     @Override
     public ResultVo<Boolean> adminRoles(String userName, Integer userRole, String passWord) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
@@ -33,5 +40,21 @@ public class UserServiceImpl implements UserService {
             return resultVo;
         }
         return userRoleApi.checkAdminRole(userName,userRole,passWord);
+    }
+
+    /**
+     * 根据用户名称更新用户密码
+     * @param userName
+     * @param passWord
+     * @return
+     */
+    @Override
+    public ResultVo<Boolean> updatePassword(String userName, String passWord) {
+        ResultVo<Boolean> resultVo = new ResultVo<>();
+        if (StringUtils.isEmpty(userName)||StringUtils.isEmpty(passWord)){
+            resultVo.setError(400,"用户名或密码不能为空");
+            return resultVo;
+        }
+        return userRoleApi.updatePassword(userName,passWord);
     }
 }
