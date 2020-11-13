@@ -10,17 +10,15 @@ import java.io.Serializable;
 
 /**
  * @package com.example.demo.entity
- * @Description ToDo
+ * @Description 用户登录权限表
  * @author Shuguang_Liux
  * @Date 2020/9/4 10:16
 **/
 
-/**
-    * 用户登录权限表
-    */
 @Data
 @TableName(value = "t_user")
 public class UserEntity implements Serializable {
+    private static final long serialVersionUID = 1020687110827214873L;
     /**
      * 主键
      */
@@ -51,7 +49,6 @@ public class UserEntity implements Serializable {
     @TableField(value = "delete_state")
     private String deleteState;
 
-    private static final long serialVersionUID = 1L;
 
     public static final String COL_ID = "id";
 

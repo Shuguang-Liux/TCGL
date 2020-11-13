@@ -24,6 +24,7 @@ import java.util.List;
 @Data
 @TableName(value = "t_vehicle_owner")
 public class VehicleOwnerEntity implements Serializable {
+    private static final long serialVersionUID = -4460480156087314200L;
     /**
      * 自增主键
      */
@@ -79,8 +80,6 @@ public class VehicleOwnerEntity implements Serializable {
     private String isValid;
 
     private List<AccessRecordHistoryEntity> accessRecordHistoryEntityList;
-
-    private static final long serialVersionUID = 1L;
 
     public static final String COL_ID = "id";
 

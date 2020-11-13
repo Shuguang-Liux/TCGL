@@ -23,6 +23,7 @@ import java.util.Date;
 @Data
 @TableName(value = "t_payment_record")
 public class PaymentRecordEntity implements Serializable {
+    private static final long serialVersionUID = -7834494783911152274L;
     /**
      * 主键
      */
@@ -66,7 +67,6 @@ public class PaymentRecordEntity implements Serializable {
     private Integer ownerId;
 
 
-    private static final long serialVersionUID = 1L;
 
     public static final String COL_ID = "id";
 

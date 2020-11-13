@@ -17,6 +17,7 @@ import java.util.Date;
 @Data
 @TableName(value = "t_access_record_history")
 public class AccessRecordHistoryEntity implements Serializable {
+    private static final long serialVersionUID = 6177090796020399896L;
     /**
      * 主键
      */
@@ -76,8 +77,6 @@ public class AccessRecordHistoryEntity implements Serializable {
      */
     @TableField(value = "delete_state")
     private String deleteState;
-
-    private static final long serialVersionUID = 1L;
 
     public static final String COL_SOURCE_ID = "source_id";
 

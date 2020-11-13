@@ -16,7 +16,8 @@ import java.util.Date;
  */
 @Data
 @TableName(value = "t_access_record")
-public class AccessRecordEntity implements Serializable {
+public class AccessRecordEntity implements Serializable{
+    private static final long serialVersionUID = -1521863785180172431L;
     /**
      * 主键
      */
@@ -83,7 +84,6 @@ public class AccessRecordEntity implements Serializable {
     @TableField(value = "is_prepayment")
     private String isPrepayment;
 
-    private static final long serialVersionUID = 1L;
 
     public static final String COL_SOURCE_ID = "source_id";
 
