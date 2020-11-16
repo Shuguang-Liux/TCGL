@@ -1,5 +1,5 @@
 
-package com.record.tcgl.webservice;
+package com.record.tcgl.webservice.JobList;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

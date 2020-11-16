@@ -1,4 +1,4 @@
-package com.record.tcgl.webservice;
+package com.record.tcgl.webservice.JobList;
 
 
 import javax.jws.WebMethod;

@@ -79,6 +79,10 @@ public class VehicleOwnerEntity implements Serializable {
     @TableField(value = "is_valid")
     private String isValid;
 
+    /**
+     * 历史列表
+     */
+    @TableField(exist = false)
     private List<AccessRecordHistoryEntity> accessRecordHistoryEntityList;
 
     public static final String COL_ID = "id";
