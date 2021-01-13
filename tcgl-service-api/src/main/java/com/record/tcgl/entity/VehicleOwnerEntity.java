@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +18,8 @@ import java.util.List;
  * @author Shuguang_Liux
  * @Date 2020/9/4 10:16
 **/
-
-/**
- * 车辆所有人登记表
- * @author Shuguang_Liux
- */
 @Data
+@EntityScan
 @TableName(value = "t_vehicle_owner")
 public class VehicleOwnerEntity implements Serializable {
     private static final long serialVersionUID = -4460480156087314200L;

@@ -11,5 +11,10 @@ import org.springframework.stereotype.Component;
  * @Date 2020/9/14 21:29
  **/
 public interface PaymentRecordApi {
+    /**
+     * 根据关联主键将信息插入租金支付记录表
+     * @param param
+     * @return
+     */
     ResultVo<String> insertPaymentInfo(JSONObject param);
 }

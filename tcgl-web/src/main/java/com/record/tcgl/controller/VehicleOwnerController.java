@@ -5,18 +5,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.service.VehicleOwnerService;
 import com.record.tcgl.util.ExcelExportUtil;
+import com.record.tcgl.util.ExcelUtils;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +35,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/vehicleOwner")
 public class VehicleOwnerController {
+
     @Autowired
     private VehicleOwnerService vehicleOwnerService;
 
@@ -42,11 +49,16 @@ public class VehicleOwnerController {
         return vehicleOwnerService.insertVehicleOwnerAndPayment(param);
     }
 
+    /**
+     * 导出车辆以及所有人信息
+     * @param response
+     * @param param
+     */
     @RequestMapping("/exportVehicleOwner")
-    public void exportVehicleOwer(HttpServletResponse response, @RequestBody Map<String, Object> param) {
+    public void exportVehicleOwner(HttpServletResponse response, @RequestBody Map<String, Object> param) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         try {
-            ResultVo<Map<String, Object>> vehicleOwnerVo = vehicleOwnerService.exportVehicleOwer(param);
+            ResultVo<Map<String, Object>> vehicleOwnerVo = vehicleOwnerService.exportVehicleOwner(param);
             if (!vehicleOwnerVo.getSuccess()){
                 try {
                     resultVo.setMessage(vehicleOwnerVo.getMessage());
@@ -98,6 +110,61 @@ public class VehicleOwnerController {
     public ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(@RequestBody JSONObject param){
         ResultVo<VehicleOwnerEntity> resultVo = vehicleOwnerService.getVehicleOwnerAndAccessRecordHistory(param);
         return resultVo;
+    }
+
+    /**
+     * 导出车辆以及所有人信息新
+     * @param request
+     * @param response
+     * @param param
+     */
+    @RequestMapping("/export")
+    public void exportTestNew(HttpServletRequest request,HttpServletResponse response, @RequestBody Map<String, Object> param){
+        String[] headTitles ={"车辆牌照", "车辆所有人", "创建时间", "创建人", "更新时间", "更新人", "有效状态",
+                "进园时间", "出园时间","入园时长统计","价格","是否出园","次数","是否预付费用户"};
+        Map<String, String[]> map = vehicleOwnerService.exportVehicleOwnerAndHistory(param,headTitles.length);
+        String title = "用户表";
+        //通过工具类获取到了一个文件对象
+        HSSFWorkbook wb = ExcelUtils.createExcel(map, headTitles, title);
+        OutputStream os = null;
+        try {
+            // 创建一个普通输出流
+            os = response.getOutputStream();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+            String fileName = formatter.format(new Date());
+            // 请求浏览器打开下载窗口
+            response.reset();
+            response.setCharacterEncoding("UTF-8");
+            // Content-disposition 告诉浏览器以下载的形式打开
+            String header = request.getHeader("User-Agent").toUpperCase();
+            if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
+                fileName = URLEncoder.encode(fileName, "utf-8");
+                // IE下载文件名空格变+号问题
+                fileName = fileName.replace("+", "%20");
+            } else {
+                fileName = new String(fileName.getBytes(), "ISO8859-1");
+            }
+            // 要保存的文件名,保存为.xls文件，HSSFWorkbook只支持xls文件
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName + ".xls");
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            // 直接用数组缓冲输出流输出
+            wb.write(os);
+            wb.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                os.flush();
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return;
+
     }
 
 

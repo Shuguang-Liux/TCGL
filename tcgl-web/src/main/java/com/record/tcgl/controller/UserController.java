@@ -27,18 +27,36 @@ public class UserController {
      * 角色账户登录
      * @return
      */
-    @RequestMapping("/roleogin")
+    @RequestMapping("/roleLogin")
     public ResultVo<Boolean> adminRoleLogin(@RequestBody JSONObject param){
-        String userName = param.getString("userName");
-        Integer userRole = param.getInteger("userRole");
-        String passWord = param.getString("passWord");
+        String userName = param.getString("username");
+        Integer userRole = param.getInteger("code");
+        String passWord = param.getString("password");
         return userService.adminRoles(userName,userRole,passWord);
     }
 
+    /**
+     * 密码更新
+     * @param param
+     * @return
+     */
     @RequestMapping("/adminPassword")
     public ResultVo<Boolean> updatePassword(@RequestBody JSONObject param){
         String userName = param.getString("userName");
         String passWord = param.getString("passWord");
         return userService.updatePassword(userName,passWord);
+    }
+//    @RequestMapping("/delete")
+//    public ResultVo<Boolean> deleteUser(@RequestBody JSONObject param){
+//
+//    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/uu")
+    public String uu(){
+        return "1";
     }
 }

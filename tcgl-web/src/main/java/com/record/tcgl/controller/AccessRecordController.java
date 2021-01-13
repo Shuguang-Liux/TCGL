@@ -20,6 +20,12 @@ public class AccessRecordController {
 
     @Autowired
     private AccessRecordService accessRecordService;
+
+    /**
+     * 由第三方识别工具传入数据
+     * @param licensePlate
+     * @return
+     */
     @RequestMapping("/Ocr")
     public ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate){
         return accessRecordService.saveRecordByInfo(licensePlate);

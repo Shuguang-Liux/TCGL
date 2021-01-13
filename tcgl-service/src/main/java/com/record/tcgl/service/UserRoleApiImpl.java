@@ -7,9 +7,10 @@ import com.record.tcgl.dao.UserDao;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
 import org.apache.dubbo.config.annotation.Service;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Shuguang_Liux
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Component
 public class UserRoleApiImpl implements UserRoleApi {
+
+    private final static Logger logger = LogManager.getLogger(UserRoleApiImpl.class);
 
     @Autowired
     private UserDao userDao;
@@ -35,16 +38,23 @@ public class UserRoleApiImpl implements UserRoleApi {
     public ResultVo<Boolean> checkAdminRole(String userName, Integer userRole, String passWord) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name",userName);
-        queryWrapper.eq("user_role",userRole);
-        queryWrapper.eq("user_password",passWord);
-        Integer count = userDao.selectCount(queryWrapper);
-        if (count > 0){
-            resultVo.setResult(true);
-            resultVo.setMessage("用户存在，正常登录");
-        }else {
-            resultVo.setResult(false);
-            resultVo.setError(400,"用户不存在！");
+        try {
+            queryWrapper.eq("user_name",userName);
+            queryWrapper.eq("user_role",userRole);
+            queryWrapper.eq("user_password",passWord);
+            Integer count = userDao.selectCount(queryWrapper);
+            if (count > 0){
+                resultVo.setResult(true);
+                resultVo.setMessage("用户存在，正常登录");
+            }else {
+                resultVo.setResult(false);
+                resultVo.setError(400,"用户不存在！");
+            }
+        } catch (Exception e) {
+            logger.error("角色登录失败"+e.getMessage());
+            e.printStackTrace();
+            resultVo.setError(400,"登录失败请联系管理员");
+
         }
         return resultVo;
     }
@@ -71,13 +81,19 @@ public class UserRoleApiImpl implements UserRoleApi {
     @Override
     public ResultVo<Boolean> updatePassword(String userName, String password) {
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
-//        updateWrapper.set("user_password",password);
-        UserEntity userEntity = new UserEntity();
-        updateWrapper.eq("user_name",userName);
-        userEntity.setUserPassword(password);
-        //mybatisplus使用构造求更新需要一个实体
-        userDao.update(userEntity,updateWrapper);
-        return null;
+        ResultVo<Boolean> resultVo = new ResultVo<>();
+        try {
+            UserEntity userEntity = new UserEntity();
+            updateWrapper.eq("user_name",userName);
+            userEntity.setUserPassword(password);
+            //mybatisPlus使用构造求更新需要一个实体
+            userDao.update(userEntity,updateWrapper);
+            resultVo.setMessage("更新成功");
+        } catch (Exception e) {
+            logger.error("更新失败"+e.getMessage());
+            e.printStackTrace();
+            resultVo.setError(400,"更新失败请联系管理员");
+        }
+        return resultVo;
     }
-
 }

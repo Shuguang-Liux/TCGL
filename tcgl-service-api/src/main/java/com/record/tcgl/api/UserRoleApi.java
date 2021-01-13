@@ -34,4 +34,7 @@ public interface UserRoleApi {
      * @return
      */
     ResultVo<Boolean> updatePassword(String userName,String password);
+
+//    public  testPatternPlan(String patternPlan);
+
 }

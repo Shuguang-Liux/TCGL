@@ -1,7 +1,5 @@
 package com.record.tcgl.util;
 
-import com.google.common.base.Strings;
-import com.sun.org.apache.bcel.internal.generic.LSTORE;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -9,14 +7,9 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Shuguang_Liux
@@ -247,8 +240,8 @@ public class ExcelExportUtil {
             throw new IOException("字体、宽度或者高度不能为负值");
         }
 
-        if (Strings.isNullOrEmpty(sheetName)) {
-            throw new IOException("工作表表名不能为NULL");
-        }
+//        if (Strings.isNullOrEmpty(sheetName)) {
+//            throw new IOException("工作表表名不能为NULL");
+//        }
     }
 }

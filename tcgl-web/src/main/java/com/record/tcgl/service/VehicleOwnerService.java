@@ -5,6 +5,7 @@ import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +27,7 @@ public interface VehicleOwnerService {
      * @param param
      * @return
      */
-    ResultVo<Map<String,Object>> exportVehicleOwer(Map<String,Object> param);
+    ResultVo<Map<String,Object>> exportVehicleOwner(Map<String,Object> param);
 
     /**
      * 查询车辆所有人和历史记录列表
@@ -34,4 +35,12 @@ public interface VehicleOwnerService {
      * @return
      */
     ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(JSONObject param);
+
+    /**
+     * 自测试导出
+     * @param param
+     * @param headTitlesLength
+     * @return
+     */
+    Map<String,String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitlesLength);
 }

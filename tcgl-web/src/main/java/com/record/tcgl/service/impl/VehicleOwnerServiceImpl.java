@@ -6,10 +6,10 @@ import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.service.VehicleOwnerService;
 import com.record.tcgl.vo.ResultVo;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +18,7 @@ import java.util.Map;
  * @Description ToDo
  * @Date 2020/9/16 15:43
  **/
-@Service("vehicleOwerService")
+@Service("vehicleOwnerService")
 public class VehicleOwnerServiceImpl implements VehicleOwnerService {
 
     @Reference
@@ -39,7 +39,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public ResultVo<Map<String, Object>> exportVehicleOwer(Map<String, Object> param) {
+    public ResultVo<Map<String, Object>> exportVehicleOwner(Map<String, Object> param) {
         ResultVo<Map<String,Object>> resultVo = new ResultVo<>();
         try {
             resultVo = vehicleOwnerApi.exportVehicleOwnerList(param);
@@ -71,4 +71,17 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
         ResultVo<VehicleOwnerEntity> resultVo = vehicleOwnerApi.getVehicleOwnerAndAccessRecordHistory(vehicleOwnerEntity);
         return resultVo;
     }
+
+    /**
+     * 自测试导出
+     * @param param
+     * @param headTitleLength
+     * @return
+     */
+    @Override
+    public Map<String, String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength) {
+        return vehicleOwnerApi.exportVehicleOwnerAndHistory(param,headTitleLength);
+    }
+
+
 }

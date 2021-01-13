@@ -108,6 +108,7 @@ public class AccessRecordApiImpl implements AccessRecordApi {
             vehicleOwnerQueryWrapper.eq("delete_state","N");
             //是否有效
             vehicleOwnerQueryWrapper.eq("is_valid","Y");
+
             //根据条件查询唯一数据
             VehicleOwnerEntity vehicleOwnerEntity = vehicleOwnerDao.selectOne(vehicleOwnerQueryWrapper);
             if(vehicleOwnerEntity != null){

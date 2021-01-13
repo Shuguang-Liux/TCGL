@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
+/**
+ * @author Shuguang_Liux
+ */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},scanBasePackages = {"com.record"})
 //@EnableDubboConfiguration
 //@ImportResource(locations = "classpath:consumer.xml")

@@ -186,7 +186,78 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         return resultVo;
     }
 
-
+    /**
+     * 自测试导出
+     * @param param
+     * @param headTitleLength
+     * @return
+     */
+    @Override
+    public Map<String, String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength) {
+        Map<String,String[]> stringListMap = new HashMap<>();
+        QueryWrapper<VehicleOwnerEntity> queryWrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(param.get("licensePlate"))){
+            queryWrapper.eq("license_plate",param.get("licensePlate"));
+        }
+        if (!StringUtils.isEmpty(param.get("vehicleOwner"))){
+            queryWrapper.eq("vehicle_owner",param.get("vehicleOwner"));
+        }
+        if (!StringUtils.isEmpty(param.get("isValid"))){
+            queryWrapper.eq("is_valid",param.get("isValid"));
+        }
+        queryWrapper.orderByDesc("id");
+        List<VehicleOwnerEntity> list = vehicleOwnerDao.selectList(queryWrapper);
+//        String[] titles = this.getHeadTitles();
+        if (list != null){
+            Set<String> licensePlateSet = new HashSet<>();
+            for (VehicleOwnerEntity vehicleOwnerEntity : list) {
+                licensePlateSet.add(vehicleOwnerEntity.getLicensePlate());
+            }
+            //日期格式转化
+            SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            //避免重复请求数据库，造成数据库资源占用（结果一次性查出）
+            ResultVo<Map<String, AccessRecordEntity>> accessRecordVo = accessRecordApi.getAccessRecordByLicensePlateSet(licensePlateSet);
+            list.forEach(e->{
+                //初始化数组长度
+                String[] objects = new String[headTitleLength];
+                //车牌号
+                objects[0] = e.getLicensePlate();
+                //车辆所有人
+                objects[1] = e.getVehicleOwner();
+                //创建时间
+                objects[2] = simpleDateFormat.format(e.getCreateTime());
+                //创建人
+                objects[3] = e.getCreatePerson();
+                //更新时间
+                objects[4] = e.getUpdateTime() == null ? null : simpleDateFormat.format(e.getUpdateTime());
+                //更新人
+                objects[5] = e.getUpdatePerson() == null ? null : e.getUpdatePerson();
+                //是否有效
+                objects[6] = e.getIsValid().equals("Y") ? "有效":"无效";
+                //获取入园记录表中对应信息
+                if (accessRecordVo.getSuccess() && accessRecordVo.getResult() != null &&
+                        accessRecordVo.getResult().get(e.getLicensePlate()) != null){
+                    //入园时间
+                    objects[7] = simpleDateFormat.format(accessRecordVo.getResult().get(e.getLicensePlate()).getEnterTime());
+                    //出园时间(三木运算符进行区别赋值)
+                    objects[8] = accessRecordVo.getResult().get(e.getLicensePlate()).getOutTime() == null ? null : simpleDateFormat.format(accessRecordVo.getResult().get(e.getLicensePlate()).getOutTime());
+                    //入园时长统计
+                    objects[9] = accessRecordVo.getResult().get(e.getLicensePlate()).getTimeCount() == null ? null : String.valueOf(accessRecordVo.getResult().get(e.getLicensePlate()).getTimeCount());
+                    //价格
+                    objects[10] = accessRecordVo.getResult().get(e.getLicensePlate()).getBillingPrice() == null ? null : String.valueOf(accessRecordVo.getResult().get(e.getLicensePlate()).getBillingPrice());
+                    //是否出园
+                    objects[11] = accessRecordVo.getResult().get(e.getLicensePlate()).getIsOut().equals("Y") ? "已出园":"未出园";
+                    //次数统计
+                    objects[12] = String.valueOf(accessRecordVo.getResult().get(e.getLicensePlate()).getAccessTimes());
+                    //预付费用户
+                    objects[13] = accessRecordVo.getResult().get(e.getLicensePlate()).getIsPrepayment().equals("Y")?"有效":"无效";
+                }
+                //添加到list中
+                stringListMap.put(e.getLicensePlate(),objects);
+            });
+        }
+        return stringListMap;
+    }
 
 
 }

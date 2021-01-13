@@ -12,5 +12,10 @@ import java.util.Map;
  * @Date 2020/9/15 0:28
  **/
 public interface AccessRecordService {
+    /**
+     * 由第三方识别工具传入数据
+     * @param licensePlate
+     * @return
+     */
     ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate);
 }
