@@ -1,6 +1,7 @@
 package com.record.tcgl.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/roleLogin")
-    public ResultVo<Boolean> adminRoleLogin(@RequestBody JSONObject param){
-        String userName = param.getString("username");
-        Integer userRole = param.getInteger("code");
-        String passWord = param.getString("password");
-        return userService.adminRoles(userName,userRole,passWord);
+    public ResultVo<Boolean> adminRoleLogin(@RequestBody UserEntity param){
+        return userService.adminRoles(param);
     }
 
     /**
@@ -41,10 +39,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/adminPassword")
-    public ResultVo<Boolean> updatePassword(@RequestBody JSONObject param){
-        String userName = param.getString("userName");
-        String passWord = param.getString("passWord");
-        return userService.updatePassword(userName,passWord);
+    public ResultVo<Boolean> updatePassword(@RequestBody UserEntity param){
+        return userService.updatePassword(param);
     }
 //    @RequestMapping("/delete")
 //    public ResultVo<Boolean> deleteUser(@RequestBody JSONObject param){

@@ -13,12 +13,9 @@ import org.springframework.stereotype.Component;
 public interface UserRoleApi {
     /**
      * 用户角色权限登录
-     * @param userName
-     * @param userRole
-     * @param passWord
      * @return
      */
-    ResultVo<Boolean> checkAdminRole(String userName, Integer userRole,String passWord);
+    ResultVo<Boolean> checkAdminRole(UserEntity userEntity);
 
     /**
      * 根据用户名查询（webservice测试使用）
@@ -29,11 +26,9 @@ public interface UserRoleApi {
 
     /**
      * 根据用户名更新用户密码
-     * @param userName
-     * @param password
      * @return
      */
-    ResultVo<Boolean> updatePassword(String userName,String password);
+    ResultVo<Boolean> updatePassword(UserEntity userEntity);
 
 //    public  testPatternPlan(String patternPlan);
 

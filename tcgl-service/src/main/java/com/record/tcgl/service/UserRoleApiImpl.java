@@ -29,19 +29,16 @@ public class UserRoleApiImpl implements UserRoleApi {
 
     /**
      * 用户角色权限登录
-     * @param userName
-     * @param userRole
-     * @param passWord
      * @return
      */
     @Override
-    public ResultVo<Boolean> checkAdminRole(String userName, Integer userRole, String passWord) {
+    public ResultVo<Boolean> checkAdminRole(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         try {
-            queryWrapper.eq("user_name",userName);
-            queryWrapper.eq("user_role",userRole);
-            queryWrapper.eq("user_password",passWord);
+            queryWrapper.eq("user_name",userEntity.getUserName());
+            queryWrapper.eq("user_role",userEntity.getUserRole());
+            queryWrapper.eq("user_password",userEntity.getUserRole());
             Integer count = userDao.selectCount(queryWrapper);
             if (count > 0){
                 resultVo.setResult(true);
@@ -74,18 +71,15 @@ public class UserRoleApiImpl implements UserRoleApi {
     /**
      * 根据用户名更新用户密码
      *
-     * @param userName
-     * @param password
      * @return
      */
     @Override
-    public ResultVo<Boolean> updatePassword(String userName, String password) {
+    public ResultVo<Boolean> updatePassword(UserEntity userEntity) {
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         ResultVo<Boolean> resultVo = new ResultVo<>();
         try {
-            UserEntity userEntity = new UserEntity();
-            updateWrapper.eq("user_name",userName);
-            userEntity.setUserPassword(password);
+            updateWrapper.eq("user_name",userEntity.getUserName());
+            userEntity.setUserPassword(userEntity.getUserPassword());
             //mybatisPlus使用构造求更新需要一个实体
             userDao.update(userEntity,updateWrapper);
             resultVo.setMessage("更新成功");

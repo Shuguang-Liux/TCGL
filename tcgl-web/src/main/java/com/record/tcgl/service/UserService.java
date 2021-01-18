@@ -1,5 +1,6 @@
 package com.record.tcgl.service;
 
+import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
 import org.springframework.stereotype.Component;
 
@@ -14,19 +15,14 @@ import java.util.Map;
 public interface UserService {
     /**
      * 根据角色判断用户登录
-     * @param userName
-     * @param userRole
-     * @param passWord
      * @return
      */
-    ResultVo<Boolean> adminRoles(String userName, Integer userRole, String passWord);
+    ResultVo<Boolean> adminRoles(UserEntity userEntity);
 
     /**
      * 根据用户名称更新用户密码
-     * @param userName
-     * @param passWord
      * @return
      */
-    ResultVo<Boolean> updatePassword(String userName,String passWord);
+    ResultVo<Boolean> updatePassword(UserEntity userEntity);
 
 }
