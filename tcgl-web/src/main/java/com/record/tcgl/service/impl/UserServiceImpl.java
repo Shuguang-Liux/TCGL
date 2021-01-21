@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Reference()
+    @Reference(version = "1.0.0",check = true)
     private UserRoleApi userRoleApi;
 
 
@@ -27,17 +27,13 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public ResultVo<Boolean> adminRoles(UserEntity userEntity) {
+    public ResultVo<Boolean> login(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         if(StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getUserPassword())){
             resultVo.setError(400,"用户名或密码不正确！");
             return resultVo;
         }
-        if (StringUtils.isEmpty(userEntity.getUserRole())){
-            resultVo.setError(400,"角色信息不正确！");
-            return resultVo;
-        }
-        return userRoleApi.checkAdminRole(userEntity);
+        return userRoleApi.checkUserRole(userEntity);
     }
 
     /**

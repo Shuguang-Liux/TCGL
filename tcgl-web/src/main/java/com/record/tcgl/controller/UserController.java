@@ -1,6 +1,5 @@
 package com.record.tcgl.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 
 /**
  * @author Shuguang_Liux
@@ -29,8 +27,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/roleLogin")
-    public ResultVo<Boolean> adminRoleLogin(@RequestBody UserEntity param){
-        return userService.adminRoles(param);
+    public ResultVo<Boolean> adminRoleLogin(@RequestBody UserEntity userEntity){
+        return userService.login(userEntity);
     }
 
     /**
@@ -42,10 +40,7 @@ public class UserController {
     public ResultVo<Boolean> updatePassword(@RequestBody UserEntity param){
         return userService.updatePassword(param);
     }
-//    @RequestMapping("/delete")
-//    public ResultVo<Boolean> deleteUser(@RequestBody JSONObject param){
-//
-//    }
+
 
     /**
      *
@@ -55,4 +50,5 @@ public class UserController {
     public String uu(){
         return "1";
     }
+
 }

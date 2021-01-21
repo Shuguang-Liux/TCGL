@@ -17,7 +17,7 @@ public interface UserService {
      * 根据角色判断用户登录
      * @return
      */
-    ResultVo<Boolean> adminRoles(UserEntity userEntity);
+    ResultVo<Boolean> login(UserEntity userEntity);
 
     /**
      * 根据用户名称更新用户密码

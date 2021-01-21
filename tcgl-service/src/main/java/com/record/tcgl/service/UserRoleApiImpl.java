@@ -32,7 +32,7 @@ public class UserRoleApiImpl implements UserRoleApi {
      * @return
      */
     @Override
-    public ResultVo<Boolean> checkAdminRole(UserEntity userEntity) {
+    public ResultVo<Boolean> checkUserRole(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         try {
