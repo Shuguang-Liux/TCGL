@@ -12,10 +12,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Shuguang_Liux
  * @package com.record.tcgl.service
- * @Description ToDo
+ * @Description ToDo 
  * @Date 2020/9/9 17:02
  **/
 @Service
@@ -32,17 +35,16 @@ public class UserRoleApiImpl implements UserRoleApi {
      * @return
      */
     @Override
-    public ResultVo<Boolean> checkAdminRole(UserEntity userEntity) {
+    public ResultVo<Boolean> checkUserRole(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         try {
-            queryWrapper.eq("user_name",userEntity.getUserName());
-            queryWrapper.eq("user_role",userEntity.getUserRole());
-            queryWrapper.eq("user_password",userEntity.getUserRole());
+            queryWrapper.eq("user_name",userEntity.getUserName())
+            .eq("user_role",userEntity.getUserRole())
+            .eq("user_password",userEntity.getUserRole());
             Integer count = userDao.selectCount(queryWrapper);
             if (count > 0){
                 resultVo.setResult(true);
-                resultVo.setMessage("用户存在，正常登录");
             }else {
                 resultVo.setResult(false);
                 resultVo.setError(400,"用户不存在！");
@@ -74,9 +76,16 @@ public class UserRoleApiImpl implements UserRoleApi {
      * @return
      */
     @Override
-    public ResultVo<Boolean> updatePassword(UserEntity userEntity) {
-        UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
+    public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name",userEntity.getUserName());
+        int rowNum = userDao.selectCount(queryWrapper);
+        if (1 != rowNum){
+            resultVo.setError(400,"更新失败，请联系管理员");
+            return resultVo;
+        }
+        UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         try {
             updateWrapper.eq("user_name",userEntity.getUserName());
             userEntity.setUserPassword(userEntity.getUserPassword());
@@ -86,8 +95,43 @@ public class UserRoleApiImpl implements UserRoleApi {
         } catch (Exception e) {
             logger.error("更新失败"+e.getMessage());
             e.printStackTrace();
-            resultVo.setError(400,"更新失败请联系管理员");
+            resultVo.setError(400,"更新失败，请联系管理员");
         }
         return resultVo;
+    }
+
+    @Override
+    public ResultVo<?> register(UserEntity userEntity) {
+        ResultVo<?> resultVo = new ResultVo<>();
+        if (isExist(userEntity.getUserName())){
+          resultVo.setError(400,"用户名称已存在");
+          return resultVo;
+        }
+        try {
+            userDao.insert(userEntity);
+        } catch (Exception e) {
+            logger.error("插入失败"+e.getMessage());
+            e.printStackTrace();
+            resultVo.setError(400,"注册失败，请联系管理员");
+        }
+        return resultVo;
+    }
+
+    @Override
+    public ResultVo<Boolean> delete(String ids) {
+        userDao.selectBatchIds(Arrays.asList(ids.split(",")));
+        return new ResultVo<>();
+    }
+
+    /**
+     * 用户名称存在校验
+     * @param userName
+     * @return
+     */
+    private Boolean isExist(String userName){
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_name",userName);
+        int count = userDao.selectCount(queryWrapper);
+        return count != 0;
     }
 }

@@ -17,12 +17,26 @@ public interface UserService {
      * 根据角色判断用户登录
      * @return
      */
-    ResultVo<Boolean> adminRoles(UserEntity userEntity);
+    ResultVo<Boolean> userRoles(UserEntity userEntity);
 
     /**
      * 根据用户名称更新用户密码
      * @return
      */
-    ResultVo<Boolean> updatePassword(UserEntity userEntity);
+    ResultVo<Boolean> updateAccountInfo(UserEntity userEntity);
+
+    /**
+     * 用户注册服务
+     * @param userEntity
+     * @return
+     */
+    ResultVo<?> register(UserEntity userEntity);
+
+    /**
+     * 删除用户信息
+     * @param ids
+     * @return
+     */
+    ResultVo<Boolean> delete(String ids);
 
 }

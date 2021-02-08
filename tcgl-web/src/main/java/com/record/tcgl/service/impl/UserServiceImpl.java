@@ -4,9 +4,9 @@ import com.record.tcgl.api.UserRoleApi;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Reference()
+    @Reference(timeout = 10000,version = "1.0")
     private UserRoleApi userRoleApi;
 
 
@@ -27,17 +27,13 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public ResultVo<Boolean> adminRoles(UserEntity userEntity) {
+    public ResultVo<Boolean> userRoles(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        if(StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getUserPassword())){
+        if(StringUtils.isEmpty(userEntity.getUserName())|| StringUtils.isEmpty(userEntity.getUserPassword())){
             resultVo.setError(400,"用户名或密码不正确！");
             return resultVo;
         }
-        if (StringUtils.isEmpty(userEntity.getUserRole())){
-            resultVo.setError(400,"角色信息不正确！");
-            return resultVo;
-        }
-        return userRoleApi.checkAdminRole(userEntity);
+        return userRoleApi.checkUserRole(userEntity);
     }
 
     /**
@@ -45,12 +41,29 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public ResultVo<Boolean> updatePassword(UserEntity userEntity) {
+    public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         if (StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getUserPassword())){
             resultVo.setError(400,"用户名或密码不能为空");
             return resultVo;
         }
-        return userRoleApi.updatePassword(userEntity);
+        return userRoleApi.updateAccountInfo(userEntity);
+    }
+
+    @Override
+    public ResultVo<?> register(UserEntity userEntity) {
+        ResultVo<?> resultVo = new ResultVo<>();
+        if (StringUtils.isEmpty(userEntity.getUserName()) ||
+                StringUtils.isEmpty(userEntity.getUserPassword())||
+                null == userEntity.getUserRole()){
+            resultVo.setError(400,"信息不全");
+            return resultVo;
+        }
+        return userRoleApi.register(userEntity);
+    }
+
+    @Override
+    public ResultVo<Boolean> delete(String ids) {
+        return null;
     }
 }
