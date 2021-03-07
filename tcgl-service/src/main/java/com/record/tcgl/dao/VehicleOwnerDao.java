@@ -17,7 +17,7 @@ import java.util.Map;
  * @Date 2020/9/4 10:16
 **/
 @Mapper
-@Repository("vehicleOwnerDao")
+@Repository(value = "VehicleOwnerDao")
 public interface VehicleOwnerDao extends BaseMapper<VehicleOwnerEntity> {
     /**
      * 查询用户与入园记录

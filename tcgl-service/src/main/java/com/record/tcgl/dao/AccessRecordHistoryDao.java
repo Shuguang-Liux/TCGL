@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
  * @Date 2020/9/4 10:16
 **/
 @Mapper
-@Repository("accessRecordHistoryDao")
+@Repository(value = "AccessRecordHistoryDao")
 public interface AccessRecordHistoryDao extends BaseMapper<AccessRecordHistoryEntity> {
 }

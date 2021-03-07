@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Reference(timeout = 10000,version = "1.0")
+    @Reference()
     private UserRoleApi userRoleApi;
 
 

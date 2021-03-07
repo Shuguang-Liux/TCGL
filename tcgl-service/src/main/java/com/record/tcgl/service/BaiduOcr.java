@@ -1,9 +1,12 @@
 package com.record.tcgl.service;
 
 import com.baidu.aip.ocr.AipOcr;
+import com.baidu.aip.util.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +40,15 @@ public class BaiduOcr {
         System.setProperty("aip.log4j.conf", "path/to/your/log4j.properties");
 
         // 调用接口
-        String path = "C:/Users/Shuguang_Liux/Desktop/Snipaste1.jpg";
+        String path = "C:/Users/Shuguang_Liux/Desktop/1.jpg";
         JSONObject res = client.basicGeneral(path, new HashMap<String, String>());
-//        System.out.println(res.toString(2));
+        try {
+            byte[] data = Util.readFileByBytes(path);
+            System.out.println(Arrays.toString(data));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(res.toString(2));
         JSONArray jsonArray = res.getJSONArray("words_result");
         for (int i = 0;i<jsonArray.length();i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
