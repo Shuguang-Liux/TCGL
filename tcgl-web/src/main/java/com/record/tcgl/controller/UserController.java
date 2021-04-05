@@ -3,6 +3,7 @@ package com.record.tcgl.controller;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
+import com.record.tcgl.webConfig.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
+    @AuthToken
     public ResultVo<Boolean> login(@RequestBody UserEntity param){
         param.setUserRole(1);
         return userService.userRoles(param);

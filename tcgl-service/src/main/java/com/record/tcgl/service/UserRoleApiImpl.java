@@ -40,7 +40,7 @@ public class UserRoleApiImpl implements UserRoleApi {
         try {
             queryWrapper.eq("user_name",userEntity.getUserName())
             .eq("user_role",userEntity.getUserRole())
-            .eq("user_password",userEntity.getUserRole());
+            .eq("user_password",userEntity.getUserPassword());
             Integer count = userDao.selectCount(queryWrapper);
             if (count > 0){
                 resultVo.setResult(true);

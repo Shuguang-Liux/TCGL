@@ -14,7 +14,7 @@ import java.util.Map;
  **/
 public interface UserService {
     /**
-     * 根据角色判断用户登录
+     * @param userEntity
      * @return
      */
     ResultVo<Boolean> userRoles(UserEntity userEntity);
