@@ -21,8 +21,8 @@ public class AccessRecordEntity implements Serializable{
     /**
      * 主键
      */
-    @TableId(value = "source_id", type = IdType.AUTO)
-    private Integer sourceId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /**
      * 车牌号
@@ -75,8 +75,8 @@ public class AccessRecordEntity implements Serializable{
     /**
      * 删除状态默认N
      */
-    @TableField(value = "delete_state")
-    private String deleteState;
+    @TableField(value = "delete_status")
+    private String deleteStatus;
 
     /**
      * 是否预付费用户（N为非预付费用户，Y为预付费用户）
@@ -103,7 +103,7 @@ public class AccessRecordEntity implements Serializable{
 
     public static final String COL_ACCESS_TIMES = "access_times";
 
-    public static final String COL_DELETE_STATE = "delete_state";
+    public static final String COL_DELETE_STATUS = "delete_status";
 
     public static final String COL_IS_PREPAYMENT = "is_prepayment";
 }

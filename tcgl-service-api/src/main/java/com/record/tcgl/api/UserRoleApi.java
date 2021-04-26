@@ -5,6 +5,9 @@ import com.record.tcgl.vo.ResultVo;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Shuguang_Liux
  * @package com.record.tcgl.api
@@ -45,4 +48,6 @@ public interface UserRoleApi {
      * @return
      */
     ResultVo<Boolean> delete(String ids);
+
+    List<Map<String,String>> userList();
 }

@@ -10,9 +10,7 @@ import com.record.tcgl.vo.ResultVo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,20 +38,24 @@ public class VehicleOwnerController {
     private VehicleOwnerService vehicleOwnerService;
 
     /**
-     * 插入信息
-     * @param param
-     * @return
-     */
-    @RequestMapping("/insert")
+     * @Author Shuguang_Liux
+     * @Description TODO 插入用户信息并存入支付信息
+     * @Date 2021/4/18 20:58
+     * @Param [com.alibaba.fastjson.JSONObject]
+     * @return com.record.tcgl.vo.ResultVo<java.lang.String>
+     **/
+    @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public ResultVo<String> insertVehicleOwner(@RequestBody JSONObject param){
         return vehicleOwnerService.insertVehicleOwnerAndPayment(param);
     }
 
     /**
-     * 导出车辆以及所有人信息
-     * @param response
-     * @param param
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 导出车辆以及所有人信息
+     * @Date 2021/4/18 20:58
+     * @Param [javax.servlet.http.HttpServletResponse, java.util.Map<java.lang.String,java.lang.Object>]
+     * @return void
+     **/
     @RequestMapping("/exportVehicleOwner")
     public void exportVehicleOwner(HttpServletResponse response, @RequestBody Map<String, Object> param) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
@@ -102,10 +104,12 @@ public class VehicleOwnerController {
     }
 
     /**
-     * 取VehicleOwner和AccessRecordHistory对应列表信息
-     * @param param
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 取VehicleOwner和AccessRecordHistory对应列表信息
+     * @Date 2021/4/18 23:00
+     * @Param [com.alibaba.fastjson.JSONObject]
+     * @return com.record.tcgl.vo.ResultVo<com.record.tcgl.entity.VehicleOwnerEntity>
+     **/
     @RequestMapping("/getVehicleOwnerList")
     public ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(@RequestBody JSONObject param){
         ResultVo<VehicleOwnerEntity> resultVo = vehicleOwnerService.getVehicleOwnerAndAccessRecordHistory(param);

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Reference()
+    @Reference
     private UserRoleApi userRoleApi;
 
 
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Boolean> userRoles(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        if(StringUtils.isEmpty(userEntity.getUserName())|| StringUtils.isEmpty(userEntity.getUserPassword())){
+        if(StringUtils.isEmpty(userEntity.getUserName())|| StringUtils.isEmpty(userEntity.getPassword())){
             resultVo.setError(400,"用户名或密码不正确！");
             return resultVo;
         }
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        if (StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getUserPassword())){
+        if (StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getPassword())){
             resultVo.setError(400,"用户名或密码不能为空");
             return resultVo;
         }
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     public ResultVo<?> register(UserEntity userEntity) {
         ResultVo<?> resultVo = new ResultVo<>();
         if (StringUtils.isEmpty(userEntity.getUserName()) ||
-                StringUtils.isEmpty(userEntity.getUserPassword())||
+                StringUtils.isEmpty(userEntity.getPassword())||
                 null == userEntity.getUserRole()){
             resultVo.setError(400,"信息不全");
             return resultVo;

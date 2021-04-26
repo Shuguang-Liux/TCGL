@@ -11,15 +11,10 @@ import java.util.Date;
 
 /**
  * @package com.example.demo.entity
- * @Description ToDo
+ * @Description ToDo 预付用户钱款信息记录表
  * @author Shuguang_Liux
  * @Date 2020/9/3 14:00
 **/
-
-/**
-    * 预付用户钱款信息记录表
- * @author Shuguang_Liux
- */
 @Data
 @TableName(value = "t_payment_record")
 public class PaymentRecordEntity implements Serializable {

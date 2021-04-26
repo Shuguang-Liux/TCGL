@@ -1,9 +1,6 @@
 package com.record.tcgl.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -34,8 +31,8 @@ public class UserEntity implements Serializable {
     /**
      * 用户密码
      */
-    @TableField(value = "user_password")
-    private String userPassword;
+    @TableField(value = "password")
+    private String password;
 
     /**
      * 管理员0，普通用户1
@@ -46,17 +43,18 @@ public class UserEntity implements Serializable {
     /**
      * 删除状态
      */
-    @TableField(value = "delete_state")
-    private String deleteState;
+    @TableField(value = "delete_status")
+    @TableLogic(value = "N")
+    private String deleteStatus;
 
 
     public static final String COL_ID = "id";
 
     public static final String COL_USER_NAME = "user_name";
 
-    public static final String COL_USER_PASSWORD = "user_password";
+    public static final String COL_USER_PASSWORD = "password";
 
     public static final String COL_USER_ROLE = "user_role";
 
-    public static final String COL_DELETE_STATE = "delete_state";
+    public static final String COL_DELETE_STATUS = "delete_status";
 }

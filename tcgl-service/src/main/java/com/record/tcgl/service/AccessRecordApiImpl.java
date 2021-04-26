@@ -39,10 +39,12 @@ public class AccessRecordApiImpl implements AccessRecordApi {
     private VehicleOwnerDao vehicleOwnerDao;
 
     /**
-     * 车牌扫描入口信息更新（车牌传入）
-     * @param licensePlate
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 车牌扫描入口信息更新（车牌传入）
+     * @Date 2021/4/18 23:00
+     * @Param [java.lang.String]
+     * @return com.record.tcgl.vo.ResultVo<java.util.Map<java.lang.String,java.lang.Object>>
+     **/
     @Override
     public ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate) {
         ResultVo<Map<String,Object>> resultVo = new ResultVo<>();
@@ -133,11 +135,13 @@ public class AccessRecordApiImpl implements AccessRecordApi {
         return resultVo;
     }
 
-    /**
-     * 根据licensePlate查询列表
-     * @param licensePlateSet
-     * @return
-     */
+   /**
+    * @Author Shuguang_Liux
+    * @Description TODO 根据licensePlate查询列表
+    * @Date 2021/4/18 21:38
+    * @Param [java.util.Set<java.lang.String>]
+    * @return com.record.tcgl.vo.ResultVo<java.util.Map<java.lang.String,com.record.tcgl.entity.AccessRecordEntity>>
+    **/
     @Override
     public ResultVo<Map<String, AccessRecordEntity>> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet) {
         ResultVo<Map<String, AccessRecordEntity>> resultVo = new ResultVo<>();
@@ -151,11 +155,12 @@ public class AccessRecordApiImpl implements AccessRecordApi {
     }
 
     /**
-     * 用户时长计算
-     * @param enterTime
-     * @param outTime
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 用户时长计算
+     * @Date 2021/4/18 21:38
+     * @Param [java.util.Date, java.util.Date]
+     * @return java.util.Map<java.lang.String,java.math.BigDecimal>
+     **/
     private Map<String,BigDecimal> priceCalculation(Date enterTime, Date outTime){
         Map<String, BigDecimal> map = new HashMap<>();
         //计算时间差值

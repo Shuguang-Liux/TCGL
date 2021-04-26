@@ -12,19 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
-import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * @author Shuguang_Liux
  * @package com.record.tcgl.webConfig.controller
- * @Description ToDo
+ * @Description ToDo 登
  * @Date 2021/3/28 21:43
  **/
 @RestController
 @RequestMapping("web")
-public class Hello {
+public class AuthController {
 
     @Autowired
     private TokenUtils tokenUtils;
@@ -37,7 +36,7 @@ public class Hello {
 
     /**
      * @Author Shuguang_Liux
-     * @Description //TODO
+     * @Description TODO 登录用户名验证并获取token返回
      * @Date 23:00 2021/4/5
      * @Param [userEntity]
      * @return com.record.tcgl.vo.ResultVo<java.lang.String>
@@ -47,7 +46,7 @@ public class Hello {
         ResultVo<Boolean> boo = userService.userRoles(userEntity);
         ResultVo<String> resultVo = new ResultVo<>();
         String userName = userEntity.getUserName();
-        String password = userEntity.getUserPassword();
+        String password = userEntity.getPassword();
         if (boo.getSuccess()){
             Jedis jedis = new Jedis("127.0.0.1",6379);
 //            jedis.auth("12345");

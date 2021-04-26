@@ -11,10 +11,11 @@ import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @package com.example.demo.entity
- * @Description ToDo
+ * @Description ToDo 车辆所有人信息表
  * @author Shuguang_Liux
  * @Date 2020/9/4 10:16
 **/
@@ -26,7 +27,7 @@ public class VehicleOwnerEntity implements Serializable {
     /**
      * 自增主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -68,8 +69,8 @@ public class VehicleOwnerEntity implements Serializable {
     /**
      * 删除状态
      */
-    @TableField(value = "delete_state")
-    private String deleteState;
+    @TableField(value = "delete_status")
+    private String deleteStatus;
 
     /**
      * 有效状态
@@ -97,7 +98,7 @@ public class VehicleOwnerEntity implements Serializable {
 
     public static final String COL_UPDATE_PERSON = "update_person";
 
-    public static final String COL_DELETE_STATE = "delete_state";
+    public static final String COL_DELETE_STATUS = "delete_status";
 
     public static final String COL_IS_VALID = "is_valid";
 }

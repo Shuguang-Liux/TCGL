@@ -12,7 +12,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Shuguang_Liux
@@ -40,7 +45,7 @@ public class UserRoleApiImpl implements UserRoleApi {
         try {
             queryWrapper.eq("user_name",userEntity.getUserName())
             .eq("user_role",userEntity.getUserRole())
-            .eq("user_password",userEntity.getUserPassword());
+            .eq("user_password",userEntity.getPassword());
             Integer count = userDao.selectCount(queryWrapper);
             if (count > 0){
                 resultVo.setResult(true);
@@ -87,7 +92,7 @@ public class UserRoleApiImpl implements UserRoleApi {
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         try {
             updateWrapper.eq("user_name",userEntity.getUserName());
-            userEntity.setUserPassword(userEntity.getUserPassword());
+            userEntity.setPassword(userEntity.getPassword());
             //mybatisPlus使用构造求更新需要一个实体
             userDao.update(userEntity,updateWrapper);
             resultVo.setMessage("更新成功");
@@ -122,6 +127,27 @@ public class UserRoleApiImpl implements UserRoleApi {
         return new ResultVo<>();
     }
 
+    @Override
+    public List<Map<String, String>> userList() {
+        List<UserEntity> list = userDao.selectList(new UpdateWrapper<UserEntity>().eq("user_name","admin").set("delete_status","Y"));
+        userDao.update(null,new QueryWrapper<UserEntity>().eq("user_name","admin"));
+//        List<Map<String,String>> map = list.stream().collect(Collectors.toMap(UserEntity::getUserName,UserEntity::getPassword))
+       Map<Integer,UserEntity> map = list.stream().filter(o -> "1".equals(o.getUserName())).collect(Collectors.toMap(UserEntity::getId,userEntity -> userEntity,(k1,k2) -> k1));
+
+       List<Map<String,String>> mapList = list.stream().map(userEntity ->
+       { Map<String,String> remap = new HashMap<>();
+           remap.put("user_name",userEntity.getUserName());
+           remap.put("password",userEntity.getPassword());
+           return remap;
+        }).collect(Collectors.toList());
+
+       list.forEach(o -> {
+           o.setDeleteStatus("N");
+           o.setUserRole(1);
+       });
+       return null;
+     }
+
     /**
      * 用户名称存在校验
      * @param userName
@@ -131,6 +157,6 @@ public class UserRoleApiImpl implements UserRoleApi {
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name",userName);
         int count = userDao.selectCount(queryWrapper);
-        return count != 0;
+        return count > 0;
     }
 }

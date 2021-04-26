@@ -11,9 +11,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-    * 入园记录历史表
- * @author Shuguang_Liux
- */
+ * @Author Shuguang_Liux
+ * @Description ToDo 入园记录历史表
+ * @Date 2021/4/12 15:03
+ **/
 @Data
 @TableName(value = "t_access_record_history")
 public class AccessRecordHistoryEntity implements Serializable {
@@ -21,8 +22,8 @@ public class AccessRecordHistoryEntity implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "source_id", type = IdType.AUTO)
-    private Integer sourceId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /**
      * 车牌号
@@ -75,8 +76,8 @@ public class AccessRecordHistoryEntity implements Serializable {
     /**
      * 删除状态默认N
      */
-    @TableField(value = "delete_state")
-    private String deleteState;
+    @TableField(value = "delete_status")
+    private String deleteStatus;
 
     public static final String COL_SOURCE_ID = "source_id";
 
@@ -96,5 +97,5 @@ public class AccessRecordHistoryEntity implements Serializable {
 
     public static final String COL_ACCESS_TIMES = "access_times";
 
-    public static final String COL_DELETE_STATE = "delete_state";
+    public static final String COL_DELETE_STATUS = "delete_status";
 }

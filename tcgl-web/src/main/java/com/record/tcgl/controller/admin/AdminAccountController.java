@@ -20,10 +20,12 @@ public class AdminAccountController {
     private UserService userService;
 
     /**
-     * 管理员账户登录
-     * @param userEntity
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 管理员账户登录
+     * @Date 2021/4/6 0:16
+     * @Param [userEntity]
+     * @return com.record.tcgl.vo.ResultVo<java.lang.Boolean>
+     **/
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResultVo<Boolean> checkAdminAccount(@RequestBody UserEntity userEntity){
         userEntity.setUserRole(0);
@@ -31,20 +33,24 @@ public class AdminAccountController {
     }
 
     /**
-     * 管理员用户更新账户密码
-     * @param userEntity
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description  管理员用户更新账户密码
+     * @Date 23:34 2021/4/5
+     * @Param [userEntity]
+     * @return com.record.tcgl.vo.ResultVo<?>
+     **/
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public ResultVo<?> updateAccountInfo(@RequestBody UserEntity userEntity){
         return userService.updateAccountInfo(userEntity);
     }
 
     /**
-     * 删除用户信息
-     * @param ids
-     * @return
-     */
+     * @Author Shuguang_Liux
+     * @Description TODO 删除用户信息
+     * @Date 2021/4/6 14:42
+     * @Param [ids]
+     * @return com.record.tcgl.vo.ResultVo<java.lang.Boolean>
+     **/
    @RequestMapping(value = "/delete/{ids}",method = RequestMethod.DELETE)
     public ResultVo<Boolean> deleteUserInfo(@PathVariable String ids){
         return null;
