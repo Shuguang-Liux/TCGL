@@ -11,7 +11,7 @@
     <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_person" jdbcType="VARCHAR" property="updatePerson" />
-    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+    <result column="delete_status" jdbcType="VARCHAR" property="deleteStatus" />
     <result column="is_valid" jdbcType="VARCHAR" property="isValid" />
   </resultMap>
 
@@ -25,7 +25,7 @@
     <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_person" jdbcType="VARCHAR" property="updatePerson" />
-    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
+    <result column="delete_status" jdbcType="VARCHAR" property="deleteStatus" />
     <result column="is_valid" jdbcType="VARCHAR" property="isValid" />
 
     <collection property="accessRecordHistoryEntityList" ofType="com.record.tcgl.entity.AccessRecordHistoryEntity" column="sourceId">
