@@ -5,14 +5,19 @@ dubbo:
   application:
     name: dubbo-consumer
   protocal:
-#    id: dubbo
     name: dubbo
     port: 20881
   registry:
+    protocol: dubbo-consumer-registry
     address: zookeeper://127.0.0.1:2181
   monitor:
     protocol: registry
 spring:
   devtools:
+    livereload:
+      port: 35971
     restart:
       enabled: true  #热部署
+logging:
+  level:
+    org.springframework.boot.autoconfigure: debug

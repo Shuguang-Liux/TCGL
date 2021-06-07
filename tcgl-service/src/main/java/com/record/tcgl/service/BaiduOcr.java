@@ -3,6 +3,7 @@ package com.record.tcgl.service;
 import com.baidu.aip.ocr.AipOcr;
 import com.baidu.aip.util.Util;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class BaiduOcr {
     public static final String API_KEY = "cQNh0iVnffQigETyeWizHDbU";
     public static final String SECRET_KEY = "PLqG5bwNObzqfbOVix9qn6LLorgCTpCf";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException {
         // 初始化一个AipOcr
         AipOcr client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
 

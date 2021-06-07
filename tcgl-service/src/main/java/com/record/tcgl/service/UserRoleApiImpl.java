@@ -1,18 +1,21 @@
 package com.record.tcgl.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.record.tcgl.api.UserRoleApi;
 import com.record.tcgl.dao.UserDao;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +28,13 @@ import java.util.stream.Collectors;
  * @Description ToDo 
  * @Date 2020/9/9 17:02
  **/
-@Service
+@DubboService
 @Component
 public class UserRoleApiImpl implements UserRoleApi {
 
     private final static Logger logger = LogManager.getLogger(UserRoleApiImpl.class);
 
-    @Autowired
+    @Resource
     private UserDao userDao;
 
     /**
@@ -41,12 +44,12 @@ public class UserRoleApiImpl implements UserRoleApi {
     @Override
     public ResultVo<Boolean> checkUserRole(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         try {
-            queryWrapper.eq("user_name",userEntity.getUserName())
-            .eq("user_role",userEntity.getUserRole())
-            .eq("user_password",userEntity.getPassword());
-            Integer count = userDao.selectCount(queryWrapper);
+            LambdaQueryWrapper<UserEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
+            lambdaQueryWrapper.eq(UserEntity::getUserName,userEntity.getUserName())
+                    .eq(UserEntity::getSecretCode,userEntity.getSecretCode());
+            System.out.println("方法提");
+            Integer count = userDao.selectCount(lambdaQueryWrapper);
             if (count > 0){
                 resultVo.setResult(true);
             }else {
@@ -92,7 +95,7 @@ public class UserRoleApiImpl implements UserRoleApi {
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         try {
             updateWrapper.eq("user_name",userEntity.getUserName());
-            userEntity.setPassword(userEntity.getPassword());
+            userEntity.setSecretCode(userEntity.getSecretCode());
             //mybatisPlus使用构造求更新需要一个实体
             userDao.update(userEntity,updateWrapper);
             resultVo.setMessage("更新成功");
@@ -135,9 +138,9 @@ public class UserRoleApiImpl implements UserRoleApi {
        Map<Integer,UserEntity> map = list.stream().filter(o -> "1".equals(o.getUserName())).collect(Collectors.toMap(UserEntity::getId,userEntity -> userEntity,(k1,k2) -> k1));
 
        List<Map<String,String>> mapList = list.stream().map(userEntity ->
-       { Map<String,String> remap = new HashMap<>();
+       { Map<String,String> remap = new HashMap<>(2);
            remap.put("user_name",userEntity.getUserName());
-           remap.put("password",userEntity.getPassword());
+           remap.put("password",userEntity.getSecretCode());
            return remap;
         }).collect(Collectors.toList());
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -25,28 +26,28 @@ import java.security.NoSuchAlgorithmException;
 @RequestMapping("web")
 public class AuthController {
 
-    @Autowired
+    @Resource
     private TokenUtils tokenUtils;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private Md5utils md5utils;
 
     /**
-     * @Author Shuguang_Liux
-     * @Description TODO 登录用户名验证并获取token返回
-     * @Date 23:00 2021/4/5
-     * @Param [userEntity]
+     * @description TODO 登录获取token
+     * @param userEntity
      * @return com.record.tcgl.vo.ResultVo<java.lang.String>
-     **/
+     * @author Shuguang_Liux
+     * @date 2021/6/4 21:43
+     */
     @RequestMapping(value = "login",method = RequestMethod.POST)
-    public ResultVo<String> login(@RequestBody UserEntity userEntity) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public ResultVo<String> login(UserEntity userEntity) throws NoSuchAlgorithmException {
         ResultVo<Boolean> boo = userService.userRoles(userEntity);
         ResultVo<String> resultVo = new ResultVo<>();
         String userName = userEntity.getUserName();
-        String password = userEntity.getPassword();
+        String password = userEntity.getSecretCode();
         if (boo.getSuccess()){
             Jedis jedis = new Jedis("127.0.0.1",6379);
 //            jedis.auth("12345");
@@ -56,8 +57,8 @@ public class AuthController {
             jedis.expire(userName,600);
             jedis.set(token,userName);
             jedis.expire(token,600);
-            Long currentTime = System.currentTimeMillis();
-            jedis.set(token+userName,currentTime.toString());
+            long currentTime = System.currentTimeMillis();
+            jedis.set(token+userName, Long.toString(currentTime));
             jedis.close();
             resultVo.setMessage("登录成功");
             resultVo.setResult(token);

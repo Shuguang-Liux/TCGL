@@ -5,6 +5,7 @@ import com.record.tcgl.api.VehicleOwnerApi;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.service.VehicleOwnerService;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,7 +22,7 @@ import java.util.Map;
 @Service("vehicleOwnerService")
 public class VehicleOwnerServiceImpl implements VehicleOwnerService {
 
-    @Reference
+    @DubboReference
     private VehicleOwnerApi vehicleOwnerApi;
     /**
      * 插入用户信息并存入支付信息

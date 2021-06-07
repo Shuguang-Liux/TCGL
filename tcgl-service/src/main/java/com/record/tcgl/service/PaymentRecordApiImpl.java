@@ -6,11 +6,13 @@ import com.record.tcgl.constant.ApplyIntEnum;
 import com.record.tcgl.dao.PaymentRecordDao;
 import com.record.tcgl.entity.PaymentRecordEntity;
 import com.record.tcgl.vo.ResultVo;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,11 +22,11 @@ import java.util.Date;
  * @Description ToDo
  * @Date 2020/9/14 21:29
  **/
-@Service
+@DubboService
 @Component
 public class PaymentRecordApiImpl implements PaymentRecordApi {
 
-    @Autowired
+    @Resource
     private PaymentRecordDao paymentRecordDao;
 
     /**

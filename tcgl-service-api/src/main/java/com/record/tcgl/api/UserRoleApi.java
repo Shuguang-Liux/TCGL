@@ -2,7 +2,6 @@ package com.record.tcgl.api;
 
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

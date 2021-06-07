@@ -11,12 +11,10 @@ import com.record.tcgl.dao.VehicleOwnerDao;
 import com.record.tcgl.entity.AccessRecordEntity;
 import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
-import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -26,16 +24,16 @@ import java.util.*;
  * @Description ToDo
  * @Date 2020/9/15 0:08
  **/
-@Service
+@DubboService
 @Component
 public class VehicleOwnerApiImpl implements VehicleOwnerApi {
-    @Autowired
+    @Resource
     private VehicleOwnerDao vehicleOwnerDao;
 
-    @Autowired
+    @Resource
     private PaymentRecordApi paymentRecordApi;
 
-    @Autowired
+    @Resource
     private AccessRecordApi accessRecordApi;
 
     /**
@@ -45,14 +43,14 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
      */
     @Override
     public ResultVo<String> insertVehicleOwner(JSONObject params) {
-        ResultVo<String> ResultVo = new ResultVo<>();
-        if (StringUtils.isEmpty(params.getString("licensePlate"))){
-            ResultVo.setError(400,"主信息不能为空！");
-            return ResultVo;
+        ResultVo<String> resultVo = new ResultVo<>();
+        if (Objects.nonNull(params.getString("licensePlate"))){
+            resultVo.setError(400,"主信息不能为空！");
+            return resultVo;
         }
         VehicleOwnerEntity vehicleOwnerEntity = new VehicleOwnerEntity();
         vehicleOwnerEntity.setLicensePlate(params.getString("licensePlate"));
-        if (!StringUtils.isEmpty(params.getString("vehicleOwner"))){
+        if (Objects.nonNull(params.getString("vehicleOwner"))){
             vehicleOwnerEntity.setVehicleOwner(params.getString("vehicleOwner"));
         }
         //暂定只能由管理员输入
@@ -63,8 +61,8 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         //mybatisplus插入后自动把id映射到实体，获取自增主键
         params.put("ownerId",vehicleOwnerEntity.getId());
         //插入租金用户信息
-        ResultVo = paymentRecordApi.insertPaymentInfo(params);
-        return ResultVo;
+        resultVo = paymentRecordApi.insertPaymentInfo(params);
+        return resultVo;
     }
 
     /**
@@ -83,7 +81,7 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         //主键倒序
         queryWrapper.orderByDesc("id");
         //页面数量
-        Page<VehicleOwnerEntity> page = new Page<>(Long.valueOf(String.valueOf(param.get("pageNum"))).longValue(),Long.valueOf(String.valueOf(param.get("pageSize"))).longValue());
+        Page<VehicleOwnerEntity> page = new Page<>(Long.parseLong(String.valueOf(param.get("pageNum"))), Long.parseLong(String.valueOf(param.get("pageSize"))));
         IPage<VehicleOwnerEntity> vehicleOwnerIPage = vehicleOwnerDao.selectPage(page,queryWrapper);
         resultVo.setResult(vehicleOwnerIPage);
         return resultVo;
@@ -99,13 +97,13 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         ResultVo<Map<String, Object>> resultVo = new ResultVo<>();
         Map<String,Object> map = new HashMap<>();
         QueryWrapper<VehicleOwnerEntity> queryWrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(param.get("licensePlate"))){
+        if (Objects.nonNull(param.get("licensePlate"))){
             queryWrapper.eq("license_plate",param.get("licensePlate"));
         }
-        if (!StringUtils.isEmpty(param.get("vehicleOwner"))){
+        if (Objects.nonNull(param.get("vehicleOwner"))){
             queryWrapper.eq("vehicle_owner",param.get("vehicleOwner"));
         }
-        if (!StringUtils.isEmpty(param.get("isValid"))){
+        if (Objects.nonNull(param.get("isValid"))){
             queryWrapper.eq("is_valid",param.get("isValid"));
         }
         queryWrapper.orderByDesc("id");
@@ -166,11 +164,10 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         return resultVo;
     }
     private String[] getHeadTitles() {
-        String[] titles = new String[]{
+        return new String[]{
                 "车辆牌照", "车辆所有人", "创建时间", "创建人", "更新时间", "更新人", "有效状态",
                 "进园时间", "出园时间","入园时长统计","价格","是否出园","次数","是否预付费用户"
         };
-        return titles;
     }
 
     /**
@@ -197,13 +194,13 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
     public Map<String, String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength) {
         Map<String,String[]> stringListMap = new HashMap<>();
         QueryWrapper<VehicleOwnerEntity> queryWrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(param.get("licensePlate"))){
+        if (Objects.nonNull(param.get("licensePlate"))){
             queryWrapper.eq("license_plate",param.get("licensePlate"));
         }
-        if (!StringUtils.isEmpty(param.get("vehicleOwner"))){
+        if (Objects.nonNull(param.get("vehicleOwner"))){
             queryWrapper.eq("vehicle_owner",param.get("vehicleOwner"));
         }
-        if (!StringUtils.isEmpty(param.get("isValid"))){
+        if (Objects.nonNull(param.get("isValid"))){
             queryWrapper.eq("is_valid",param.get("isValid"));
         }
         queryWrapper.orderByDesc("id");

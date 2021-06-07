@@ -16,10 +16,9 @@ import java.nio.charset.StandardCharsets;
 public class TokenUtils {
     /**
      * token令牌的生成策略是：使用用户名+密码进行base64的编码
-     * @throws UnsupportedEncodingException
      */
 
-    public String getToken(String userName, String userPwd) throws UnsupportedEncodingException {
+    public String getToken(String userName, String userPwd) {
 
         return new String(Base64Utils.encode((userName+userPwd).getBytes()), StandardCharsets.UTF_8).replace("=","");
     }

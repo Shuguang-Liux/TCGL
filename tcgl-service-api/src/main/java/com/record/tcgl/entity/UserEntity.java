@@ -31,8 +31,8 @@ public class UserEntity implements Serializable {
     /**
      * 用户密码
      */
-    @TableField(value = "password")
-    private String password;
+    @TableField(value = "secret_code")
+    private String secretCode;
 
     /**
      * 管理员0，普通用户1
@@ -44,17 +44,5 @@ public class UserEntity implements Serializable {
      * 删除状态
      */
     @TableField(value = "delete_status")
-    @TableLogic(value = "N")
     private String deleteStatus;
-
-
-    public static final String COL_ID = "id";
-
-    public static final String COL_USER_NAME = "user_name";
-
-    public static final String COL_USER_PASSWORD = "password";
-
-    public static final String COL_USER_ROLE = "user_role";
-
-    public static final String COL_DELETE_STATUS = "delete_status";
 }

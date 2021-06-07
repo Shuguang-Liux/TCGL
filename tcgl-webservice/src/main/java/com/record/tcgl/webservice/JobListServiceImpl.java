@@ -64,7 +64,7 @@ public class JobListServiceImpl implements JobListService{
     @Override
     public String getUserInfo(String userName) {
         UserEntity userEntity = userRoleApi.getUserInfo(userName);
-        return userEntity.getPassword();
+        return userEntity.getSecretCode();
 //        return "请求成功";
     }
 }

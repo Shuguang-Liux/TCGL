@@ -2,6 +2,7 @@ package com.record.tcgl.service.impl;
 
 import com.record.tcgl.api.Ocr;
 import com.record.tcgl.service.BaiduOcr;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.HashMap;
 @Service("baiduOcr")
 public class BaiduOcrImpl implements BaiduOcr {
 
-    @Reference(timeout = 100000)
+    @DubboReference(timeout = 100000)
     private Ocr ocr;
 
     @Override

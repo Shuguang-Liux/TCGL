@@ -1,6 +1,25 @@
+debug: true
 server:
   port: 8084
+dubbo:
+  application:
+    name: dubbo-provider
+  protocal:
+    name: dubbo
+    port: 20880
+  registry:
+    protocol: dubbo-provider-registry
+    address: zookeeper://localhost:2181
+    timeout: 4000000
+  monitor:
+    protocol: registry
+  config-center:
+    timeout: 400000
 spring:
+  devtools:
+    livereload:
+      port: 35979
+      enabled: true
   datasource:
     name: test  #数据库名称
     url: jdbc:mysql://localhost:3306/tcgl?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai #url
@@ -21,25 +40,6 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
-dubbo:
-  application:
-    name: dubbo-provider
-  protocal:
-    id: dubbo
-    name: dubbo
-    port: 20880
-  registry:
-    protocol: dubbo-provider-registry
-    address: zookeeper://localhost:2181
-#    aliyun
-#    address: zookeeper://8.131.76.172:2181
-    timeout: 4000000
-  monitor:
-    protocol: registry
-  config-center:
-    timeout: 400000
-
-
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -74,10 +74,17 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
-    #    call-setters-on-nulls: true
+    all-setters-on-nulls: true
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
-    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 解决oracle更新数据为null时无法转换报错，mysql不会出现此情况
     jdbc-type-for-null: 'null'
+logging:
+  config: classpath:log4j2.xml
+#  pattern:
+#    console: "%d - %msg%n"
+  level:
+    com.record.tcgl.dao: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
 
 
