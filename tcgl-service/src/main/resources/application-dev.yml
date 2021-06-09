@@ -12,11 +12,11 @@ dubbo:
   registry:
     protocol: dubbo-provider-registry
     address: zookeeper://127.0.0.1:2181
-    timeout: 4000000
+    timeout: 60000
   monitor:
     protocol: registry
   config-center:
-    timeout: 4000000
+    timeout: 60000
 
 spring:
   devtools:
@@ -24,7 +24,7 @@ spring:
       port: 35979
       enabled: true
   datasource:
-    name: test  #数据库名称
+    name: tcgl  #数据库名称
     url: jdbc:mysql://localhost:3306/tcgl?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai #url
     username: root  #用户名
     password: 123456  #用户密码
