@@ -231,7 +231,7 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
                 //更新人
                 objects[5] = e.getUpdatePerson() == null ? null : e.getUpdatePerson();
                 //是否有效
-                objects[6] = e.getIsValid().equals("Y") ? "有效":"无效";
+                objects[6] = "Y".equals(e.getIsValid()) ? "有效":"无效";
                 //获取入园记录表中对应信息
                 if (accessRecordVo.getSuccess() && accessRecordVo.getResult() != null &&
                         accessRecordVo.getResult().get(e.getLicensePlate()) != null){
@@ -244,11 +244,11 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
                     //价格
                     objects[10] = accessRecordVo.getResult().get(e.getLicensePlate()).getBillingPrice() == null ? null : String.valueOf(accessRecordVo.getResult().get(e.getLicensePlate()).getBillingPrice());
                     //是否出园
-                    objects[11] = accessRecordVo.getResult().get(e.getLicensePlate()).getIsOut().equals("Y") ? "已出园":"未出园";
+                    objects[11] = "Y".equals(accessRecordVo.getResult().get(e.getLicensePlate()).getIsOut()) ? "已出园":"未出园";
                     //次数统计
                     objects[12] = String.valueOf(accessRecordVo.getResult().get(e.getLicensePlate()).getAccessTimes());
                     //预付费用户
-                    objects[13] = accessRecordVo.getResult().get(e.getLicensePlate()).getIsPrepayment().equals("Y")?"有效":"无效";
+                    objects[13] = "Y".equals(accessRecordVo.getResult().get(e.getLicensePlate()).getIsPrepayment())?"有效":"无效";
                 }
                 //添加到list中
                 stringListMap.put(e.getLicensePlate(),objects);

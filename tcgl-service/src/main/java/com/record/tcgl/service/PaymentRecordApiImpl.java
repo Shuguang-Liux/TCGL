@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author Shuguang_Liux
@@ -36,10 +37,10 @@ public class PaymentRecordApiImpl implements PaymentRecordApi {
      */
     @Override
     public ResultVo<String> insertPaymentInfo(JSONObject params) {
-        ResultVo<String> ResultVo = new ResultVo<>();
-        if (StringUtils.isEmpty(params.getInteger("ownerId")) || StringUtils.isEmpty(params.getInteger("paymentAmount"))){
-            ResultVo.setError(400,"信息不全无法添加！");
-            return ResultVo;
+        ResultVo<String> resultVo = new ResultVo<>();
+        if (Objects.nonNull(params.getInteger("ownerId")) || Objects.nonNull(params.getInteger("paymentAmount"))){
+            resultVo.setError(400,"信息不全无法添加！");
+            return resultVo;
         }
         PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
         paymentRecordEntity.setOwnerId(params.getInteger("ownerId"));
@@ -55,10 +56,10 @@ public class PaymentRecordApiImpl implements PaymentRecordApi {
         //插入数据库
         int count = paymentRecordDao.insert(paymentRecordEntity);
         if (count == 1){
-            ResultVo.setMessage("插入数据库成功！");
+            resultVo.setMessage("插入数据库成功！");
         }else {
-            ResultVo.setError(400,"数据插入失败");
+            resultVo.setError(400,"数据插入失败");
         }
-        return ResultVo;
+        return resultVo;
     }
 }

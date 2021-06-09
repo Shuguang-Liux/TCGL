@@ -16,7 +16,7 @@ public class TcglServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TcglServiceApplication.class, args);
-        System.out.println("服务者启动成功");
+        System.out.println("服务者启动成功--占用8084端口");
     }
 
 }

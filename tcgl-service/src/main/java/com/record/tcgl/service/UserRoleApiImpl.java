@@ -9,10 +9,9 @@ import com.record.tcgl.dao.UserDao;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.vo.ResultVo;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.apache.dubbo.config.annotation.Service;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserRoleApiImpl implements UserRoleApi {
 
-    private final static Logger logger = LogManager.getLogger(UserRoleApiImpl.class);
+    private final static Logger logger = LoggerFactory.getLogger(UserRoleApiImpl.class);
 
     @Resource
     private UserDao userDao;
@@ -48,7 +47,6 @@ public class UserRoleApiImpl implements UserRoleApi {
             LambdaQueryWrapper<UserEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
             lambdaQueryWrapper.eq(UserEntity::getUserName,userEntity.getUserName())
                     .eq(UserEntity::getSecretCode,userEntity.getSecretCode());
-            System.out.println("方法提");
             Integer count = userDao.selectCount(lambdaQueryWrapper);
             if (count > 0){
                 resultVo.setResult(true);

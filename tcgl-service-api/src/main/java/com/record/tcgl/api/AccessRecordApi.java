@@ -2,7 +2,6 @@ package com.record.tcgl.api;
 
 import com.record.tcgl.entity.AccessRecordEntity;
 import com.record.tcgl.vo.ResultVo;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Set;

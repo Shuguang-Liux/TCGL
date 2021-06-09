@@ -1,10 +1,12 @@
-debug: true
 server:
   port: 8090
 dubbo:
+  consumer:
+    timeout: 60000
+    retries: 1
   application:
     name: dubbo-consumer
-  protocal:
+  protocol:
     name: dubbo
     port: 20881
   registry:
@@ -12,12 +14,29 @@ dubbo:
     address: zookeeper://127.0.0.1:2181
   monitor:
     protocol: registry
+
+
 spring:
   devtools:
     livereload:
       port: 35971
     restart:
       enabled: true  #热部署
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: redis
+    database: 1
+    connect-timeout: 10
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1
+
 logging:
   level:
-    org.springframework.boot.autoconfigure: debug
+    org.springframework: warn
+
+
