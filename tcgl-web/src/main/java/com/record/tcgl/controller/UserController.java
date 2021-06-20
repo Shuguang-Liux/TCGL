@@ -3,8 +3,9 @@ package com.record.tcgl.controller;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
-import com.record.tcgl.webConfig.AuthToken;
+import com.record.tcgl.interfaces.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,20 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2020/9/14 15:43
  **/
 @RestController
-@RequestMapping("user")
+@RequestMapping("login")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * 角色账户登录
      * @return
      */
-    @RequestMapping(value = "login",method = RequestMethod.POST)
-    @AuthToken
-    public ResultVo<Boolean> login(@RequestBody UserEntity param){
-        param.setUserRole(1);
+    @RequestMapping(value = "submit",method = RequestMethod.POST)
+    public ResultVo<Boolean> login(UserEntity param){
         return userService.userRoles(param);
     }
 
@@ -41,7 +43,7 @@ public class UserController {
      */
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public ResultVo<?> register(@RequestBody UserEntity userEntity){
-        userEntity.setUserRole(1);
+        userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
         return userService.register(userEntity);
     }
 
@@ -51,8 +53,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "update",method = RequestMethod.POST)
-    public ResultVo<Boolean> updatePassword(@RequestBody UserEntity param){
-        return userService.updateAccountInfo(param);
+    public ResultVo<Boolean> updatePassword(@RequestBody UserEntity userEntity){
+        userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
+        return userService.updateAccountInfo(userEntity);
     }
 
 }

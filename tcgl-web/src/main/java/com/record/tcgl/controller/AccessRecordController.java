@@ -16,7 +16,7 @@ import java.util.Map;
  * @Date 2020/8/11 14:04
  **/
 @RestController
-@RequestMapping("/accessRecord")
+@RequestMapping("accessRecord")
 public class AccessRecordController {
 
     @Autowired

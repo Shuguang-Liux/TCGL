@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.record.tcgl.dao.AccessRecordHistoryDao">
-  <resultMap id="BaseResultMap" type="com.record.tcgl.entity.AccessRecordHistoryEntity">
-    <!--@mbg.generated-->
-    <!--@Table t_access_record_history-->
-    <id column="source_id" jdbcType="INTEGER" property="sourceId" />
-    <result column="license_plate" jdbcType="VARCHAR" property="licensePlate" />
-    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
-    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
-    <result column="out_time" jdbcType="TIMESTAMP" property="outTime" />
-    <result column="time_count" jdbcType="DECIMAL" property="timeCount" />
-    <result column="billing_price" jdbcType="DECIMAL" property="billingPrice" />
-    <result column="is_out" jdbcType="VARCHAR" property="isOut" />
-    <result column="access_times" jdbcType="INTEGER" property="accessTimes" />
-    <result column="delete_state" jdbcType="VARCHAR" property="deleteState" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    source_id, license_plate, owner_name, enter_time, out_time, time_count, billing_price, 
-    is_out, access_times, delete_state
-  </sql>
 </mapper>

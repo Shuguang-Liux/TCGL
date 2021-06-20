@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.record.tcgl.dao.PaymentRecordDao">
-  <resultMap id="BaseResultMap" type="com.record.tcgl.entity.PaymentRecordEntity">
-    <!--@mbg.generated-->
-    <!--@Table t_payment_record-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="payment_status" jdbcType="VARCHAR" property="paymentStatus" />
-    <result column="payment_date" jdbcType="TIMESTAMP" property="paymentDate" />
-    <result column="payment_amount" jdbcType="INTEGER" property="paymentAmount" />
-    <result column="payment_method" jdbcType="VARCHAR" property="paymentMethod" />
-    <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime" />
-    <result column="owner_id" jdbcType="INTEGER" property="ownerId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, payment_status, payment_date, payment_amount, payment_method, expiration_time, 
-    owner_id
-  </sql>
 </mapper>

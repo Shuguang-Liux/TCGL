@@ -39,4 +39,19 @@ logging:
   level:
     org.springframework: warn
 
+# JWT配置
+jwt:
+  # 密匙Key
+  secret: JWTSecret,tcgl
+  # HeaderKey
+  tokenHeader: Authorization
+  # Token前缀
+  tokenPrefix: Bearer
+  # 过期时间，单位秒
+  expiration: 300
+  # 刷新时间，单位天
+  refreshTime: 7
+  # 配置白名单（不需要认证）
+  antMatchers: /login/**,/register/**,/static/**
+
 

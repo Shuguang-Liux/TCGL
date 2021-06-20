@@ -6,7 +6,6 @@ import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
 
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Boolean> userRoles(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        if(StringUtils.isEmpty(userEntity.getUserName())|| StringUtils.isEmpty(userEntity.getSecretCode())){
+        if(StringUtils.isEmpty(userEntity.getUsername())|| StringUtils.isEmpty(userEntity.getPassword())){
             resultVo.setError(400,"用户名或密码不正确！");
             return resultVo;
         }
@@ -44,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
-        if (StringUtils.isEmpty(userEntity.getUserName())||StringUtils.isEmpty(userEntity.getSecretCode())){
+        if (StringUtils.isEmpty(userEntity.getUsername())||StringUtils.isEmpty(userEntity.getPassword())){
             resultVo.setError(400,"用户名或密码不能为空");
             return resultVo;
         }
@@ -54,9 +53,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<?> register(UserEntity userEntity) {
         ResultVo<?> resultVo = new ResultVo<>();
-        if (StringUtils.isEmpty(userEntity.getUserName()) ||
-                StringUtils.isEmpty(userEntity.getSecretCode())||
-                null == userEntity.getUserRole()){
+        if (StringUtils.isEmpty(userEntity.getUsername()) ||
+                StringUtils.isEmpty(userEntity.getPassword())){
             resultVo.setError(400,"信息不全");
             return resultVo;
         }

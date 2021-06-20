@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @package com.example.demo.entity
@@ -25,20 +26,15 @@ public class UserEntity implements Serializable {
     /**
      * 用户名
      */
-    @TableField(value = "user_name")
-    private String userName;
+    @TableField(value = "username")
+    private String username;
 
     /**
      * 用户密码
      */
-    @TableField(value = "secret_code")
-    private String secretCode;
+    @TableField(value = "password")
+    private String password;
 
-    /**
-     * 管理员0，普通用户1
-     */
-    @TableField(value = "user_role")
-    private Integer userRole;
 
     /**
      * 删除状态

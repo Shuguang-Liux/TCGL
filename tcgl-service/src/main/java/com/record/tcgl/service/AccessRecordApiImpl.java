@@ -13,6 +13,7 @@ import com.record.tcgl.entity.VehicleOwnerEntity;
 import com.record.tcgl.vo.ResultVo;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,13 +30,13 @@ import java.util.*;
 @Component
 public class AccessRecordApiImpl implements AccessRecordApi {
 
-    @Resource
+    @Autowired
     private AccessRecordDao accessRecordDao;
 
-    @Resource
+    @Autowired
     private AccessRecordHistoryDao accessRecordHistoryDao;
 
-    @Resource
+    @Autowired
     private VehicleOwnerDao vehicleOwnerDao;
 
     /**

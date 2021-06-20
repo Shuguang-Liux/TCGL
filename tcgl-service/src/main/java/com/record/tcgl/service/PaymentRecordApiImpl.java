@@ -27,7 +27,7 @@ import java.util.Objects;
 @Component
 public class PaymentRecordApiImpl implements PaymentRecordApi {
 
-    @Resource
+    @Autowired
     private PaymentRecordDao paymentRecordDao;
 
     /**

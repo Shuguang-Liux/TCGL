@@ -3,9 +3,7 @@ package com.record.tcgl.controller.security;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
-import com.record.tcgl.webConfig.RedisFlagContast;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.data.redis.connection.jedis.JedisUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +25,6 @@ public class AuthController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private JedisPool jedisPool;
-
     /**
      * @description TODO 登录获取token
      * @param userEntity
@@ -41,31 +36,31 @@ public class AuthController {
     public ResultVo<String> login(UserEntity userEntity) {
         ResultVo<Boolean> boo = userService.userRoles(userEntity);
         ResultVo<String> resultVo = new ResultVo<>();
-        String userName = userEntity.getUserName();
+        String userName = userEntity.getUsername();
         if (boo.getSuccess()){
-            String token = DigestUtils.md5Hex(userEntity.getUserName() + System.currentTimeMillis());
-            resultVo.setResult(token);
-            resultVo.setMessage("当前登录用户"+userName);
-            BinaryJedisCommands binaryJedisCommands = jedisPool.getResource();
-            String redisToken = RedisFlagContast.AUTH_KEY_PREFIX + token;
-            binaryJedisCommands.set(userName.getBytes(),redisToken.getBytes());
-            binaryJedisCommands.expire(userName.getBytes(), RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
-            byte[] userNameTokenbyte = redisToken.getBytes();
-            //存在
-            if (binaryJedisCommands.exists(userName.getBytes())) {
-                //获取对应的value
-                byte[] userNameToken = binaryJedisCommands.get(userName.getBytes());
-                if (userNameToken != null) {
-                    binaryJedisCommands.del(userNameToken);
-                    binaryJedisCommands.set(redisToken.getBytes(), userNameTokenbyte);
-                    binaryJedisCommands.expire(redisToken.getBytes(),
-                            RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
-                }
-            } else {
-                binaryJedisCommands.set(redisToken.getBytes(), userNameTokenbyte);
-                binaryJedisCommands.expire(redisToken.getBytes(),
-                        RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
-            }
+//            String token = DigestUtils.md5Hex(userEntity.getUserName() + System.currentTimeMillis());
+//            resultVo.setResult(token);
+//            resultVo.setMessage("当前登录用户"+userName);
+//            BinaryJedisCommands binaryJedisCommands = jedisPool.getResource();
+//            String redisToken = RedisFlagContast.AUTH_KEY_PREFIX + token;
+//            binaryJedisCommands.set(userName.getBytes(),redisToken.getBytes());
+//            binaryJedisCommands.expire(userName.getBytes(), RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
+//            byte[] userNameTokenbyte = redisToken.getBytes();
+//            //存在
+//            if (binaryJedisCommands.exists(userName.getBytes())) {
+//                //获取对应的value
+//                byte[] userNameToken = binaryJedisCommands.get(userName.getBytes());
+//                if (userNameToken != null) {
+//                    binaryJedisCommands.del(userNameToken);
+//                    binaryJedisCommands.set(redisToken.getBytes(), userNameTokenbyte);
+//                    binaryJedisCommands.expire(redisToken.getBytes(),
+//                            RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
+//                }
+//            } else {
+//                binaryJedisCommands.set(redisToken.getBytes(), userNameTokenbyte);
+//                binaryJedisCommands.expire(redisToken.getBytes(),
+//                        RedisFlagContast.ACCOUNT_TOKEN_TIMEOUT);
+//            }
         }else {
             resultVo.setError(400,"用户名或密码不对");
         }

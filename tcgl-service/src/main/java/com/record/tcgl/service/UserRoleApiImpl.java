@@ -12,6 +12,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -33,7 +34,7 @@ public class UserRoleApiImpl implements UserRoleApi {
 
     private final static Logger logger = LoggerFactory.getLogger(UserRoleApiImpl.class);
 
-    @Resource
+    @Autowired
     private UserDao userDao;
 
     /**
@@ -45,8 +46,8 @@ public class UserRoleApiImpl implements UserRoleApi {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         try {
             LambdaQueryWrapper<UserEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
-            lambdaQueryWrapper.eq(UserEntity::getUserName,userEntity.getUserName())
-                    .eq(UserEntity::getSecretCode,userEntity.getSecretCode());
+            lambdaQueryWrapper.eq(UserEntity::getUsername,userEntity.getUsername())
+                    .eq(UserEntity::getPassword,userEntity.getPassword());
             Integer count = userDao.selectCount(lambdaQueryWrapper);
             if (count > 0){
                 resultVo.setResult(true);
@@ -71,7 +72,7 @@ public class UserRoleApiImpl implements UserRoleApi {
     @Override
     public UserEntity getUserInfo(String userName) {
         QueryWrapper<UserEntity> userEntityQueryWrapper = new QueryWrapper<>();
-        userEntityQueryWrapper.eq("user_name",userName);
+        userEntityQueryWrapper.eq("username",userName);
         return userDao.selectOne(userEntityQueryWrapper);
     }
 
@@ -84,7 +85,7 @@ public class UserRoleApiImpl implements UserRoleApi {
     public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name",userEntity.getUserName());
+        queryWrapper.eq("username",userEntity.getUsername());
         int rowNum = userDao.selectCount(queryWrapper);
         if (1 != rowNum){
             resultVo.setError(400,"更新失败，请联系管理员");
@@ -92,8 +93,8 @@ public class UserRoleApiImpl implements UserRoleApi {
         }
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         try {
-            updateWrapper.eq("user_name",userEntity.getUserName());
-            userEntity.setSecretCode(userEntity.getSecretCode());
+            updateWrapper.eq("username",userEntity.getUsername());
+            userEntity.setPassword(userEntity.getPassword());
             //mybatisPlus使用构造求更新需要一个实体
             userDao.update(userEntity,updateWrapper);
             resultVo.setMessage("更新成功");
@@ -108,7 +109,7 @@ public class UserRoleApiImpl implements UserRoleApi {
     @Override
     public ResultVo<?> register(UserEntity userEntity) {
         ResultVo<?> resultVo = new ResultVo<>();
-        if (isExist(userEntity.getUserName())){
+        if (isExist(userEntity.getUsername())){
           resultVo.setError(400,"用户名称已存在");
           return resultVo;
         }
@@ -130,21 +131,20 @@ public class UserRoleApiImpl implements UserRoleApi {
 
     @Override
     public List<Map<String, String>> userList() {
-        List<UserEntity> list = userDao.selectList(new UpdateWrapper<UserEntity>().eq("user_name","admin").set("delete_status","Y"));
-        userDao.update(null,new QueryWrapper<UserEntity>().eq("user_name","admin"));
+        List<UserEntity> list = userDao.selectList(new UpdateWrapper<UserEntity>().eq("username","admin").set("delete_status","Y"));
+        userDao.update(null,new QueryWrapper<UserEntity>().eq("username","admin"));
 //        List<Map<String,String>> map = list.stream().collect(Collectors.toMap(UserEntity::getUserName,UserEntity::getPassword))
-       Map<Integer,UserEntity> map = list.stream().filter(o -> "1".equals(o.getUserName())).collect(Collectors.toMap(UserEntity::getId,userEntity -> userEntity,(k1,k2) -> k1));
+       Map<Integer,UserEntity> map = list.stream().filter(o -> "1".equals(o.getUsername())).collect(Collectors.toMap(UserEntity::getId,userEntity -> userEntity,(k1,k2) -> k1));
 
        List<Map<String,String>> mapList = list.stream().map(userEntity ->
        { Map<String,String> remap = new HashMap<>(2);
-           remap.put("user_name",userEntity.getUserName());
-           remap.put("password",userEntity.getSecretCode());
+           remap.put("username",userEntity.getUsername());
+           remap.put("password",userEntity.getPassword());
            return remap;
         }).collect(Collectors.toList());
 
        list.forEach(o -> {
            o.setDeleteStatus("N");
-           o.setUserRole(1);
        });
        return null;
      }
@@ -156,7 +156,7 @@ public class UserRoleApiImpl implements UserRoleApi {
      */
     private Boolean isExist(String userName){
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name",userName);
+        queryWrapper.eq("username",userName);
         int count = userDao.selectCount(queryWrapper);
         return count > 0;
     }

@@ -20,7 +20,8 @@ public class TokenUtils {
 
     public String getToken(String userName, String userPwd) {
 
-        return new String(Base64Utils.encode((userName+userPwd).getBytes()), StandardCharsets.UTF_8).replace("=","");
+        return new String(Base64Utils.encode((userName+userPwd).getBytes()), StandardCharsets.UTF_8)
+                .replace("=","");
     }
 
 }

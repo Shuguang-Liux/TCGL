@@ -28,7 +28,6 @@ public class AdminAccountController {
      **/
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResultVo<Boolean> checkAdminAccount(@RequestBody UserEntity userEntity){
-        userEntity.setUserRole(0);
         return userService.userRoles(userEntity);
     }
 
