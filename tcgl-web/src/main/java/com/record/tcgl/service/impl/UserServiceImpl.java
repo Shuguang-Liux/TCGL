@@ -1,6 +1,6 @@
 package com.record.tcgl.service.impl;
 
-import com.record.tcgl.api.UserRoleApi;
+import com.record.tcgl.api.UserApi;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.UserService;
 import com.record.tcgl.vo.ResultVo;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @DubboReference
-    private UserRoleApi userRoleApi;
+    private UserApi userApi;
 
 
     /**
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
             resultVo.setError(400,"用户名或密码不正确！");
             return resultVo;
         }
-        return userRoleApi.checkUserRole(userEntity);
+        return userApi.checkUserRole(userEntity);
     }
 
     /**
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
             resultVo.setError(400,"用户名或密码不能为空");
             return resultVo;
         }
-        return userRoleApi.updateAccountInfo(userEntity);
+        return userApi.updateAccountInfo(userEntity);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
             resultVo.setError(400,"信息不全");
             return resultVo;
         }
-        return userRoleApi.register(userEntity);
+        return userApi.register(userEntity);
     }
 
     @Override

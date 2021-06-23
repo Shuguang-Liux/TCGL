@@ -23,7 +23,7 @@ import java.util.UUID;
 @EntityScan
 @TableName(value = "t_vehicle_owner")
 public class VehicleOwnerEntity implements Serializable {
-    private static final long serialVersionUID = -4460480156087314200L;
+    private static final long serialVersionUID = 1400920817912195122L;
     /**
      * 自增主键
      */

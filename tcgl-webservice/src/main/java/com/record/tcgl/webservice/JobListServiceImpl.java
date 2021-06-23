@@ -1,6 +1,6 @@
 package com.record.tcgl.webservice;
 
-import com.record.tcgl.api.UserRoleApi;
+import com.record.tcgl.api.UserApi;
 import com.record.tcgl.entity.UserEntity;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
@@ -58,12 +58,12 @@ import javax.jws.WebService;
         endpointInterface = "com.record.tcgl.webservice.JobListService") //服务所在
 public class JobListServiceImpl implements JobListService{
     @Reference
-    private UserRoleApi userRoleApi;
+    private UserApi userApi;
 
 
     @Override
     public String getUserInfo(String userName) {
-        UserEntity userEntity = userRoleApi.getUserInfo(userName);
+        UserEntity userEntity = userApi.getUserInfo(userName);
         return userEntity.getPassword();
 //        return "请求成功";
     }

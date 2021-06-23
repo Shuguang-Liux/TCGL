@@ -16,12 +16,12 @@ import java.util.Set;
 @Data
 @TableName(value = "t_user")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 1020687110827214873L;
+    private static final long serialVersionUID = 571620662071575840L;
     /**
      * 主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名
@@ -40,5 +40,5 @@ public class UserEntity implements Serializable {
      * 删除状态
      */
     @TableField(value = "delete_status")
-    private String deleteStatus;
+    private int deleteStatus;
 }

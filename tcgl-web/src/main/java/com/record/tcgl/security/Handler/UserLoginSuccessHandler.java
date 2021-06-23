@@ -1,6 +1,6 @@
 package com.record.tcgl.security.Handler;
 
-import com.record.tcgl.entity.SysUserDetails;
+import com.record.tcgl.security.entity.SysUserDetails;
 import com.record.tcgl.security.utils.AccessAddressUtils;
 import com.record.tcgl.security.utils.JWTTokenUtils;
 import com.record.tcgl.security.utils.ResponseUtils;

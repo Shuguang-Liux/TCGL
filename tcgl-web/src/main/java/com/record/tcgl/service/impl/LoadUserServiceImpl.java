@@ -1,7 +1,11 @@
 package com.record.tcgl.service.impl;
 
-import com.record.tcgl.api.LoadUserApi;
-import com.record.tcgl.entity.SysUserDetails;
+import com.record.tcgl.api.RoleApi;
+import com.record.tcgl.api.UserApi;
+import com.record.tcgl.api.UserRoleApi;
+import com.record.tcgl.entity.Role;
+import com.record.tcgl.entity.UserRole;
+import com.record.tcgl.security.entity.SysUserDetails;
 import com.record.tcgl.entity.UserEntity;
 import com.record.tcgl.service.LoadUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -11,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,26 +27,12 @@ import java.util.Set;
 @Service
 public class LoadUserServiceImpl implements LoadUserService {
 
+
     @DubboReference
-    private LoadUserApi loadUserApi;
-    @Override
-    public SysUserDetails loadUserByUsername(String username) {
-        UserEntity userEntity = loadUserApi.loadUserByUsername(username);
-        if (userEntity != null) {
-            SysUserDetails sysUserDetails = new SysUserDetails();
-            BeanUtils.copyProperties(userEntity, sysUserDetails);
+    private UserApi userApi;
 
-            Set<GrantedAuthority> authorities = new HashSet<>(); // 角色集合
+    @DubboReference
+    private RoleApi roleApi;
 
-//            List<UserEntity> roleList = userRoleApi.getUserInfo(username);
-//            roleList.forEach(role -> {
-//
-//            });
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + userEntity.getUsername()));
-            sysUserDetails.setAuthorities(authorities);
 
-            return sysUserDetails;
-        }
-        return null;
-    }
 }

@@ -1,5 +1,6 @@
-package com.record.tcgl.entity;
+package com.record.tcgl.security.entity;
 
+import com.record.tcgl.entity.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,8 +18,8 @@ import java.util.Collection;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SysUserDetails extends UserEntity implements UserDetails, Serializable {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 3549359999881413333L;
 	/**
 	 * 用户角色
 	 */

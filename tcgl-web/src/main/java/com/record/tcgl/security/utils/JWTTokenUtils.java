@@ -2,7 +2,7 @@ package com.record.tcgl.security.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.record.tcgl.entity.SysUserDetails;
+import com.record.tcgl.security.entity.SysUserDetails;
 import com.record.tcgl.security.config.JWTConfig;
 import com.record.tcgl.service.LoadUserService;
 import io.jsonwebtoken.Claims;

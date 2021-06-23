@@ -1,6 +1,6 @@
 package com.record.tcgl.service;
 
-import com.record.tcgl.entity.SysUserDetails;
+import com.record.tcgl.security.entity.SysUserDetails;
 
 /**
  * 根据用户名查用户信息
@@ -10,5 +10,12 @@ import com.record.tcgl.entity.SysUserDetails;
  */
 
 public interface LoadUserService {
-    SysUserDetails loadUserByUsername(String username);
+    /**
+     * 用户名称判断，角色集合处理
+     * @author Shuguang_Liux
+     * @date 2021/6/20 18:58
+     * @param username 用户名
+     * @return SysUserDetails
+     */
+
 }

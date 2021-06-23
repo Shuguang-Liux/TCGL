@@ -1,45 +1,43 @@
 package com.record.tcgl.security;
 
-import com.record.tcgl.entity.SysUserDetails;
+import com.record.tcgl.security.entity.SysUserDetails;
 import com.record.tcgl.service.LoadUserService;
+import com.record.tcgl.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 用户登录验证处理类
- * 
- * @author CL
  *
+ * @author Shuguang_Liux
+ * @date 2021/06/23 17:19
  */
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	private LoadUserService loadUserService;
+	private SecurityService securityService;
 
 	/**
 	 * 身份验证
 	 */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String username = (String) authentication.getPrincipal(); // 获取用户名
-		String password = (String) authentication.getCredentials(); // 获取密码
+		// 获取用户名
+		String username = (String) authentication.getPrincipal();
+		// 获取密码
+		String password = (String) authentication.getCredentials();
 
-		SysUserDetails sysUserDetails = loadUserService.loadUserByUsername(username);
+		SysUserDetails sysUserDetails = securityService.loadUserByUsername(username);
 		if (sysUserDetails == null) {
 			throw new UsernameNotFoundException("用户名不存在");
 		}
@@ -48,7 +46,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 			throw new BadCredentialsException("用户名或密码错误");
 		}
 
-		if (sysUserDetails.getDeleteStatus().equals("1")) {
+		if (1 == sysUserDetails.getDeleteStatus()) {
 			throw new LockedException("用户已禁用");
 		}
 
