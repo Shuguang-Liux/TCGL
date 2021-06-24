@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.record.tcgl</groupId>
+    <groupId>com.tcgl</groupId>
     <artifactId>tcgl</artifactId>
-    <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
+
     <name>tcgl</name>
     <description>停车入园管理系统</description>
     <parent>
@@ -18,29 +18,124 @@
     </parent>
 
     <properties>
+        <tcgl.version>1.0-SNAPSHOT</tcgl.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <file.encoding>UTF-8</file.encoding>
         <skipTest>true</skipTest>
         <java.version>11</java.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mysql-connector.version>8.0.25</mysql-connector.version>
+        <commoms-lang3.version>3.12.0</commoms-lang3.version>
+        <fastjson.version>1.2.25.sec10</fastjson.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <dubbo-spring-boot-starter.version>2.7.10</dubbo-spring-boot-starter.version>
+        <dubbo.version>2.7.10</dubbo.version>
+        <zookeeper.version>3.4.13</zookeeper.version>
+        <curator-recipes.version>2.13.0</curator-recipes.version>
+        <alibaba-druid.version>1.2.1</alibaba-druid.version>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commoms-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${alibaba-druid.version}</version>
+            </dependency>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency>
-    </dependencies>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-common</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-job</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-service</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-service-api</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-web</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tcgl</groupId>
+                <artifactId>tcgl-webservice</artifactId>
+                <version>${tcgl.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
         <module>tcgl-common</module>
         <module>tcgl-service</module>
@@ -49,6 +144,7 @@
         <module>tcgl-webservice</module>
         <module>tcgl-web</module>
     </modules>
+    <packaging>pom</packaging>
     <profiles>
         <profile>
             <!-- 本地开发环境 -->

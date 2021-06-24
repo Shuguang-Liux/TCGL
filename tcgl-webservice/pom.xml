@@ -3,31 +3,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.record.tcgl</groupId>
+        <groupId>com.tcgl</groupId>
+        <version>1.0-SNAPSHOT</version>
         <artifactId>tcgl</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
     <artifactId>tcgl-webservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>tcgl-webservice</name>
-    <description>webservice接口</description>
 
-    <properties>
-        <java.version>11</java.version>
-    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.record</groupId>
+            <groupId>com.tcgl</groupId>
             <artifactId>tcgl-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.record</groupId>
+            <groupId>com.tcgl</groupId>
             <artifactId>tcgl-service-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 <!--        日志打印-->
         <dependency>
@@ -43,7 +34,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -77,13 +67,11 @@
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>2.7.10</version>
         </dependency>
 <!--        zookeeper依赖-->
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
-            <version>3.7.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -98,7 +86,6 @@
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
-            <version>2.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
