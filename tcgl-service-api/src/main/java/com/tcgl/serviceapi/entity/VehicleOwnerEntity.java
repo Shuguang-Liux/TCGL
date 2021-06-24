@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @package com.example.demo.entity
- * @Description ToDo 车辆所有人信息表
  * @author Shuguang_Liux
+ * @package com.example.demo.entity
+ * @Description 车辆所有人信息表
  * @Date 2020/9/4 10:16
-**/
+ **/
 @Data
 @EntityScan
 @TableName(value = "t_vehicle_owner")
@@ -25,7 +25,7 @@ public class VehicleOwnerEntity implements Serializable {
     /**
      * 自增主键
      */
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**

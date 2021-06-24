@@ -7,45 +7,57 @@ import com.tcgl.serviceapi.entity.VehicleOwnerEntity;
 
 import java.util.Map;
 
+
 /**
- * @author Shuguang_Liux
- * @package com.record.tcgl.api
- * @Description ToDo
- * @Date 2020/9/15 0:06
- **/
+ * 车主api
+ *
+ * @author sun
+ * @date 2021/06/24
+ */
 public interface VehicleOwnerApi {
+
     /**
-     * 插入用户信息同时插入租金信息表
-     * @param param
-     * @return
+     * 插入车主
+     *
+     * @param param 参数
+     * @return {@link ResultVo<String>}
      */
     ResultVo<String> insertVehicleOwner(JSONObject param);
 
+
     /**
-     * 列表查询
-     * @param param
-     * @return
+     * 选择的页面
+     *
+     * @param param 参数
+     * @return {@link ResultVo<IPage<VehicleOwnerEntity>>}
      */
     ResultVo<IPage<VehicleOwnerEntity>> selectByPage(Map<String,String> param);
 
+
     /**
-     * 导出
-     * @param param
-     * @return
+     * 出口车主清单
+     *
+     * @param param 参数
+     * @return {@link ResultVo<Map<String, Object>>}
      */
     ResultVo<Map<String,Object>> exportVehicleOwnerList(Map<String,Object> param);
 
+
     /**
-     * 获取VehicleOwner和AccessRecordHistory对应列表信息
-     * @param vehicleOwnerEntity
-     * @return
+     * 让车主和访问历史记录
+     *
+     * @param vehicleOwnerEntity 车主实体
+     * @return {@link ResultVo<VehicleOwnerEntity>}
      */
     ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(VehicleOwnerEntity vehicleOwnerEntity);
 
+
     /**
-     * 自测试导出
-     * @param param
-     * @return
+     * 出口车主和历史
+     *
+     * @param param           参数
+     * @param headTitleLength 头标题长度
+     * @return {@link Map<String, String[]>}
      */
     Map<String,String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength);
 
