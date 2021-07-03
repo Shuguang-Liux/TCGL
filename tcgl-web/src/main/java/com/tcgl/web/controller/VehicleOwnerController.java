@@ -19,17 +19,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+
 /**
+ * 车主控制器
+ *
  * @author Shuguang_Liux
- * @package com.example.demo.controller
- * @Description ToDo
- * @Date 2020/9/9 1:13
- **/
+ * @date 2021/06/28 13:51
+ */
 @RestController
 @RequestMapping("/vehicleOwner")
 public class VehicleOwnerController {
@@ -37,25 +39,25 @@ public class VehicleOwnerController {
     @Autowired
     private VehicleOwnerService vehicleOwnerService;
 
+
     /**
-     * @Author Shuguang_Liux
-     * @Description TODO 插入用户信息并存入支付信息
-     * @Date 2021/4/18 20:58
-     * @Param [com.alibaba.fastjson.JSONObject]
-     * @return com.record.tcgl.vo.ResultVo<java.lang.String>
-     **/
+     * 插入车主
+     *
+     * @param param 参数
+     * @return {@link ResultVo<String>}
+     */
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public ResultVo<String> insertVehicleOwner(@RequestBody JSONObject param){
         return vehicleOwnerService.insertVehicleOwnerAndPayment(param);
     }
 
+
     /**
-     * @Author Shuguang_Liux
-     * @Description TODO 导出车辆以及所有人信息
-     * @Date 2021/4/18 20:58
-     * @Param [javax.servlet.http.HttpServletResponse, java.util.Map<java.lang.String,java.lang.Object>]
-     * @return void
-     **/
+     * 出口车主
+     *
+     * @param response 响应
+     * @param param    参数
+     */
     @RequestMapping("/exportVehicleOwner")
     public void exportVehicleOwner(HttpServletResponse response, @RequestBody Map<String, Object> param) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
@@ -79,7 +81,7 @@ public class VehicleOwnerController {
             ExcelExportUtil excelExportUtil = new ExcelExportUtil((String[]) vehicleOwnerVo.getResult().get("titles"),(List<Object[]>)vehicleOwnerVo.getResult().get("dataList"),sheetName);
             SXSSFWorkbook sxssfWorkbook = excelExportUtil.exportExport();
             // 如果文件名有中文，必须URL编码
-            String  fileName1 = URLEncoder.encode(sheetName, "UTF-8");
+            String  fileName1 = URLEncoder.encode(sheetName, StandardCharsets.UTF_8);
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-Disposition", "attachment; filename=" + fileName1+".xlsx");
             sxssfWorkbook.write(outputStream);
