@@ -1,33 +1,40 @@
 package com.tcgl.job;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+
 /**
- * @package com.example.demo.task
- * @Description 定时调度配置类
- * @Editor Shuguang_Liux
- * @Date 2020/8/26 13:23
- **/
-//@Component
-//@Slf4j
-//@EnableAsync
+ * 安排的任务
+ *
+ * @author Shuguang_Liux
+ * @date 2021/07/03 22:09
+ */
+@Component
+@Slf4j
+@EnableAsync
 public class ScheduleTask {
 
     /**
      * cron表达式
      * 每3秒执行一次
      */
-//    @Scheduled(cron = "0 0/1 * * * ?")
-//    @Async
-//    public void run1() {
-//        log.info("======cron1======");
-//        System.err.println("定时调度开始1");
-//    }
-//    @Scheduled(cron = "0 0/1 * * * ?")
-//    @Async
-//    public void run2() {
-//        log.info("======cron2======");
-//        System.err.println("定时调度开始2");
-//    }
+    @Scheduled(cron = "0 0/1 * * * ?")
+    @Async
+    public void run1() {
+        log.info("======cron1======");
+        System.err.println("定时调度开始1");
+    }
+    @Scheduled(cron = "0 0/1 * * * ?")
+    @Async
+    public void run2() {
+        log.info("======cron2======");
+        System.err.println("定时调度开始2");
+    }
 
 
 

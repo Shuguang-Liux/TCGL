@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 /**
  * @author Shuguang_Liux
  */
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableDubbo
-@MapperScan("com.record.tcgl.dao")
+@MapperScan("com.tcgl.service.dao")
 public class TcglServiceApplication {
 
     public static void main(String[] args) {

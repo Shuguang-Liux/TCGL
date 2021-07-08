@@ -9,6 +9,7 @@ import lombok.Data;
 
 /**
  * 角色表
+ * @author Shuguang_Liux
  * @TableName t_role
  */
 @TableName(value ="t_role")
