@@ -13,6 +13,9 @@ public class ResultVo<T> implements Serializable {
 
     private static final long serialVersionUID = -1409598320516446621L;
 
+    public static final int SUCCESS = 200;
+    public static final int FAIL = -1;
+
     /**
      * 响应码
      */
@@ -21,7 +24,7 @@ public class ResultVo<T> implements Serializable {
     /**
      * 初始信息
      */
-    private String message ="";
+    private String message = "";
 
 
     private T result;
@@ -63,10 +66,47 @@ public class ResultVo<T> implements Serializable {
         this.success = success;
     }
 
-    public void setError(int code, String message){
-        this.code=code;
-        this.message=message;
-        this.success=false;
+    public void setError(int code, String message) {
+        this.code = code;
+        this.message = message;
+        this.success = false;
+    }
+
+    public static <T> ResultVo<T> ok() {
+        return restResult(true, null, SUCCESS, "");
+    }
+
+    public static <T> ResultVo<T> ok(T data) {
+        return restResult(true, data, SUCCESS, "");
+    }
+
+    public static <T> ResultVo<T> ok(T data, String msg) {
+        return restResult(true, data, SUCCESS, msg);
+    }
+
+    public static <T> ResultVo<T> fail() {
+        return restResult(false, null, FAIL, "");
+    }
+
+    public static <T> ResultVo<T> fail(T data) {
+        return restResult(false, data, FAIL, "");
+    }
+
+    public static <T> ResultVo<T> fail(T data, String msg) {
+        return restResult(false, data, FAIL, msg);
+    }
+
+    public static <T> ResultVo<T> fail(int code, String msg) {
+        return restResult(false, null, code, msg);
+    }
+
+    public static <T> ResultVo<T> restResult(boolean success, T result, int code, String msg) {
+        ResultVo<T> apiResult = new ResultVo<>();
+        apiResult.setResult(result);
+        apiResult.setMessage(msg);
+        apiResult.setSuccess(success);
+        apiResult.setCode(code);
+        return apiResult;
     }
 
     @Override
