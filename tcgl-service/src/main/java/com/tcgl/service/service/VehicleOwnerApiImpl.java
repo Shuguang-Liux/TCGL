@@ -44,11 +44,9 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
      * @return
      */
     @Override
-    public ResultVo<String> insertVehicleOwner(JSONObject params) {
-        ResultVo<String> resultVo = new ResultVo<>();
+    public ResultVo<?> insertVehicleOwner(JSONObject params) {
         if (Objects.nonNull(params.getString("licensePlate"))) {
-            resultVo.setError(400, "主信息不能为空！");
-            return resultVo;
+            return ResultVo.fail("400","主信息不能为空");
         }
         VehicleOwnerEntity vehicleOwnerEntity = new VehicleOwnerEntity();
         vehicleOwnerEntity.setLicensePlate(params.getString("licensePlate"));
@@ -63,7 +61,7 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
         //mybatis-plus插入后自动把id映射到实体，获取自增主键
         params.put("ownerId", vehicleOwnerEntity.getId());
         //插入租金用户信息
-        resultVo = paymentRecordApi.insertPaymentInfo(params);
+         ResultVo<?> resultVo = paymentRecordApi.insertPaymentInfo(params);
         return resultVo;
     }
 

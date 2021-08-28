@@ -42,23 +42,14 @@ public class UserApiImpl implements UserApi {
      */
     @Override
     public ResultVo<Boolean> checkUserRole(UserEntity userEntity) {
-        ResultVo<Boolean> resultVo = new ResultVo<>();
-        try {
             LambdaQueryWrapper<UserEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
             lambdaQueryWrapper.eq(UserEntity::getUsername,userEntity.getUsername())
                     .eq(UserEntity::getPassword,userEntity.getPassword());
             Integer count = userDao.selectCount(lambdaQueryWrapper);
-            if (count > 0){
-            }else {
-                resultVo.setError(400,"用户不存在！");
+            if (count < 1){
+                return ResultVo.fail("用户不存在");
             }
-        } catch (Exception e) {
-            logger.error("角色登录失败"+e.getMessage());
-            e.printStackTrace();
-            resultVo.setError(400,"登录失败请联系管理员");
-
-        }
-        return resultVo;
+            return ResultVo.ok();
     }
 
     /**
@@ -80,13 +71,11 @@ public class UserApiImpl implements UserApi {
      */
     @Override
     public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
-        ResultVo<Boolean> resultVo = new ResultVo<>();
         QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username",userEntity.getUsername());
         int rowNum = userDao.selectCount(queryWrapper);
         if (1 != rowNum){
-            resultVo.setError(400,"更新失败，请联系管理员");
-            return resultVo;
+            return ResultVo.fail(400, "更新失败，请联系管理员");
         }
         UpdateWrapper<UserEntity> updateWrapper = new UpdateWrapper<>();
         try {
@@ -94,30 +83,26 @@ public class UserApiImpl implements UserApi {
             userEntity.setPassword(userEntity.getPassword());
             //mybatisPlus使用构造求更新需要一个实体
             userDao.update(userEntity,updateWrapper);
-            resultVo.setMessage("更新成功");
         } catch (Exception e) {
             logger.error("更新失败"+e.getMessage());
             e.printStackTrace();
-            resultVo.setError(400,"更新失败，请联系管理员");
+            return ResultVo.fail(400,"更新失败，请联系管理员");
         }
-        return resultVo;
+        return ResultVo.ok();
     }
 
     @Override
     public ResultVo<?> register(UserEntity userEntity) {
-        ResultVo<?> resultVo = new ResultVo<>();
         if (isExist(userEntity.getUsername())){
-          resultVo.setError(400,"用户名称已存在");
-          return resultVo;
+            return ResultVo.fail(400,"用户名称已存在");
         }
         try {
             userDao.insert(userEntity);
         } catch (Exception e) {
             logger.error("插入失败"+e.getMessage());
-            e.printStackTrace();
-            resultVo.setError(400,"注册失败，请联系管理员");
+            return ResultVo.fail(400,"注册失败，请联系管理员");
         }
-        return resultVo;
+        return ResultVo.ok();
     }
 
     @Override
@@ -130,9 +115,6 @@ public class UserApiImpl implements UserApi {
     public List<Map<String, String>> userList() {
         List<UserEntity> list = userDao.selectList(new UpdateWrapper<UserEntity>().eq("username","admin").set("delete_status","Y"));
         userDao.update(null,new QueryWrapper<UserEntity>().eq("username","admin"));
-//        List<Map<String,String>> map = list.stream().collect(Collectors.toMap(UserEntity::getUserName,UserEntity::getPassword))
-//       Map<Integer,UserEntity> map = list.stream().filter(o -> "1".equals(o.getUsername())).collect(Collectors.toMap(UserEntity::getId,userEntity -> userEntity,(k1,k2) -> k1));
-
        List<Map<String,String>> mapList = list.stream().map(userEntity ->
        { Map<String,String> remap = new HashMap<>(2);
            remap.put("username",userEntity.getUsername());

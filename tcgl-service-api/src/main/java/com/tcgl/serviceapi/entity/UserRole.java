@@ -8,17 +8,16 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
+ * 用户角色
  * 用户角色关系表
- * @TableName t_user_role
+ *
+ * @author Shugu
+ * @date 2021/08/28
  */
-@TableName(value ="t_user_role")
+
 @Data
+@TableName(value ="t_user_role")
 public class UserRole implements Serializable {
-    /**
-     * ID
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
 
     /**
      * 用户ID

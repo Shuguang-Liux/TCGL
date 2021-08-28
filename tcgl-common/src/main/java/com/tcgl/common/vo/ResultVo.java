@@ -99,6 +99,9 @@ public class ResultVo<T> implements Serializable {
     public static <T> ResultVo<T> fail(int code, String msg) {
         return restResult(false, null, code, msg);
     }
+    public static <T> ResultVo<T> fail(String msg) {
+        return restResult(false, null, FAIL, msg);
+    }
 
     public static <T> ResultVo<T> restResult(boolean success, T result, int code, String msg) {
         ResultVo<T> apiResult = new ResultVo<>();

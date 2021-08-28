@@ -22,7 +22,7 @@ public interface VehicleOwnerApi {
      * @param param 参数
      * @return {@link ResultVo<String>}
      */
-    ResultVo<String> insertVehicleOwner(JSONObject param);
+    ResultVo<?> insertVehicleOwner(JSONObject param);
 
 
     /**

@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * @author Shuguang_Liux
  * @package com.record.tcgl.service
- * @Description ToDo
+ * @Description
  * @Date 2020/9/14 21:29
  **/
 @DubboService
@@ -33,11 +33,9 @@ public class PaymentRecordApiImpl implements PaymentRecordApi {
      * @return
      */
     @Override
-    public ResultVo<String> insertPaymentInfo(JSONObject params) {
-        ResultVo<String> resultVo = new ResultVo<>();
+    public ResultVo<?> insertPaymentInfo(JSONObject params) {
         if (Objects.nonNull(params.getInteger("ownerId")) || Objects.nonNull(params.getInteger("paymentAmount"))){
-            resultVo.setError(400,"信息不全无法添加！");
-            return resultVo;
+            return ResultVo.fail(400,"信息不全无法添加！");
         }
         PaymentRecordEntity paymentRecordEntity = new PaymentRecordEntity();
         paymentRecordEntity.setOwnerId(params.getInteger("ownerId"));
@@ -51,12 +49,7 @@ public class PaymentRecordApiImpl implements PaymentRecordApi {
         calendar.add(Calendar.DAY_OF_MONTH,monthCount);
         paymentRecordEntity.setExpirationTime(calendar.getTime());
         //插入数据库
-        int count = paymentRecordDao.insert(paymentRecordEntity);
-        if (count == 1){
-            resultVo.setMessage("插入数据库成功！");
-        }else {
-            resultVo.setError(400,"数据插入失败");
-        }
-        return resultVo;
+        paymentRecordDao.insert(paymentRecordEntity);
+        return ResultVo.ok(paymentRecordEntity.getId());
     }
 }

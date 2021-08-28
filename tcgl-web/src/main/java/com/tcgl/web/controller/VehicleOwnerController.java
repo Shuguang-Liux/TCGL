@@ -33,7 +33,7 @@ import java.util.Map;
  * @date 2021/06/28 13:51
  */
 @RestController
-@RequestMapping("/vehicleOwner")
+@RequestMapping("vehicleOwner")
 public class VehicleOwnerController {
 
     @Autowired
@@ -46,8 +46,8 @@ public class VehicleOwnerController {
      * @param param 参数
      * @return {@link ResultVo<String>}
      */
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public ResultVo<String> insertVehicleOwner(@RequestBody JSONObject param){
+    @RequestMapping(value = "insert",method = RequestMethod.POST)
+    public ResultVo<?> insertVehicleOwner(@RequestBody JSONObject param){
         return vehicleOwnerService.insertVehicleOwnerAndPayment(param);
     }
 
@@ -58,7 +58,7 @@ public class VehicleOwnerController {
      * @param response 响应
      * @param param    参数
      */
-    @RequestMapping("/exportVehicleOwner")
+    @RequestMapping("exportVehicleOwner")
     public void exportVehicleOwner(HttpServletResponse response, @RequestBody Map<String, Object> param) {
         ResultVo<Boolean> resultVo = new ResultVo<>();
         try {
@@ -102,7 +102,6 @@ public class VehicleOwnerController {
                 ex.printStackTrace();
             }
         }
-        return;
     }
 
     /**
@@ -112,10 +111,9 @@ public class VehicleOwnerController {
      * @Param [com.alibaba.fastjson.JSONObject]
      * @return com.record.tcgl.vo.ResultVo<com.record.tcgl.entity.VehicleOwnerEntity>
      **/
-    @RequestMapping("/getVehicleOwnerList")
+    @RequestMapping("getVehicleOwnerList")
     public ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(@RequestBody JSONObject param){
-        ResultVo<VehicleOwnerEntity> resultVo = vehicleOwnerService.getVehicleOwnerAndAccessRecordHistory(param);
-        return resultVo;
+        return vehicleOwnerService.getVehicleOwnerAndAccessRecordHistory(param);
     }
 
     /**
@@ -124,7 +122,7 @@ public class VehicleOwnerController {
      * @param response
      * @param param
      */
-    @RequestMapping("/export")
+    @RequestMapping("export")
     public void exportTestNew(HttpServletRequest request,HttpServletResponse response, @RequestBody Map<String, Object> param){
         String[] headTitles ={"车辆牌照", "车辆所有人", "创建时间", "创建人", "更新时间", "更新人", "有效状态",
                 "进园时间", "出园时间","入园时长统计","价格","是否出园","次数","是否预付费用户"};
@@ -157,8 +155,6 @@ public class VehicleOwnerController {
             // 直接用数组缓冲输出流输出
             wb.write(os);
             wb.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -169,7 +165,6 @@ public class VehicleOwnerController {
                 e.printStackTrace();
             }
         }
-        return;
 
     }
 

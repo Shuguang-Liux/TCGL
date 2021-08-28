@@ -15,5 +15,5 @@ public interface PaymentRecordApi {
      * @param param
      * @return
      */
-    ResultVo<String> insertPaymentInfo(JSONObject param);
+    ResultVo<?> insertPaymentInfo(JSONObject param);
 }

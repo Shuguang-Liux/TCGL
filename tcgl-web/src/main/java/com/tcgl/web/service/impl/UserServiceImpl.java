@@ -28,10 +28,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResultVo<Boolean> userRoles(UserEntity userEntity) {
-        ResultVo<Boolean> resultVo = new ResultVo<>();
         if(StringUtils.isEmpty(userEntity.getUsername())|| StringUtils.isEmpty(userEntity.getPassword())){
-            resultVo.setError(400,"用户名或密码不正确！");
-            return resultVo;
+            return ResultVo.fail(400,"用户名或密码不正确！");
         }
         return userApi.checkUserRole(userEntity);
     }
@@ -52,11 +50,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVo<?> register(UserEntity userEntity) {
-        ResultVo<?> resultVo = new ResultVo<>();
+
         if (StringUtils.isEmpty(userEntity.getUsername()) ||
                 StringUtils.isEmpty(userEntity.getPassword())){
-            resultVo.setError(400,"信息不全");
-            return resultVo;
+            return ResultVo.fail(400,"信息不全");
         }
         return userApi.register(userEntity);
     }

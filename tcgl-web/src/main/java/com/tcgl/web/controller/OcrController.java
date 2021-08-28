@@ -17,7 +17,7 @@ import javax.xml.bind.DatatypeConverter;
  * @Date 2021/2/8 14:03
  **/
 @RestController
-@RequestMapping("/ocr")
+@RequestMapping("ocr")
 public class OcrController {
 
     @Autowired

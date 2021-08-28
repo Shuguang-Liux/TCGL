@@ -9,7 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Shuguang_Liux
@@ -28,7 +31,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public ResultVo<String> insertVehicleOwnerAndPayment(JSONObject param) {
+    public ResultVo<?> insertVehicleOwnerAndPayment(JSONObject param) {
         return vehicleOwnerApi.insertVehicleOwner(param);
     }
 
@@ -67,8 +70,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
         if (!StringUtils.isEmpty((CharSequence) param.get("isValid"))){
             vehicleOwnerEntity.setIsValid(String.valueOf(param.get("isValid")));
         }
-        ResultVo<VehicleOwnerEntity> resultVo = vehicleOwnerApi.getVehicleOwnerAndAccessRecordHistory(vehicleOwnerEntity);
-        return resultVo;
+        return vehicleOwnerApi.getVehicleOwnerAndAccessRecordHistory(vehicleOwnerEntity);
     }
 
     /**
