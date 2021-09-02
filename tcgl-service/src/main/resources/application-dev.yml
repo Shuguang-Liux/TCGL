@@ -13,8 +13,8 @@ dubbo:
     protocol: dubbo-provider-registry
     address: zookeeper://127.0.0.1:2181
     timeout: 60000
-  monitor:
-    protocol: registry
+#  monitor:
+#    protocol: registry
   config-center:
     timeout: 60000
 
@@ -84,8 +84,6 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 logging:
   config: classpath:log4j2.xml
-  level:
-    com.record.tcgl.dao: debug
-    org.springframework: warn
+
 
 

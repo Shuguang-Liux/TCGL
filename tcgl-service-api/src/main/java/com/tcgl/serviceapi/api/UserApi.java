@@ -1,12 +1,15 @@
 package com.tcgl.serviceapi.api;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tcgl.common.vo.ResultVo;
 import com.tcgl.serviceapi.entity.UserEntity;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 import java.util.Map;
 
 /**
+ * 用户api
  * The interface User api.
  *
  * @author Shuguang_Liux
@@ -21,7 +24,7 @@ public interface UserApi {
      * @param userEntity the user entity
      * @return result vo
      */
-    ResultVo<Boolean> checkUserRole(UserEntity userEntity);
+    Boolean checkUserCount(UserEntity userEntity);
 
     /**
      * 根据用户名查询（webservice测试使用）
@@ -29,7 +32,7 @@ public interface UserApi {
      * @param userName the user name
      * @return user info
      */
-    UserEntity getUserInfo(String userName);
+    UserEntity getUserInfoByName(String userName);
 
     /**
      * 根据用户名更新用户密码
@@ -62,6 +65,14 @@ public interface UserApi {
      * @return the list
      */
     List<Map<String,String>> userList();
+
+    /**
+     * 用户列表
+     *
+     * @param userEntity 用户实体
+     * @return {@link List}<{@link UserEntity}>
+     */
+    IPage<UserEntity> userPage(UserEntity userEntity);
 
 
 

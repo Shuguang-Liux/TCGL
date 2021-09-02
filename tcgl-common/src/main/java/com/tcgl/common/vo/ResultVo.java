@@ -72,6 +72,11 @@ public class ResultVo<T> implements Serializable {
         this.success = false;
     }
 
+    public ResultVo<T> of(T result) {
+        this.result = result;
+        return this;
+    }
+
     public static <T> ResultVo<T> ok() {
         return restResult(true, null, SUCCESS, "");
     }

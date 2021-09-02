@@ -1,5 +1,7 @@
 package com.tcgl.web.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tcgl.common.exception.BaseBusinessException;
 import com.tcgl.common.vo.ResultVo;
 import com.tcgl.serviceapi.api.UserApi;
 import com.tcgl.serviceapi.entity.UserEntity;
@@ -7,6 +9,8 @@ import com.tcgl.web.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 
 /**
@@ -23,15 +27,20 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     * 根据角色判断用户登录
-     * @return
+     * 检查用户
+     *
+     * @param userEntity 用户实体
+     * @return {@link ResultVo}<{@link Boolean}>
      */
     @Override
-    public ResultVo<Boolean> userRoles(UserEntity userEntity) {
+    public ResultVo<Boolean> checkUser(UserEntity userEntity) {
         if(StringUtils.isEmpty(userEntity.getUsername())|| StringUtils.isEmpty(userEntity.getPassword())){
-            return ResultVo.fail(400,"用户名或密码不正确！");
+            throw new BaseBusinessException("请输入用户名和密码");
         }
-        return userApi.checkUserRole(userEntity);
+        if (!userApi.checkUserCount(userEntity)){
+            return ResultVo.fail("账户不存在");
+        }
+        return ResultVo.ok();
     }
 
     /**
@@ -40,26 +49,49 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public ResultVo<Boolean> updateAccountInfo(UserEntity userEntity) {
-        ResultVo<Boolean> resultVo = new ResultVo<>();
+        if(Objects.isNull(userEntity.getId())){
+            throw new BaseBusinessException("请传入ID");
+        }
         if (StringUtils.isEmpty(userEntity.getUsername())||StringUtils.isEmpty(userEntity.getPassword())){
-            resultVo.setError(400,"用户名或密码不能为空");
-            return resultVo;
+            throw new BaseBusinessException("用户名或密码不能为空");
+        }
+        if (Objects.nonNull(userApi.getUserInfoByName(userEntity.getUsername())) ){
+            throw new BaseBusinessException("用户不存在");
         }
         return userApi.updateAccountInfo(userEntity);
     }
 
     @Override
     public ResultVo<?> register(UserEntity userEntity) {
-
         if (StringUtils.isEmpty(userEntity.getUsername()) ||
                 StringUtils.isEmpty(userEntity.getPassword())){
-            return ResultVo.fail(400,"信息不全");
+            throw new BaseBusinessException("请输入用户信息");
+        }
+        if (Objects.nonNull(userApi.getUserInfoByName(userEntity.getUsername()))){
+            throw new BaseBusinessException("用户名已存在");
         }
         return userApi.register(userEntity);
     }
 
+    /**
+     * 删除(多个)
+     *
+     * @param ids id
+     * @return {@link ResultVo}<{@link Boolean}>
+     */
     @Override
     public ResultVo<Boolean> delete(String ids) {
-        return null;
+        return userApi.delete(ids);
+    }
+
+    /**
+     * 页面
+     *
+     * @param userEntity 用户实体
+     * @return {@link IPage}<{@link UserEntity}>
+     */
+    @Override
+    public IPage<UserEntity> page(UserEntity userEntity) {
+        return userApi.userPage(userEntity);
     }
 }

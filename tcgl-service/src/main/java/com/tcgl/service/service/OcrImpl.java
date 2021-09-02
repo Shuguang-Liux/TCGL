@@ -17,7 +17,6 @@ import java.util.HashMap;
  * @Date 2021/2/8 13:15
  **/
 @DubboService
-@Component
 public class OcrImpl implements Ocr {
     public static final String APP_ID = "22651090";
     public static final String API_KEY = "cQNh0iVnffQigETyeWizHDbU";

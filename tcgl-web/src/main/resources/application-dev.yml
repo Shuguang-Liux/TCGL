@@ -13,8 +13,8 @@ dubbo:
   registry:
     protocol: dubbo-consumer-registry
     address: zookeeper://127.0.0.1:2181
-  monitor:
-    protocol: registry
+#  monitor:
+#    protocol: registry
 
 
 spring:

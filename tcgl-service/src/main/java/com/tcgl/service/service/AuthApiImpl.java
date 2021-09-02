@@ -3,6 +3,7 @@ package com.tcgl.service.service;
 import com.tcgl.service.dao.AuthDao;
 import com.tcgl.serviceapi.api.AuthApi;
 import com.tcgl.serviceapi.entity.Auth;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author Shuguang_Liux
  * @date 2021 /06/22 16:33
  */
+@DubboService
 public class AuthApiImpl implements AuthApi {
 
     @Autowired

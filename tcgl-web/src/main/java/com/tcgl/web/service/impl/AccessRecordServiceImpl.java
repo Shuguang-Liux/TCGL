@@ -23,10 +23,8 @@ public class AccessRecordServiceImpl implements AccessRecordService {
 
     @Override
     public ResultVo<Map<String, Object>> saveRecordByInfo(String licensePlate) {
-        ResultVo<Map<String,Object>> resultVo = new ResultVo<>();
         if (StringUtils.isEmpty(licensePlate)){
-            resultVo.setError(400,"传入信息为空！");
-            return resultVo;
+            return ResultVo.fail(400,"传入信息为空！");
         }
         return accessRecordApi.saveRecordByInfo(licensePlate);
     }

@@ -19,14 +19,14 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.*;
 
+
 /**
- * @author Shuguang_Liux
- * @package com.record.tcgl.service
- * @Description ToDo
- * @Date 2020/9/14 21:38
- **/
+ * 访问记录api impl
+ *
+ * @author Shugu
+ * @date 2021/08/29
+ */
 @DubboService
-@Component
 public class AccessRecordApiImpl implements AccessRecordApi {
 
     @Autowired
@@ -38,36 +38,36 @@ public class AccessRecordApiImpl implements AccessRecordApi {
     @Autowired
     private VehicleOwnerDao vehicleOwnerDao;
 
+
     /**
-     * @Author Shuguang_Liux
-     * @Description TODO 车牌扫描入口信息更新（车牌传入）
-     * @Date 2021/4/18 23:00
-     * @Param [java.lang.String]
-     * @return com.record.tcgl.vo.ResultVo<java.util.Map<java.lang.String,java.lang.Object>>
-     **/
+     * 车牌扫描入口信息更新（车牌传入）
+     *
+     * @param licensePlate 车牌
+     * @return {@link ResultVo}<{@link Map}<{@link String}, {@link Object}>>
+     */
     @Override
-    public ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate) {
-        ResultVo<Map<String,Object>> resultVo = new ResultVo<>();
-        Map<String,Object> resultMap = new HashMap<>();
+    public ResultVo<Map<String, Object>> saveRecordByInfo(String licensePlate) {
+        ResultVo<Map<String, Object>> resultVo = new ResultVo<>();
+        Map<String, Object> resultMap = new HashMap<>();
         AccessRecordEntity accessRecordEntity = new AccessRecordEntity();
         int count = 0;
         //取值
         QueryWrapper<AccessRecordEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("license_plate",licensePlate);
+        queryWrapper.eq("license_plate", licensePlate);
         accessRecordEntity = accessRecordDao.selectOne(queryWrapper);
         //入园记录中车牌存在性判断
-        if (accessRecordEntity != null){
+        if (accessRecordEntity != null) {
             String isOutValue = ApplyStringEnum.ISOUT.getStringValue();
             //根据车牌号进行是否已经出园判断
-            if (isOutValue.equals(accessRecordEntity.getIsOut())){
+            if (isOutValue.equals(accessRecordEntity.getIsOut())) {
                 //判断是否是预付费用户
-                if ("Y".equals(accessRecordEntity.getIsPrepayment())){
+                if ("Y".equals(accessRecordEntity.getIsPrepayment())) {
                     resultVo.setMessage("当前用户为预付费用户");
                     accessRecordEntity.setBillingPrice(BigDecimal.valueOf(0));
                     accessRecordEntity.setTimeCount(BigDecimal.valueOf(0));
-                }else {
+                } else {
                     //未出园
-                    Map<String, BigDecimal> map = priceCalculation(accessRecordEntity.getEnterTime(),new Date());
+                    Map<String, BigDecimal> map = priceCalculation(accessRecordEntity.getEnterTime(), new Date());
                     //赋值时间统计
                     accessRecordEntity.setTimeCount(map.get("timeCount"));
                     //赋值价格统计
@@ -83,10 +83,10 @@ public class AccessRecordApiImpl implements AccessRecordApi {
                 resultVo.setResult(resultMap);
                 //数据存入出入园记录表
                 AccessRecordHistoryEntity accessRecordHistoryEntity = new AccessRecordHistoryEntity();
-                BeanUtils.copyProperties(accessRecordEntity,accessRecordHistoryEntity);
+                BeanUtils.copyProperties(accessRecordEntity, accessRecordHistoryEntity);
                 //插入历史记录表
                 accessRecordHistoryDao.insert(accessRecordHistoryEntity);
-            }else {//存在入园记录并且是已经出园的，当前为重新入园
+            } else {//存在入园记录并且是已经出园的，当前为重新入园
                 //入场时间为当前时间
                 accessRecordEntity.setEnterTime(new Date());
                 //出园时间，价格，时间统计置为空（mybatisplus配置忽略null更新限制）
@@ -96,24 +96,24 @@ public class AccessRecordApiImpl implements AccessRecordApi {
                 //是否出园置为N
                 accessRecordEntity.setIsOut("N");
                 //入园次数+1
-                accessRecordEntity.setAccessTimes(accessRecordEntity.getAccessTimes()+1);
+                accessRecordEntity.setAccessTimes(accessRecordEntity.getAccessTimes() + 1);
             }
             //更新表数据
             count = accessRecordDao.updateById(accessRecordEntity);
-        }else {
+        } else {
             AccessRecordEntity accessRecordNew = new AccessRecordEntity();
             //查询是否为月租用户并且状态为正常
             QueryWrapper<VehicleOwnerEntity> vehicleOwnerQueryWrapper = new QueryWrapper<>();
             //车牌
-            vehicleOwnerQueryWrapper.eq("license_plate",licensePlate);
+            vehicleOwnerQueryWrapper.eq("license_plate", licensePlate);
             //删除状态
-            vehicleOwnerQueryWrapper.eq("delete_state","N");
+            vehicleOwnerQueryWrapper.eq("delete_state", "N");
             //是否有效
-            vehicleOwnerQueryWrapper.eq("is_valid","Y");
+            vehicleOwnerQueryWrapper.eq("is_valid", "Y");
 
             //根据条件查询唯一数据
             VehicleOwnerEntity vehicleOwnerEntity = vehicleOwnerDao.selectOne(vehicleOwnerQueryWrapper);
-            if(vehicleOwnerEntity != null){
+            if (vehicleOwnerEntity != null) {
                 //判断成立设定值为预付费用户
                 accessRecordNew.setIsPrepayment("Y");
                 //赋值车辆所有人
@@ -127,53 +127,53 @@ public class AccessRecordApiImpl implements AccessRecordApi {
             accessRecordNew.setLicensePlate(licensePlate);
             count = accessRecordDao.insert(accessRecordNew);
         }
-        if (count>0){
+        if (count > 0) {
             resultVo.setMessage("数据库操作成功");
-        }else {
-            resultVo.setError(400,"操作失败");
+        } else {
+            resultVo.setError(400, "操作失败");
         }
         return resultVo;
     }
 
-   /**
-    * @Author Shuguang_Liux
-    * @Description TODO 根据licensePlate查询列表
-    * @Date 2021/4/18 21:38
-    * @Param [java.util.Set<java.lang.String>]
-    * @return com.record.tcgl.vo.ResultVo<java.util.Map<java.lang.String,com.record.tcgl.entity.AccessRecordEntity>>
-    **/
+
+    /**
+     * 根据licensePlate查询列表
+     *
+     * @param licensePlateSet 车牌集
+     * @return {@link ResultVo}<{@link Map}<{@link String}, {@link AccessRecordEntity}>>
+     */
     @Override
     public ResultVo<Map<String, AccessRecordEntity>> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet) {
         ResultVo<Map<String, AccessRecordEntity>> resultVo = new ResultVo<>();
-        if (licensePlateSet != null && licensePlateSet.size()>0){
-            Map<String,AccessRecordEntity> accessRecordMap = accessRecordDao.getAccessRecordByLicensePlateSet(licensePlateSet);
+        if (licensePlateSet != null && licensePlateSet.size() > 0) {
+            Map<String, AccessRecordEntity> accessRecordMap = accessRecordDao.getAccessRecordByLicensePlateSet(licensePlateSet);
             resultVo.setResult(accessRecordMap);
-        }else {
-            resultVo.setError(400,"单号为空不允许查询");
+        } else {
+            resultVo.setError(400, "单号为空不允许查询");
         }
         return resultVo;
     }
 
     /**
+     * @return java.util.Map<java.lang.String, java.math.BigDecimal>
      * @Author Shuguang_Liux
      * @Description TODO 用户时长计算
      * @Date 2021/4/18 21:38
      * @Param [java.util.Date, java.util.Date]
-     * @return java.util.Map<java.lang.String,java.math.BigDecimal>
      **/
-    private Map<String,BigDecimal> priceCalculation(Date enterTime, Date outTime){
+    private Map<String, BigDecimal> priceCalculation(Date enterTime, Date outTime) {
         Map<String, BigDecimal> map = new HashMap<>();
         //计算时间差值
-        double dateCount = outTime.getTime()-enterTime.getTime();
+        double dateCount = outTime.getTime() - enterTime.getTime();
         //计算时间长短（小时）毫秒级单位
-        double hours = dateCount/(1000*60*60);
+        double hours = dateCount / (1000 * 60 * 60);
         //向上取整
         BigDecimal timeCount = BigDecimal.valueOf(Math.ceil(hours));
         //价格计数(Bigdecimal乘法multiply)
         BigDecimal price = timeCount.multiply(BigDecimal.valueOf(ApplyIntEnum.PRICE.getIntValue()));
         //赋值
-        map.put("timeCount",timeCount);
-        map.put("billingPrice",price);
+        map.put("timeCount", timeCount);
+        map.put("billingPrice", price);
         return map;
     }
 }

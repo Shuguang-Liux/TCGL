@@ -36,6 +36,9 @@ public class SecurityServiceImpl implements SecurityService {
     @DubboReference
     private UserApi userApi;
 
+    public SecurityServiceImpl() {
+    }
+
     /**
      * 角色
      *

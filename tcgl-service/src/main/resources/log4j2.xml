@@ -83,6 +83,12 @@
         <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="org.apache.dubbo" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.apache.zookeeper" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
 
         <!--配置输出sql语句-->
         <logger name="org.apache.ibatis" level="DEBUG"/>

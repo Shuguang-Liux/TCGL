@@ -26,7 +26,6 @@ import java.util.*;
  * @date 2021/06/25
  */
 @DubboService
-@Component
 public class VehicleOwnerApiImpl implements VehicleOwnerApi {
     @Autowired
     private VehicleOwnerDao vehicleOwnerDao;

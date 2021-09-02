@@ -21,7 +21,6 @@ import java.util.Objects;
  * @Date 2020/9/14 21:29
  **/
 @DubboService
-@Component
 public class PaymentRecordApiImpl implements PaymentRecordApi {
 
     @Autowired

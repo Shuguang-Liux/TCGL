@@ -1,8 +1,10 @@
 package com.tcgl.web.service;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tcgl.common.vo.ResultVo;
 import com.tcgl.serviceapi.entity.UserEntity;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Map;
 
@@ -13,11 +15,14 @@ import java.util.Map;
  * @Date 2020/9/9 16:08
  **/
 public interface UserService {
+
     /**
-     * @param userEntity
-     * @return
+     * 检查用户
+     *
+     * @param userEntity 用户实体
+     * @return {@link ResultVo}<{@link Boolean}>
      */
-    ResultVo<Boolean> userRoles(UserEntity userEntity);
+    ResultVo<Boolean> checkUser(UserEntity userEntity);
 
     /**
      * 根据用户名称更新用户密码
@@ -38,5 +43,13 @@ public interface UserService {
      * @return
      */
     ResultVo<Boolean> delete(String ids);
+
+    /**
+     * 页面
+     *
+     * @param userEntity 用户实体
+     * @return {@link IPage}<{@link UserEntity}>
+     */
+    IPage<UserEntity> page(UserEntity userEntity);
 
 }
