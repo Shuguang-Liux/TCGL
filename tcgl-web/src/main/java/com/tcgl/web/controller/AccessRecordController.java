@@ -3,8 +3,11 @@ package com.tcgl.web.controller;
 import com.tcgl.common.vo.ResultVo;
 import com.tcgl.web.service.AccessRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -32,7 +35,7 @@ public class AccessRecordController {
      */
     @RequestMapping("/Ocr")
     @PreAuthorize(value = "hasRole('ADMIN') or hasPermission('user/role','sys:role:info')")
-    public ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate){
-        return accessRecordService.saveRecordByInfo(licensePlate);
+    public ResultVo<?> saveRecordByInfo(String licensePlate, String type){
+        return accessRecordService.saveRecordByInfo(licensePlate,type);
     }
 }

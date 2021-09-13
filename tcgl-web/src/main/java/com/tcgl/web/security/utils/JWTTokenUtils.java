@@ -74,7 +74,7 @@ public class JWTTokenUtils {
 	 */
 	public static String refreshAccessToken(String oldToken) {
 		String username = JWTTokenUtils.getUserNameByToken(oldToken);
-		SysUserDetails sysUserDetails = (SysUserDetails) jwtTokenUtils.securityService
+		SysUserDetails sysUserDetails = jwtTokenUtils.securityService
 				.loadUserByUsername(username);
 		sysUserDetails.setIp(JWTTokenUtils.getIpByToken(oldToken));
 		return createAccessToken(sysUserDetails);

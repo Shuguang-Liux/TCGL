@@ -1,6 +1,8 @@
 package com.tcgl.service.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.tcgl.common.constant.ApplyIntEnum;
 import com.tcgl.common.constant.ApplyStringEnum;
 import com.tcgl.common.vo.ResultVo;
@@ -46,16 +48,39 @@ public class AccessRecordApiImpl implements AccessRecordApi {
      * @return {@link ResultVo}<{@link Map}<{@link String}, {@link Object}>>
      */
     @Override
-    public ResultVo<Map<String, Object>> saveRecordByInfo(String licensePlate) {
-        ResultVo<Map<String, Object>> resultVo = new ResultVo<>();
-        Map<String, Object> resultMap = new HashMap<>();
-        AccessRecordEntity accessRecordEntity = new AccessRecordEntity();
+    public ResultVo<?> saveRecordByInfo(String licensePlate,String type) {
+        if ("1".equals(type)){
+
+        }
         int count = 0;
         //取值
-        QueryWrapper<AccessRecordEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("license_plate", licensePlate);
-        accessRecordEntity = accessRecordDao.selectOne(queryWrapper);
+        AccessRecordEntity accessRecordEntity = accessRecordDao.selectOne(
+                Wrappers.<AccessRecordEntity>lambdaQuery()
+                        .eq(AccessRecordEntity::getLicensePlate,licensePlate));
         //入园记录中车牌存在性判断
+        if (Objects.isNull(accessRecordEntity)){
+            AccessRecordEntity accessRecord = new AccessRecordEntity();
+
+            //入园时间为当前时间
+            accessRecord.setEnterTime(new Date());
+            //入园次数为0
+            accessRecord.setAccessTimes(0);
+            //录入车牌
+            accessRecord.setLicensePlate(licensePlate);
+            //查询是否为月租用户并且状态为正常
+            int ownerCount = vehicleOwnerDao.selectCount(
+                    Wrappers.<VehicleOwnerEntity>lambdaQuery()
+                            .eq(VehicleOwnerEntity::getLicensePlate,licensePlate)
+                            .eq(VehicleOwnerEntity::getDeleteStatus,"N")
+                            .eq(VehicleOwnerEntity::getIsValid,"Y"));
+            if (ownerCount > 1) {
+                accessRecordDao.insert(accessRecord);
+                return ResultVo.ok("月租用户");
+            }else {
+
+            }
+
+        }
         if (accessRecordEntity != null) {
             String isOutValue = ApplyStringEnum.ISOUT.getStringValue();
             //根据车牌号进行是否已经出园判断

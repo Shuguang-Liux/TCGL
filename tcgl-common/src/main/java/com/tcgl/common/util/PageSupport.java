@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tcgl.common.constant.SymbolConstant;
-import com.tcgl.common.spring.ServletUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public final class PageSupport {

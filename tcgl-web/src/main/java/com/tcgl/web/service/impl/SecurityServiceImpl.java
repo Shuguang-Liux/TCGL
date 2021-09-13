@@ -69,7 +69,7 @@ public class SecurityServiceImpl implements SecurityService {
      */
     @Override
     public SysUserDetails loadUserByUsername(String username) {
-        UserEntity userEntity = userApi.getUserInfo(username);
+        UserEntity userEntity = userApi.getUserInfoByName(username);
         if (userEntity != null) {
             SysUserDetails sysUserDetails = new SysUserDetails();
             BeanUtils.copyProperties(userEntity, sysUserDetails);

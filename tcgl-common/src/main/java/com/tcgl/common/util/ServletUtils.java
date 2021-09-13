@@ -1,4 +1,4 @@
-package com.tcgl.common.spring;
+package com.tcgl.common.util;
 
 import com.tcgl.common.util.Convert;
 import org.apache.commons.lang3.StringUtils;

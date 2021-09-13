@@ -18,7 +18,7 @@ public interface AccessRecordApi {
      * @param licensePlate
      * @return
      */
-    ResultVo<Map<String,Object>> saveRecordByInfo(String licensePlate);
+    ResultVo<?> saveRecordByInfo(String licensePlate,String type);
 
     /**
      * 根据licensePlate查询列表
