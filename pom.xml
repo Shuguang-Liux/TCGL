@@ -31,7 +31,7 @@
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
         <jjwt.version>0.9.1</jjwt.version>
         <dubbo-spring-boot-starter.version>2.7.10</dubbo-spring-boot-starter.version>
-        <dubbo.version>2.7.10</dubbo.version>
+        <dubbo.version>2.7.13</dubbo.version>
         <zookeeper.version>3.4.14</zookeeper.version>
         <curator-recipes.version>2.13.0</curator-recipes.version>
         <alibaba-druid.version>1.2.1</alibaba-druid.version>
