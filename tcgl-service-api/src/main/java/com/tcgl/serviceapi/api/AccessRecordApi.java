@@ -25,5 +25,5 @@ public interface AccessRecordApi {
      * @param licensePlateSet
      * @return
      */
-    ResultVo<Map<String, AccessRecordEntity>> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet);
+    Map<String, AccessRecordEntity> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet);
 }

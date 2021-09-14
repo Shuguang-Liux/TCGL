@@ -22,7 +22,7 @@ public interface VehicleOwnerApi {
      * @param param 参数
      * @return {@link ResultVo<String>}
      */
-    ResultVo<?> insertVehicleOwner(JSONObject param);
+    ResultVo<?> insertVehicleOwner(VehicleOwnerEntity vehicleOwnerEntity);
 
 
     /**
@@ -31,16 +31,16 @@ public interface VehicleOwnerApi {
      * @param param 参数
      * @return {@link ResultVo<IPage<VehicleOwnerEntity>>}
      */
-    ResultVo<IPage<VehicleOwnerEntity>> selectByPage(Map<String,String> param);
+    IPage<VehicleOwnerEntity> selectByPage(VehicleOwnerEntity vehicleOwnerEntity);
 
 
     /**
      * 出口车主清单
      *
-     * @param param 参数
-     * @return {@link ResultVo<Map<String, Object>>}
+     * @param vehicleOwnerEntity 车主实体
+     * @return {@link Map}<{@link String}, {@link Object}>
      */
-    ResultVo<Map<String,Object>> exportVehicleOwnerList(Map<String,Object> param);
+    Map<String,Object> exportVehicleOwnerList(VehicleOwnerEntity vehicleOwnerEntity);
 
 
     /**
@@ -59,6 +59,6 @@ public interface VehicleOwnerApi {
      * @param headTitleLength 头标题长度
      * @return {@link Map<String, String[]>}
      */
-    Map<String,String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength);
+    Map<String,String[]> exportVehicleOwnerAndHistory(VehicleOwnerEntity vehicleOwnerEntity,Integer headTitleLength);
 
 }

@@ -106,7 +106,7 @@ public class VehicleOwnerController {
 
     /**
      * @Author Shuguang_Liux
-     * @Description TODO 取VehicleOwner和AccessRecordHistory对应列表信息
+     * @Description 取VehicleOwner和AccessRecordHistory对应列表信息
      * @Date 2021/4/18 23:00
      * @Param [com.alibaba.fastjson.JSONObject]
      * @return com.record.tcgl.vo.ResultVo<com.record.tcgl.entity.VehicleOwnerEntity>
@@ -123,10 +123,10 @@ public class VehicleOwnerController {
      * @param param
      */
     @RequestMapping("export")
-    public void exportTestNew(HttpServletRequest request,HttpServletResponse response, @RequestBody Map<String, Object> param){
+    public void exportTestNew(HttpServletRequest request,HttpServletResponse response, @RequestBody VehicleOwnerEntity vehicleOwnerEntity){
         String[] headTitles ={"车辆牌照", "车辆所有人", "创建时间", "创建人", "更新时间", "更新人", "有效状态",
                 "进园时间", "出园时间","入园时长统计","价格","是否出园","次数","是否预付费用户"};
-        Map<String, String[]> map = vehicleOwnerService.exportVehicleOwnerAndHistory(param,headTitles.length);
+        Map<String, String[]> map = vehicleOwnerService.exportVehicleOwnerAndHistory(vehicleOwnerEntity,headTitles.length);
         String title = "用户表";
         //通过工具类获取到了一个文件对象
         HSSFWorkbook wb = ExcelUtils.createExcel(map, headTitles, title);

@@ -31,7 +31,7 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public ResultVo<?> insertVehicleOwnerAndPayment(JSONObject param) {
+    public ResultVo<?>  insertVehicleOwnerAndPayment(JSONObject param) {
         return vehicleOwnerApi.insertVehicleOwner(param);
     }
 
@@ -41,15 +41,8 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public ResultVo<Map<String, Object>> exportVehicleOwner(Map<String, Object> param) {
-        ResultVo<Map<String,Object>> resultVo = new ResultVo<>();
-        try {
-            resultVo = vehicleOwnerApi.exportVehicleOwnerList(param);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultVo.setError(400,"导出失败，请联系系统管理员");
-        }
-        return resultVo;
+    public ResultVo<Map<String, Object>> exportVehicleOwner(VehicleOwnerEntity vehicleOwnerEntity) {
+        return ResultVo.ok(vehicleOwnerApi.exportVehicleOwnerList(vehicleOwnerEntity));
     }
 
     /**
@@ -80,8 +73,8 @@ public class VehicleOwnerServiceImpl implements VehicleOwnerService {
      * @return
      */
     @Override
-    public Map<String, String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitleLength) {
-        return vehicleOwnerApi.exportVehicleOwnerAndHistory(param,headTitleLength);
+    public Map<String, String[]> exportVehicleOwnerAndHistory(VehicleOwnerEntity vehicleOwnerEntity,Integer headTitleLength) {
+        return vehicleOwnerApi.exportVehicleOwnerAndHistory(vehicleOwnerEntity,headTitleLength);
     }
 
 

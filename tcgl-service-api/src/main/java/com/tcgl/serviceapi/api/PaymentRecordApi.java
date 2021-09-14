@@ -2,6 +2,7 @@ package com.tcgl.serviceapi.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tcgl.common.vo.ResultVo;
+import com.tcgl.serviceapi.entity.VehicleOwnerEntity;
 
 /**
  * @author Shuguang_Liux
@@ -11,9 +12,11 @@ import com.tcgl.common.vo.ResultVo;
  **/
 public interface PaymentRecordApi {
     /**
+     * 插入付款信息
      * 根据关联主键将信息插入租金支付记录表
-     * @param param
-     * @return
+     *
+     * @param vehicleOwnerEntity 车主实体
+     * @return {@link ResultVo}<{@link ?}>
      */
-    ResultVo<?> insertPaymentInfo(JSONObject param);
+    int insertPaymentInfo(VehicleOwnerEntity vehicleOwnerEntity);
 }

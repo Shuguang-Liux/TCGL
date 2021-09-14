@@ -99,12 +99,11 @@ public class AccessRecordApiImpl implements AccessRecordApi {
      * @return {@link ResultVo}<{@link Map}<{@link String}, {@link AccessRecordEntity}>>
      */
     @Override
-    public ResultVo<Map<String, AccessRecordEntity>> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet) {
+    public Map<String, AccessRecordEntity> getAccessRecordByLicensePlateSet(Set<String> licensePlateSet) {
         if (CollectionUtils.isEmpty(licensePlateSet)) {
-            return ResultVo.fail("单号为空");
-
-        } Map<String, AccessRecordEntity> accessRecordMap = accessRecordDao.getAccessRecordByLicensePlateSet(licensePlateSet);
-        return ResultVo.ok(accessRecordMap);
+            throw new BaseBusinessException("单号不允许为空");
+        }
+        return accessRecordDao.getAccessRecordByLicensePlateSet(licensePlateSet);
     }
 
     /**

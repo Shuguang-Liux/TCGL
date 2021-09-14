@@ -8,6 +8,7 @@ import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,12 @@ public class VehicleOwnerEntity implements Serializable {
      */
     @TableField(value = "is_valid")
     private String isValid;
+
+    /**
+     * 缴费月数
+     */
+    @TableField(exist = false)
+    private BigDecimal paymentAmount;
 
     /**
      * 历史列表

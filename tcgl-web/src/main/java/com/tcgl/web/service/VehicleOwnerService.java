@@ -21,11 +21,13 @@ public interface VehicleOwnerService {
     ResultVo<?> insertVehicleOwnerAndPayment(JSONObject param);
 
     /**
+     * 出口车主
      * VehicleOwer导出
-     * @param param
-     * @return
+     *
+     * @param vehicleOwnerEntity 车主实体
+     * @return {@link ResultVo}<{@link Map}<{@link String}, {@link Object}>>
      */
-    ResultVo<Map<String,Object>> exportVehicleOwner(Map<String,Object> param);
+    ResultVo<Map<String,Object>> exportVehicleOwner(VehicleOwnerEntity vehicleOwnerEntity);
 
     /**
      * 查询车辆所有人和历史记录列表
@@ -40,5 +42,5 @@ public interface VehicleOwnerService {
      * @param headTitlesLength
      * @return
      */
-    Map<String,String[]> exportVehicleOwnerAndHistory(Map<String, Object> param,Integer headTitlesLength);
+    Map<String,String[]> exportVehicleOwnerAndHistory(VehicleOwnerEntity vehicleOwnerEntity,Integer headTitlesLength);
 }
