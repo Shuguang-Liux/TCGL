@@ -180,11 +180,8 @@ public class VehicleOwnerApiImpl implements VehicleOwnerApi {
      */
     @Override
     public ResultVo<VehicleOwnerEntity> getVehicleOwnerAndAccessRecordHistory(VehicleOwnerEntity vehicleOwnerEntity) {
-        ResultVo<VehicleOwnerEntity> resultVo = new ResultVo<>();
-        VehicleOwnerEntity vehicleOwnerEntityNew = new VehicleOwnerEntity();
-        vehicleOwnerEntityNew = vehicleOwnerDao.getVehicleOwnerAndAccessRecordHistory(vehicleOwnerEntity);
-        resultVo.setResult(vehicleOwnerEntityNew);
-        return resultVo;
+        VehicleOwnerEntity vehicleOwnerEntityNew  = vehicleOwnerDao.getVehicleOwnerAndAccessRecordHistory(vehicleOwnerEntity);
+        return ResultVo.ok(vehicleOwnerEntityNew);
     }
 
     /**
