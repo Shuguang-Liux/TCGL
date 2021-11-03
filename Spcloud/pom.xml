@@ -13,7 +13,14 @@
         <module>service</module>
         <module>model</module>
         <module>client</module>
+        <module>gateway</module>
     </modules>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>2.4.6</version>
+    </parent>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -22,13 +29,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.4.6</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -81,7 +81,11 @@
         <profile>
             <id>dev</id>
             <properties>
-                <profiles.active>dev</profiles.active>
+                <active>dev</active>
+                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>
+                <group>dev</group>
+                <fileType>yaml</fileType>
+                <nacosHost>127.0.0.1:8848</nacosHost>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -89,7 +93,14 @@
         </profile>
         <profile>
             <id>test</id>
+            <properties>
+                <active>test</active>
+                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>
+                <group>DEFAULT_GROUP</group>
+                <fileType>yaml</fileType>
+                <nacosHost>127.0.0.1:8848</nacosHost>
+            </properties>
+
         </profile>
     </profiles>
-
 </project>
