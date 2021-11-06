@@ -10,7 +10,11 @@ spring:
         server-addr: @nacosHost@
         group: @group@
       discovery:
-        server-addr: @nacosHost@=
+        server-addr: @nacosHost@
         group: @group@
+        heart-beat-interval: 10
 #  profiles:
+logging:
+  level:
+    org.springframework: debug
 #    active: @active@

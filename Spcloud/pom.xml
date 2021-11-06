@@ -23,8 +23,16 @@
     </parent>
 
     <properties>
+        <springcloud-alibaba.version>2021.1</springcloud-alibaba.version>
+        <springcloud.version>2020.0.3</springcloud.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <lombok.version>1.18.20</lombok.version>
+        <mybatisplus.version>3.4.3.4</mybatisplus.version>
+        <mysqlconnector.version>8.0.25</mysqlconnector.version>
+        <fastjson.version>1.2.78</fastjson.version>
+        <hutool.version>5.7.14</hutool.version>
+        <alibabadurid.version>1.2.8</alibabadurid.version>
     </properties>
 
     <dependencyManagement>
@@ -32,47 +40,46 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2021.1</version>
+                <version>${springcloud-alibaba.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2020.0.3</version>
+                <version>${springcloud.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
+                <version>${lombok.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.4.3.4</version>
+                <version>${mybatisplus.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.25</version>
+                <version>${mysqlconnector.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.78</version>
+                <version>${fastjson.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-core</artifactId>
-                <version>5.7.14</version>
+                <version>${hutool.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.2.8</version>
+                <version>${alibabadurid.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -82,7 +89,7 @@
             <id>dev</id>
             <properties>
                 <active>dev</active>
-                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>
+<!--                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>-->
                 <group>dev</group>
                 <fileType>yaml</fileType>
                 <nacosHost>127.0.0.1:8848</nacosHost>
@@ -95,7 +102,7 @@
             <id>test</id>
             <properties>
                 <active>test</active>
-                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>
+<!--                <namespace>fef0975d-de9d-4db1-8bc3-f150ed890336</namespace>-->
                 <group>DEFAULT_GROUP</group>
                 <fileType>yaml</fileType>
                 <nacosHost>127.0.0.1:8848</nacosHost>

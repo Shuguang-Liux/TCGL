@@ -14,6 +14,7 @@
 
     <modules>
         <module>provider</module>
+        <module>admin</module>
     </modules>
 
     <properties>
