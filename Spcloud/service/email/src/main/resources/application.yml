@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: elemes-email-@dataKey@-@nameSuffix@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacosHost@
+        group: @datakey@
+        #心跳包发送间隔
+        heart-beat-interval: 10
+  jackson:
+    time-zone: GMT+8
+
+# 启动 FeignClient 的 Fallback 设置
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 25000
+ribbon:
+  ReadTimeout: 25000
+  ConnectTimeout: 25000

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: tcgl-provider-@datakey@-@nameSuffix@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacosHost@
+        group: @datakey@
+        #心跳包发送间隔
+        heart-beat-interval: 10
+
+#        cluster-name: provider-dev

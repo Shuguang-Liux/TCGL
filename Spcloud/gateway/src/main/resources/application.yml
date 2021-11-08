@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: tcgl-gateway-@datakey@-@nameSuffix@
+
+#        cluster-name: provider-dev

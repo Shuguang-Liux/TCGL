@@ -3,15 +3,7 @@ spring:
     name: gateway
   cloud:
     nacos:
-#      server-addr: @nacosHost@
       config:
-#        namespace: @namespace@
         file-extension: @fileType@
         server-addr: @nacosHost@
-        group: @group@
-      discovery:
-        server-addr: @nacosHost@
-##        namespace: @namespace@
-        group: @group@
-#  profiles:
-#    active: @active@
+        group: @datakey@
