@@ -1,5 +1,6 @@
 package com.tcgl.provider.controller;
 
+import com.tcgl.common.util.QRCodeUtil;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class DemoController {
     @GetMapping(value = "/demo/{string}")
-    public String demoTesting(@PathVariable("string") String string){
+    public String demoTesting(@PathVariable("string") String string) throws Exception {
+        QRCodeUtil.createImage("",null,true);
         return "hello" + string;
     }
 }

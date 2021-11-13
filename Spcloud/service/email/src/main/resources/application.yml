@@ -6,22 +6,20 @@ spring:
       discovery:
         server-addr: @nacosHost@
         group: @datakey@
-        #心跳包发送间隔
-        heart-beat-interval: 10
   jackson:
     time-zone: GMT+8
-
+  mail:
+    host: imap.163.com
+    port: 465
+    test-connection: true
+    username: 17554166634@163.com
+    password: 1212
+    default-encoding: UTF-8
+    protocol: smtp
+mybatis-plus:
+  configuration:
+    default-fetch-size:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: false
 # 启动 FeignClient 的 Fallback 设置
-feign:
-  hystrix:
-    enabled: true
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 25000
-ribbon:
-  ReadTimeout: 25000
-  ConnectTimeout: 25000

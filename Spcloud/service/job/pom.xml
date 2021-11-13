@@ -7,19 +7,22 @@
         <groupId>com.tcgl</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>admin</artifactId>
+    <artifactId>job</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>admin</name>
-    <description>admin</description>
+    <name>job</name>
+    <description>job</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -29,7 +32,17 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -39,7 +52,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>/src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
