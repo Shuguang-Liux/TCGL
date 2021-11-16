@@ -8,18 +8,3 @@ spring:
         group: @datakey@
   jackson:
     time-zone: GMT+8
-  mail:
-    host: imap.163.com
-    port: 465
-    test-connection: true
-    username: 17554166634@163.com
-    password: 1212
-    default-encoding: UTF-8
-    protocol: smtp
-mybatis-plus:
-  configuration:
-    default-fetch-size:
-    cache-enabled: false
-    map-underscore-to-camel-case: true
-    call-setters-on-nulls: false
-# 启动 FeignClient 的 Fallback 设置

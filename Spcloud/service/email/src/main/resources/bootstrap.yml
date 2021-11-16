@@ -4,5 +4,5 @@ spring:
       config:
         file-extension: @fileType@
         server-addr: @nacosHost@
-        group: @group@
+        group: @datakey@
         name: email

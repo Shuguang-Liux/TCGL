@@ -10,8 +10,9 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
         <!-- 定义日志存储的路径，不要配置相对路径 -->
-        <property name="FILE_PATH" value="./logs" />
-        <property name="FILE_NAME" value="provider" />
+        <property name="APP_NAME" value="tcgl-provider"/>
+        <property name="FILE_PATH" value="./logs/${APP_NAME}"/>
+        <property name="FILE_NAME" value="${APP_NAME}" />
     </Properties>
 
     <appenders>
@@ -85,16 +86,16 @@
         <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger additivity="true" level="trace" name="com.alibaba.nacos.client.naming">
+        <Logger additivity="true" level="info" name="com.alibaba.nacos.client.naming">
             <AppenderRef ref="Console"/>
         </Logger>
-
+<!--        子logger优先级高于root-->
         <root level="info">
             <appender-ref ref="Console"/>
             <appender-ref ref="Filelog"/>
             <appender-ref ref="RollingFileInfo"/>
-            <appender-ref ref="RollingFileWarn"/>
-            <appender-ref ref="RollingFileError"/>
+<!--            <appender-ref ref="RollingFileWarn"/>-->
+<!--            <appender-ref ref="RollingFileError"/>-->
         </root>
     </loggers>
 
