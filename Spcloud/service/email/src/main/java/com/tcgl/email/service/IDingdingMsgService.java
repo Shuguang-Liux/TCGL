@@ -1,4 +1,4 @@
-package com.tcgl.msg;
+package com.tcgl.email.service;
 
 import com.tcgl.common.model.R;
 
@@ -24,5 +24,12 @@ public interface IDingdingMsgService {
      * @return {@link R}<{@link ?}>
      */
     R<?> getAllDeptInfo(Long deptId);
+
+    /**
+     * 得到id列表
+     *
+     * @param deptId 部门id
+     * @return {@link R}<{@link ?}>
+     */
     R<?> getListId(Long deptId);
 }

@@ -1,12 +1,8 @@
-package com.tcgl.msg;
+package com.tcgl.email.service.impl;
 
-import com.dingtalk.api.DefaultDingTalkClient;
-import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.*;
-import com.dingtalk.api.response.*;
-import com.taobao.api.ApiException;
 import com.tcgl.common.model.R;
 import com.tcgl.common.model.exception.BusinessException;
+import com.tcgl.email.service.IDingdingMsgService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
