@@ -2,7 +2,7 @@ spring:
   cloud:
     nacos:
       config:
-        file-extension: @fileType@
-        server-addr: @nacosHost@
-        group: @datakey@
+        file-extension: @fileExtension@
+        server-addr: @serverAddr@
+        group: @group@
         name: provider

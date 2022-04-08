@@ -13,7 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>common-util</module>
-        <module>multi-db-config</module>
+        <module>common-redis</module>
+        <module>common-core</module>
     </modules>
 
     <properties>
