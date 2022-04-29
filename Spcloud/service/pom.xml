@@ -15,7 +15,7 @@
     <modules>
         <module>provider</module>
         <module>admin</module>
-        <module>email</module>
+        <module>message</module>
         <module>job</module>
         <module>generator</module>
     </modules>

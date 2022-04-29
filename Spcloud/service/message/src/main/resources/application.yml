@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: elemes-email-@dataKey@-@nameSuffix@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacosHost@
+        group: @datakey@
+  jackson:
+    time-zone: GMT+8

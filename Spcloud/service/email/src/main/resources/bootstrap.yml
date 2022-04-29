@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    nacos:
-      config:
-        file-extension: @fileType@
-        server-addr: @nacosHost@
-        group: @datakey@
-        name: email

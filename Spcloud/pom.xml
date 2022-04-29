@@ -120,7 +120,6 @@
                 <fileType>yaml</fileType>
                 <nacosHost>127.0.0.1:8848</nacosHost>
             </properties>
-
         </profile>
     </profiles>
 </project>
