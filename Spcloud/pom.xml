@@ -30,7 +30,7 @@
         <lombok.version>1.18.20</lombok.version>
         <mybatisplus.version>3.4.3.4</mybatisplus.version>
         <mysqlconnector.version>8.0.25</mysqlconnector.version>
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <hutool.version>5.7.14</hutool.version>
         <alibabadurid.version>1.2.8</alibabadurid.version>
     </properties>
