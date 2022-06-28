@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: tcgl-provider-@datakey@-@nameSuffix@
-  cloud:
-    nacos:
-      discovery:
-        server-addr: @nacosHost@
-        group: @datakey@
