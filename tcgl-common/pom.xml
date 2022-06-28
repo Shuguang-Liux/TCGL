@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.tcgl</groupId>
+        <artifactId>tcgl</artifactId>
+        <version>3.4.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>tcgl-common-log</module>
+        <module>tcgl-common-core</module>
+        <module>tcgl-common-redis</module>
+        <module>tcgl-common-swagger</module>
+        <module>tcgl-common-security</module>
+        <module>tcgl-common-datascope</module>
+		<module>tcgl-common-datasource</module>
+    </modules>
+
+    <artifactId>tcgl-common</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+	    tcgl-common通用模块
+    </description>
+
+</project>
