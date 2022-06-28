@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    nacos:
-      config:
-        name: job
-        file-extension: @fileType@
-        server-addr: @nacosHost@
-        group: @datakey@

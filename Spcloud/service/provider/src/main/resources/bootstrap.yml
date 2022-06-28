@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    nacos:
-      config:
-        file-extension: @fileExtension@
-        server-addr: @serverAddr@
-        group: @group@
-        name: provider
