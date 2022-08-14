@@ -12,6 +12,7 @@
 
     <properties>
         <tcgl.version>3.4.0</tcgl.version>
+        <lombok.version>1.18.20</lombok.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
@@ -235,6 +236,13 @@
                 <artifactId>tcgl-api-system</artifactId>
                 <version>${tcgl.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

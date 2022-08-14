@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.tcgl.system.api.domain.SysDept;
 import com.tcgl.system.domain.SysMenu;
+import lombok.Data;
 
 /**
  * Treeselect树结构实体类
  * 
  * @author tcgl
  */
+@Data
 public class TreeSelect implements Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -45,33 +47,4 @@ public class TreeSelect implements Serializable
         this.children = menu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public String getLabel()
-    {
-        return label;
-    }
-
-    public void setLabel(String label)
-    {
-        this.label = label;
-    }
-
-    public List<TreeSelect> getChildren()
-    {
-        return children;
-    }
-
-    public void setChildren(List<TreeSelect> children)
-    {
-        this.children = children;
-    }
 }

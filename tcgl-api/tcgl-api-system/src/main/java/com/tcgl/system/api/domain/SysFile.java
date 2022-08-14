@@ -1,5 +1,7 @@
 package com.tcgl.system.api.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -8,6 +10,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 
  * @author ruoyi
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class SysFile
 {
     /**
@@ -40,11 +44,4 @@ public class SysFile
         this.url = url;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("name", getName())
-            .append("url", getUrl())
-            .toString();
-    }
 }

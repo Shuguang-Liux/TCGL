@@ -1,12 +1,14 @@
 package com.tcgl.system.domain.vo;
 
 import com.tcgl.common.core.utils.StringUtils;
+import lombok.Data;
 
 /**
  * 路由显示信息
  * 
  * @author tcgl
  */
+@Data
 public class MetaVo
 {
     /**
@@ -69,38 +71,4 @@ public class MetaVo
         return noCache;
     }
 
-    public void setNoCache(boolean noCache)
-    {
-        this.noCache = noCache;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-
-    public String getIcon()
-    {
-        return icon;
-    }
-
-    public void setIcon(String icon)
-    {
-        this.icon = icon;
-    }
-
-    public String getLink()
-    {
-        return link;
-    }
-
-    public void setLink(String link)
-    {
-        this.link = link;
-    }
 }

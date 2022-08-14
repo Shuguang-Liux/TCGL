@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tcgl.common.core.annotation.Excel;
 import com.tcgl.common.core.annotation.Excel.ColumnType;
 import com.tcgl.common.core.web.domain.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 系统访问记录表 sys_logininfor
  * 
  * @author tcgl
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class SysLogininfor extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -40,63 +44,4 @@ public class SysLogininfor extends BaseEntity
     @Excel(name = "访问时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date accessTime;
 
-    public Long getInfoId()
-    {
-        return infoId;
-    }
-
-    public void setInfoId(Long infoId)
-    {
-        this.infoId = infoId;
-    }
-
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getIpaddr()
-    {
-        return ipaddr;
-    }
-
-    public void setIpaddr(String ipaddr)
-    {
-        this.ipaddr = ipaddr;
-    }
-
-    public String getMsg()
-    {
-        return msg;
-    }
-
-    public void setMsg(String msg)
-    {
-        this.msg = msg;
-    }
-
-    public Date getAccessTime()
-    {
-        return accessTime;
-    }
-
-    public void setAccessTime(Date accessTime)
-    {
-        this.accessTime = accessTime;
-    }
 }
