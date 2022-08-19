@@ -2,6 +2,8 @@ package com.tcgl.system.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import com.tcgl.common.core.annotation.Excel;
@@ -15,6 +17,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("SYS_CONFIG")
 public class SysConfig extends BaseEntity
 {
     private static final long serialVersionUID = 1L;

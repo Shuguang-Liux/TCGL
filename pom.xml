@@ -38,6 +38,7 @@
         <poi.version>4.1.2</poi.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
+        <mybatis-plus-boot-stater.version>3.4.3.4</mybatis-plus-boot-stater.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -241,6 +242,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-stater.version}</version>
             </dependency>
 
 

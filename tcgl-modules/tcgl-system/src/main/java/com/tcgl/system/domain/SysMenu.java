@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -17,6 +18,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  * @author tcgl
  */
 @Data
+@TableName("SYS_MENU")
 public class SysMenu extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

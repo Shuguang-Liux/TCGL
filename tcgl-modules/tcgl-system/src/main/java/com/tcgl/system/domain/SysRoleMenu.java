@@ -1,5 +1,6 @@
 package com.tcgl.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author tcgl
  */
 @Data
+@TableName("SYS_ROLE_MENU")
 public class SysRoleMenu
 {
     /** 角色ID */

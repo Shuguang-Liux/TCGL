@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -23,6 +24,7 @@ import com.tcgl.job.util.CronUtils;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("SYS_JOB")
 public class SysJob extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

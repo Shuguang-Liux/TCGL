@@ -2,6 +2,9 @@ package com.tcgl.gen.domain;
 
 import javax.validation.constraints.NotBlank;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.tcgl.common.core.utils.StringUtils;
 import com.tcgl.common.core.web.domain.BaseEntity;
 import lombok.Data;
@@ -14,12 +17,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("GEN_TABLE_COLUMN")
 public class GenTableColumn extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * 编号
      */
+    @TableId(type = IdType.AUTO)
     private Long columnId;
 
     /**
@@ -170,9 +175,6 @@ public class GenTableColumn extends BaseEntity {
     public boolean isQuery(String isQuery) {
         return isQuery != null && StringUtils.equals("1", isQuery);
     }
-
-
-
 
 
     public boolean isSuperColumn() {

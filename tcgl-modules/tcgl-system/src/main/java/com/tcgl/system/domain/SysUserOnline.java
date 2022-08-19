@@ -1,5 +1,6 @@
 package com.tcgl.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author tcgl
  */
 @Data
+@TableName("SYS_USER_ONLINE")
 public class SysUserOnline {
     /**
      * 会话编号

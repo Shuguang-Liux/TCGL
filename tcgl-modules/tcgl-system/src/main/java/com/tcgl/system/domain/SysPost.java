@@ -3,6 +3,7 @@ package com.tcgl.system.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -16,6 +17,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  * @author tcgl
  */
 @Data
+@TableName("SYS_POST")
 public class SysPost extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
