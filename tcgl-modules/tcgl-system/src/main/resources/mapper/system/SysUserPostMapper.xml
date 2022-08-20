@@ -4,10 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysUserPostMapper">
 
-	<resultMap type="com.tcgl.system.domain.SysUserPost" id="SysUserPostResult">
-		<result property="userId"     column="user_id"      />
-		<result property="postId"     column="post_id"      />
-	</resultMap>
 
 	<delete id="deleteUserPostByUserId" parameterType="Long">
 		delete from sys_user_post where user_id=#{userId}

@@ -4,22 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysRoleMapper">
 
-	<resultMap type="com.tcgl.system.api.domain.SysRole" id="SysRoleResult">
-		<id     property="roleId"             column="role_id"               />
-		<result property="roleName"           column="role_name"             />
-		<result property="roleKey"            column="role_key"              />
-		<result property="roleSort"           column="role_sort"             />
-		<result property="dataScope"          column="data_scope"            />
-		<result property="menuCheckStrictly"  column="menu_check_strictly"   />
-		<result property="deptCheckStrictly"  column="dept_check_strictly"   />
-		<result property="status"             column="status"                />
-		<result property="delFlag"            column="del_flag"              />
-		<result property="createBy"           column="create_by"             />
-		<result property="createTime"         column="create_time"           />
-		<result property="updateBy"           column="update_by"             />
-		<result property="updateTime"         column="update_time"           />
-		<result property="remark"             column="remark"                />
-	</resultMap>
 	
 	<sql id="selectRoleVo">
 	    select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.menu_check_strictly, r.dept_check_strictly,
@@ -30,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        left join sys_dept d on u.dept_id = d.dept_id
     </sql>
     
-    <select id="selectRoleList" parameterType="com.tcgl.system.api.domain.SysRole" resultMap="SysRoleResult">
+    <select id="selectRoleList" parameterType="com.tcgl.system.api.domain.SysRole" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		where r.del_flag = '0'
 		<if test="roleId != null and roleId != 0">
@@ -56,12 +40,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by r.role_sort
 	</select>
     
-	<select id="selectRolePermissionByUserId" parameterType="Long" resultMap="SysRoleResult">
+	<select id="selectRolePermissionByUserId" parameterType="Long" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		WHERE r.del_flag = '0' and ur.user_id = #{userId}
 	</select>
 	
-	<select id="selectRoleAll" resultMap="SysRoleResult">
+	<select id="selectRoleAll" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 	</select>
 	
@@ -73,22 +57,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    where u.user_id = #{userId}
 	</select>
 	
-	<select id="selectRoleById" parameterType="Long" resultMap="SysRoleResult">
+	<select id="selectRoleById" parameterType="Long" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		where r.role_id = #{roleId}
 	</select>
 	
-	<select id="selectRolesByUserName" parameterType="String" resultMap="SysRoleResult">
+	<select id="selectRolesByUserName" parameterType="String" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		WHERE r.del_flag = '0' and u.user_name = #{userName}
 	</select>
 	
-	<select id="checkRoleNameUnique" parameterType="String" resultMap="SysRoleResult">
+	<select id="checkRoleNameUnique" parameterType="String" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		 where r.role_name=#{roleName} limit 1
 	</select>
 	
-	<select id="checkRoleKeyUnique" parameterType="String" resultMap="SysRoleResult">
+	<select id="checkRoleKeyUnique" parameterType="String" resultType="com.tcgl.system.api.domain.SysRole">
 		<include refid="selectRoleVo"/>
 		 where r.role_key=#{roleKey} limit 1
 	</select>

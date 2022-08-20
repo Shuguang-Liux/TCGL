@@ -4,30 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysDeptMapper">
 
-	<resultMap type="com.tcgl.system.api.domain.SysDept" id="SysDeptResult">
-		<id     property="deptId"     column="dept_id"     />
-		<result property="parentId"   column="parent_id"   />
-		<result property="ancestors"  column="ancestors"   />
-		<result property="deptName"   column="dept_name"   />
-		<result property="orderNum"   column="order_num"   />
-		<result property="leader"     column="leader"      />
-		<result property="phone"      column="phone"       />
-		<result property="email"      column="email"       />
-		<result property="status"     column="status"      />
-		<result property="delFlag"    column="del_flag"    />
-		<result property="parentName" column="parent_name" />
-		<result property="createBy"   column="create_by"   />
-		<result property="createTime" column="create_time" />
-		<result property="updateBy"   column="update_by"   />
-		<result property="updateTime" column="update_time" />
-	</resultMap>
-	
+
 	<sql id="selectDeptVo">
         select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time 
         from sys_dept d
     </sql>
     
-	<select id="selectDeptList" parameterType="com.tcgl.system.api.domain.SysDept" resultMap="SysDeptResult">
+	<select id="selectDeptList" parameterType="com.tcgl.system.api.domain.SysDept" resultType="com.tcgl.system.api.domain.SysDept">
         <include refid="selectDeptVo"/>
         where d.del_flag = '0'
 		<if test="deptId != null and deptId != 0">
@@ -72,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where del_flag = '0' and parent_id = #{deptId} limit 1
 	</select>
 	
-	<select id="selectChildrenDeptById" parameterType="Long" resultMap="SysDeptResult">
+	<select id="selectChildrenDeptById" parameterType="Long" resultType="com.tcgl.system.api.domain.SysDept">
 		select * from sys_dept where find_in_set(#{deptId}, ancestors)
 	</select>
 	

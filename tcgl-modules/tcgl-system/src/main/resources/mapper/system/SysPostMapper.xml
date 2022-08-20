@@ -4,25 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysPostMapper">
 
-	<resultMap type="com.tcgl.system.domain.SysPost" id="SysPostResult">
-		<id     property="postId"        column="post_id"       />
-		<result property="postCode"      column="post_code"     />
-		<result property="postName"      column="post_name"     />
-		<result property="postSort"      column="post_sort"     />
-		<result property="status"        column="status"        />
-		<result property="createBy"      column="create_by"     />
-		<result property="createTime"    column="create_time"   />
-		<result property="updateBy"      column="update_by"     />
-		<result property="updateTime"    column="update_time"   />
-		<result property="remark"        column="remark"        />
-	</resultMap>
 	
 	<sql id="selectPostVo">
         select post_id, post_code, post_name, post_sort, status, create_by, create_time, remark 
 		from sys_post
     </sql>
 	
-	<select id="selectPostList" parameterType="com.tcgl.system.domain.SysPost" resultMap="SysPostResult">
+	<select id="selectPostList" parameterType="com.tcgl.system.domain.SysPost" resultType="com.tcgl.system.domain.SysPost">
 	    <include refid="selectPostVo"/>
 		<where>
 			<if test="postCode != null and postCode != ''">
@@ -37,11 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<select id="selectPostAll" resultMap="SysPostResult">
+	<select id="selectPostAll" resultType="com.tcgl.system.domain.SysPost">
 		<include refid="selectPostVo"/>
 	</select>
 	
-	<select id="selectPostById" parameterType="Long" resultMap="SysPostResult">
+	<select id="selectPostById" parameterType="Long" resultType="com.tcgl.system.domain.SysPost">
 		<include refid="selectPostVo"/>
 		where post_id = #{postId}
 	</select>
@@ -54,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    where u.user_id = #{userId}
 	</select>
 	
-	<select id="selectPostsByUserName" parameterType="String" resultMap="SysPostResult">
+	<select id="selectPostsByUserName" parameterType="String" resultType="com.tcgl.system.domain.SysPost">
 		select p.post_id, p.post_name, p.post_code
 		from sys_post p
 			 left join sys_user_post up on up.post_id = p.post_id
@@ -62,12 +50,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where u.user_name = #{userName}
 	</select>
 	
-	<select id="checkPostNameUnique" parameterType="String" resultMap="SysPostResult">
+	<select id="checkPostNameUnique" parameterType="String" resultType="com.tcgl.system.domain.SysPost">
 		<include refid="selectPostVo"/>
 		 where post_name=#{postName} limit 1
 	</select>
 	
-	<select id="checkPostCodeUnique" parameterType="String" resultMap="SysPostResult">
+	<select id="checkPostCodeUnique" parameterType="String" resultType="com.tcgl.system.domain.SysPost">
 		<include refid="selectPostVo"/>
 		 where post_code=#{postCode} limit 1
 	</select>

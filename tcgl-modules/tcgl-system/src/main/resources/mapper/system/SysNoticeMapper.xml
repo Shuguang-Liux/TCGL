@@ -4,30 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysNoticeMapper">
     
-    <resultMap type="com.tcgl.system.domain.SysNotice" id="SysNoticeResult">
-        <result property="noticeId"       column="notice_id"       />
-        <result property="noticeTitle"    column="notice_title"    />
-        <result property="noticeType"     column="notice_type"     />
-        <result property="noticeContent"  column="notice_content"  />
-        <result property="status"         column="status"          />
-        <result property="createBy"       column="create_by"       />
-        <result property="createTime"     column="create_time"     />
-        <result property="updateBy"       column="update_by"       />
-        <result property="updateTime"     column="update_time"     />
-        <result property="remark"         column="remark"          />
-    </resultMap>
-    
+
     <sql id="selectNoticeVo">
         select notice_id, notice_title, notice_type, cast(notice_content as char) as notice_content, status, create_by, create_time, update_by, update_time, remark 
 		from sys_notice
     </sql>
     
-    <select id="selectNoticeById" parameterType="Long" resultMap="SysNoticeResult">
+    <select id="selectNoticeById" parameterType="Long" resultType="com.tcgl.system.domain.SysNotice">
         <include refid="selectNoticeVo"/>
         where notice_id = #{noticeId}
     </select>
     
-    <select id="selectNoticeList" parameterType="com.tcgl.system.domain.SysNotice" resultMap="SysNoticeResult">
+    <select id="selectNoticeList" parameterType="com.tcgl.system.domain.SysNotice" resultType="com.tcgl.system.domain.SysNotice">
         <include refid="selectNoticeVo"/>
         <where>
 			<if test="noticeTitle != null and noticeTitle != ''">

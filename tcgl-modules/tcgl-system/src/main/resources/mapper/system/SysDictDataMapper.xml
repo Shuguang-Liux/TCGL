@@ -4,28 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysDictDataMapper">
 	
-	<resultMap type="com.tcgl.system.api.domain.SysDictData" id="SysDictDataResult">
-		<id     property="dictCode"   column="dict_code"   />
-		<result property="dictSort"   column="dict_sort"   />
-		<result property="dictLabel"  column="dict_label"  />
-		<result property="dictValue"  column="dict_value"  />
-		<result property="dictType"   column="dict_type"   />
-		<result property="cssClass"   column="css_class"   />
-		<result property="listClass"  column="list_class"  />
-		<result property="isDefault"  column="is_default"  />
-		<result property="status"     column="status"      />
-		<result property="createBy"   column="create_by"   />
-		<result property="createTime" column="create_time" />
-		<result property="updateBy"   column="update_by"   />
-		<result property="updateTime" column="update_time" />
-	</resultMap>
-	
+
 	<sql id="selectDictDataVo">
         select dict_code, dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, create_by, create_time, remark 
 		from sys_dict_data
     </sql>
 
-	<select id="selectDictDataList" parameterType="com.tcgl.system.api.domain.SysDictData" resultMap="SysDictDataResult">
+	<select id="selectDictDataList" parameterType="com.tcgl.system.api.domain.SysDictData" resultType="com.tcgl.system.api.domain.SysDictData">
 	    <include refid="selectDictDataVo"/>
 		<where>
 		    <if test="dictType != null and dictType != ''">
@@ -41,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by dict_sort asc
 	</select>
 	
-	<select id="selectDictDataByType" parameterType="com.tcgl.system.api.domain.SysDictData" resultMap="SysDictDataResult">
+	<select id="selectDictDataByType" parameterType="com.tcgl.system.api.domain.SysDictData" resultType="com.tcgl.system.api.domain.SysDictData">
 		<include refid="selectDictDataVo"/>
 		where status = '0' and dict_type = #{dictType} order by dict_sort asc
 	</select>

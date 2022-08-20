@@ -4,23 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysDictTypeMapper">
 
-	<resultMap type="com.tcgl.system.api.domain.SysDictType" id="SysDictTypeResult">
-		<id     property="dictId"     column="dict_id"     />
-		<result property="dictName"   column="dict_name"   />
-		<result property="dictType"   column="dict_type"   />
-		<result property="status"     column="status"      />
-		<result property="createBy"   column="create_by"   />
-		<result property="createTime" column="create_time" />
-		<result property="updateBy"   column="update_by"   />
-		<result property="updateTime" column="update_time" />
-	</resultMap>
-	
+
 	<sql id="selectDictTypeVo">
         select dict_id, dict_name, dict_type, status, create_by, create_time, remark 
 		from sys_dict_type
     </sql>
 
-	<select id="selectDictTypeList" parameterType="com.tcgl.system.api.domain.SysDictType" resultMap="SysDictTypeResult">
+	<select id="selectDictTypeList" parameterType="com.tcgl.system.api.domain.SysDictType" resultType="com.tcgl.system.api.domain.SysDictType">
 	    <include refid="selectDictTypeVo"/>
 		<where>
 		    <if test="dictName != null and dictName != ''">
@@ -41,21 +31,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    </where>
 	</select>
 	
-	<select id="selectDictTypeAll" resultMap="SysDictTypeResult">
+	<select id="selectDictTypeAll" resultType="com.tcgl.system.api.domain.SysDictType">
 		<include refid="selectDictTypeVo"/>
 	</select>
 	
-	<select id="selectDictTypeById" parameterType="Long" resultMap="SysDictTypeResult">
+	<select id="selectDictTypeById" parameterType="Long" resultType="com.tcgl.system.api.domain.SysDictType">
 		<include refid="selectDictTypeVo"/>
 		where dict_id = #{dictId}
 	</select>
 	
-	<select id="selectDictTypeByType" parameterType="String" resultMap="SysDictTypeResult">
+	<select id="selectDictTypeByType" parameterType="String" resultType="com.tcgl.system.api.domain.SysDictType">
 		<include refid="selectDictTypeVo"/>
 		where dict_type = #{dictType}
 	</select>
 	
-	<select id="checkDictTypeUnique" parameterType="String" resultMap="SysDictTypeResult">
+	<select id="checkDictTypeUnique" parameterType="String" resultType="com.tcgl.system.api.domain.SysDictType">
 		<include refid="selectDictTypeVo"/>
 		where dict_type = #{dictType} limit 1
 	</select>

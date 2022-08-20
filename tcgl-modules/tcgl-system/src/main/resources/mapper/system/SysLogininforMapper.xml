@@ -4,21 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcgl.system.mapper.SysLogininforMapper">
 
-	<resultMap type="com.tcgl.system.api.domain.SysLogininfor" id="SysLogininforResult">
-		<id     property="infoId"        column="info_id"           />
-		<result property="userName"      column="user_name"         />
-		<result property="status"        column="status"            />
-		<result property="ipaddr"        column="ipaddr"            />
-		<result property="msg"           column="msg"               />
-		<result property="accessTime"    column="access_time"       />
-	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="com.tcgl.system.api.domain.SysLogininfor">
 		insert into sys_logininfor (user_name, status, ipaddr, msg, access_time)
 		values (#{userName}, #{status}, #{ipaddr}, #{msg}, sysdate())
 	</insert>
 	
-	<select id="selectLogininforList" parameterType="com.tcgl.system.api.domain.SysLogininfor" resultMap="SysLogininforResult">
+	<select id="selectLogininforList" parameterType="com.tcgl.system.api.domain.SysLogininfor" resultType="com.tcgl.system.api.domain.SysLogininfor">
 		select info_id, user_name, ipaddr, status, msg, access_time from sys_logininfor
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
