@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author tcgl
  */
 @Data
-@TableName("SYS_ROLE_MENU")
+@TableName("sys_role_menu")
 public class SysRoleMenu
 {
     /** 角色ID */

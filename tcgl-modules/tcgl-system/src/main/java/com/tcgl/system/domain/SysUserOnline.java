@@ -9,7 +9,7 @@ import lombok.Data;
  * @author tcgl
  */
 @Data
-@TableName("SYS_USER_ONLINE")
+@TableName("sys_user_online")
 public class SysUserOnline {
     /**
      * 会话编号

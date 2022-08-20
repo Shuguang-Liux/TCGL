@@ -18,7 +18,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  * @author tcgl
  */
 @Data
-@TableName("SYS_MENU")
+@TableName("sys_menu")
 public class SysMenu extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

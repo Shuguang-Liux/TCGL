@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -23,6 +24,7 @@ import com.tcgl.common.core.xss.Xss;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("sys_user")
 public class SysUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

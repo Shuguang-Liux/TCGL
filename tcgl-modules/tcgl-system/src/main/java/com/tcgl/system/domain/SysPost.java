@@ -17,7 +17,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  * @author tcgl
  */
 @Data
-@TableName("SYS_POST")
+@TableName("sys_post")
 public class SysPost extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

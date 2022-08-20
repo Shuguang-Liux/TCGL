@@ -3,6 +3,7 @@ package com.tcgl.system.api.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -18,6 +19,7 @@ import com.tcgl.common.core.web.domain.BaseEntity;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("sys_role")
 public class SysRole extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

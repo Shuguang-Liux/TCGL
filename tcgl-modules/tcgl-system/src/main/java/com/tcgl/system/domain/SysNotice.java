@@ -16,7 +16,7 @@ import com.tcgl.common.core.xss.Xss;
  * @author tcgl
  */
 @Data
-@TableName("SYS_NOTICE")
+@TableName("sys_notice")
 public class SysNotice extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

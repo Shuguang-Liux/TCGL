@@ -2,6 +2,7 @@ package com.tcgl.system.mapper;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tcgl.system.domain.SysConfig;
 
 /**
@@ -9,7 +10,7 @@ import com.tcgl.system.domain.SysConfig;
  *
  * @author tcgl
  */
-public interface SysConfigMapper {
+public interface SysConfigMapper extends BaseMapper<SysConfig> {
     /**
      * 查询参数配置信息
      *
