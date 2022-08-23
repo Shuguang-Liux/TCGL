@@ -2,12 +2,10 @@ package com.tcgl.common.log.enums;
 
 /**
  * 操作状态
- * 
- * @author tcgl
  *
+ * @author tcgl
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */

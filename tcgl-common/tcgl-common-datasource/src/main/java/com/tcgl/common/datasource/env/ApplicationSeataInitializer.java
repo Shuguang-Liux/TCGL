@@ -10,17 +10,14 @@ import org.springframework.core.env.ConfigurableEnvironment;
  *
  * @author ruoyi
  */
-public class ApplicationSeataInitializer implements EnvironmentPostProcessor, Ordered
-{
+public class ApplicationSeataInitializer implements EnvironmentPostProcessor, Ordered {
     @Override
-    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application)
-    {
+    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         System.setProperty("spring.main.allow-circular-references", "true");
     }
 
     @Override
-    public int getOrder()
-    {
+    public int getOrder() {
         return Ordered.LOWEST_PRECEDENCE;
     }
 }

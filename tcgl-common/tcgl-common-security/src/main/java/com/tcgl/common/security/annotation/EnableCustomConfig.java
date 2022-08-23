@@ -25,8 +25,7 @@ import com.tcgl.common.security.feign.FeignAutoConfiguration;
 // 开启线程异步执行
 @EnableAsync
 // 自动加载类
-@Import({ ApplicationConfig.class, FeignAutoConfiguration.class })
-public @interface EnableCustomConfig
-{
+@Import({ApplicationConfig.class, FeignAutoConfiguration.class})
+public @interface EnableCustomConfig {
 
 }

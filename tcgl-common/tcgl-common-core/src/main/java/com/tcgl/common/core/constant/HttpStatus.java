@@ -2,11 +2,10 @@ package com.tcgl.common.core.constant;
 
 /**
  * 返回状态码
- * 
+ *
  * @author tcgl
  */
-public class HttpStatus
-{
+public class HttpStatus {
     /**
      * 操作成功
      */
