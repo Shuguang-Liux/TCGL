@@ -3,7 +3,6 @@ package com.tcgl.system.controller;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +23,8 @@ import com.tcgl.common.security.utils.SecurityUtils;
 import com.tcgl.system.api.domain.SysDept;
 import com.tcgl.system.service.ISysDeptService;
 
+import javax.annotation.Resource;
+
 /**
  * 部门信息
  * 
@@ -33,7 +34,7 @@ import com.tcgl.system.service.ISysDeptService;
 @RequestMapping("/dept")
 public class SysDeptController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysDeptService deptService;
 
     /**

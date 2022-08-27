@@ -1,7 +1,6 @@
 package com.tcgl.system.controller;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +20,8 @@ import com.tcgl.common.security.utils.SecurityUtils;
 import com.tcgl.system.domain.SysNotice;
 import com.tcgl.system.service.ISysNoticeService;
 
+import javax.annotation.Resource;
+
 /**
  * 公告 信息操作处理
  * 
@@ -30,7 +31,7 @@ import com.tcgl.system.service.ISysNoticeService;
 @RequestMapping("/notice")
 public class SysNoticeController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysNoticeService noticeService;
 
     /**

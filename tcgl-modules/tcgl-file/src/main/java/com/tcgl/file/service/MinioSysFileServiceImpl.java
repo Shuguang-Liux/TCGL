@@ -1,12 +1,13 @@
 package com.tcgl.file.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.tcgl.file.config.MinioConfig;
 import com.tcgl.file.utils.FileUploadUtils;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+
+import javax.annotation.Resource;
 
 /**
  * Minio 文件存储
@@ -16,10 +17,10 @@ import io.minio.PutObjectArgs;
 @Service
 public class MinioSysFileServiceImpl implements ISysFileService
 {
-    @Autowired
+    @Resource
     private MinioConfig minioConfig;
 
-    @Autowired
+    @Resource
     private MinioClient client;
 
     /**

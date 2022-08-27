@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.core.constant.Constants;
 import com.tcgl.common.core.constant.UserConstants;
@@ -25,6 +24,8 @@ import com.tcgl.system.mapper.SysRoleMapper;
 import com.tcgl.system.mapper.SysRoleMenuMapper;
 import com.tcgl.system.service.ISysMenuService;
 
+import javax.annotation.Resource;
+
 /**
  * 菜单 业务层处理
  * 
@@ -35,13 +36,13 @@ public class SysMenuServiceImpl implements ISysMenuService
 {
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 
-    @Autowired
+    @Resource
     private SysMenuMapper menuMapper;
 
-    @Autowired
+    @Resource
     private SysRoleMapper roleMapper;
 
-    @Autowired
+    @Resource
     private SysRoleMenuMapper roleMenuMapper;
 
     /**

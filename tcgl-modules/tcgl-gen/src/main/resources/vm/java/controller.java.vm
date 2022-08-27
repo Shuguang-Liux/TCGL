@@ -34,7 +34,7 @@ import com.tcgl.common.core.web.page.TableDataInfo;
 @RequestMapping("/${businessName}")
 public class ${ClassName}Controller extends BaseController
 {
-    @Autowired
+    @Resource
     private I${ClassName}Service ${className}Service;
 
     /**

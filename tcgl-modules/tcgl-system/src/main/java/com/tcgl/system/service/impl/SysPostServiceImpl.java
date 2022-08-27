@@ -1,7 +1,6 @@
 package com.tcgl.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.core.constant.UserConstants;
 import com.tcgl.common.core.exception.ServiceException;
@@ -11,6 +10,8 @@ import com.tcgl.system.mapper.SysPostMapper;
 import com.tcgl.system.mapper.SysUserPostMapper;
 import com.tcgl.system.service.ISysPostService;
 
+import javax.annotation.Resource;
+
 /**
  * 岗位信息 服务层处理
  * 
@@ -19,10 +20,10 @@ import com.tcgl.system.service.ISysPostService;
 @Service
 public class SysPostServiceImpl implements ISysPostService
 {
-    @Autowired
+    @Resource
     private SysPostMapper postMapper;
 
-    @Autowired
+    @Resource
     private SysUserPostMapper userPostMapper;
 
     /**

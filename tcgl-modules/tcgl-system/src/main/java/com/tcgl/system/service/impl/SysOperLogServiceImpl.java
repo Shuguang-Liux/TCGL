@@ -1,11 +1,12 @@
 package com.tcgl.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.system.api.domain.SysOperLog;
 import com.tcgl.system.mapper.SysOperLogMapper;
 import com.tcgl.system.service.ISysOperLogService;
+
+import javax.annotation.Resource;
 
 /**
  * 操作日志 服务层处理
@@ -15,7 +16,7 @@ import com.tcgl.system.service.ISysOperLogService;
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService
 {
-    @Autowired
+    @Resource
     private SysOperLogMapper operLogMapper;
 
     /**

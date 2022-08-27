@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import com.tcgl.gateway.service.ValidateCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FastByteArrayOutputStream;
 import com.google.code.kaptcha.Producer;
@@ -34,10 +33,10 @@ public class ValidateCodeServiceImpl implements ValidateCodeService
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
-    @Autowired
+    @Resource
     private CaptchaProperties captchaProperties;
 
     /**

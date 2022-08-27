@@ -1,11 +1,12 @@
 package com.tcgl.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.system.api.domain.SysLogininfor;
 import com.tcgl.system.mapper.SysLogininforMapper;
 import com.tcgl.system.service.ISysLogininforService;
+
+import javax.annotation.Resource;
 
 /**
  * 系统访问日志情况信息 服务层处理
@@ -16,7 +17,7 @@ import com.tcgl.system.service.ISysLogininforService;
 public class SysLogininforServiceImpl implements ISysLogininforService
 {
 
-    @Autowired
+    @Resource
     private SysLogininforMapper logininforMapper;
 
     /**

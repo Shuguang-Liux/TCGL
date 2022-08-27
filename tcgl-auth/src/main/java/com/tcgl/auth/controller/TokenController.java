@@ -1,8 +1,8 @@
 package com.tcgl.auth.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +25,10 @@ import com.tcgl.system.api.model.LoginUser;
  */
 @RestController
 public class TokenController {
-    @Autowired
+    @Resource
     private TokenService tokenService;
 
-    @Autowired
+    @Resource
     private SysLoginService sysLoginService;
 
     @PostMapping("login")

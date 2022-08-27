@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.core.constant.UserConstants;
 import com.tcgl.common.core.exception.ServiceException;
@@ -21,6 +20,8 @@ import com.tcgl.system.mapper.SysDeptMapper;
 import com.tcgl.system.mapper.SysRoleMapper;
 import com.tcgl.system.service.ISysDeptService;
 
+import javax.annotation.Resource;
+
 /**
  * 部门管理 服务实现
  * 
@@ -29,10 +30,10 @@ import com.tcgl.system.service.ISysDeptService;
 @Service
 public class SysDeptServiceImpl implements ISysDeptService
 {
-    @Autowired
+    @Resource
     private SysDeptMapper deptMapper;
 
-    @Autowired
+    @Resource
     private SysRoleMapper roleMapper;
 
     /**

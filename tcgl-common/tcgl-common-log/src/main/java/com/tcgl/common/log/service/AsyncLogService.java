@@ -1,6 +1,5 @@
 package com.tcgl.common.log.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.core.constant.SecurityConstants;

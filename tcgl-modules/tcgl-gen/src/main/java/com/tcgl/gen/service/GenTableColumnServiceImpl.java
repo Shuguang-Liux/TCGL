@@ -2,7 +2,6 @@ package com.tcgl.gen.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.core.text.Convert;
 import com.tcgl.gen.domain.GenTableColumn;

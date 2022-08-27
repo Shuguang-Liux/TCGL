@@ -1,7 +1,6 @@
 package com.tcgl.system.controller;
 
 import java.io.IOException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +24,8 @@ import com.tcgl.system.api.domain.SysUser;
 import com.tcgl.system.api.model.LoginUser;
 import com.tcgl.system.service.ISysUserService;
 
+import javax.annotation.Resource;
+
 /**
  * 个人信息 业务处理
  * 
@@ -34,13 +35,13 @@ import com.tcgl.system.service.ISysUserService;
 @RequestMapping("/user/profile")
 public class SysProfileController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysUserService userService;
     
-    @Autowired
+    @Resource
     private TokenService tokenService;
     
-    @Autowired
+    @Resource
     private RemoteFileService remoteFileService;
 
     /**

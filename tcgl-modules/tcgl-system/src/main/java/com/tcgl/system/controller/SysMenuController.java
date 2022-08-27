@@ -1,7 +1,6 @@
 package com.tcgl.system.controller;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,8 @@ import com.tcgl.common.security.utils.SecurityUtils;
 import com.tcgl.system.domain.SysMenu;
 import com.tcgl.system.service.ISysMenuService;
 
+import javax.annotation.Resource;
+
 /**
  * 菜单信息
  * 
@@ -31,7 +32,7 @@ import com.tcgl.system.service.ISysMenuService;
 @RequestMapping("/menu")
 public class SysMenuController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysMenuService menuService;
 
     /**

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +22,8 @@ import com.tcgl.system.api.model.LoginUser;
 import com.tcgl.system.domain.SysUserOnline;
 import com.tcgl.system.service.ISysUserOnlineService;
 
+import javax.annotation.Resource;
+
 /**
  * 在线用户监控
  * 
@@ -32,10 +33,10 @@ import com.tcgl.system.service.ISysUserOnlineService;
 @RequestMapping("/online")
 public class SysUserOnlineController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysUserOnlineService userOnlineService;
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     @RequiresPermissions("monitor:online:list")

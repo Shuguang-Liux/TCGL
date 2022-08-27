@@ -2,8 +2,8 @@ package com.tcgl.system.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +35,10 @@ import com.tcgl.system.service.ISysDictTypeService;
 @RequestMapping("/dict/data")
 public class SysDictDataController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysDictDataService dictDataService;
     
-    @Autowired
+    @Resource
     private ISysDictTypeService dictTypeService;
 
     @RequiresPermissions("system:dict:list")

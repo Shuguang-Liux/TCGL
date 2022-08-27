@@ -1,12 +1,13 @@
 package com.tcgl.file.service;
 
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+
+import javax.annotation.Resource;
 
 /**
  * FastDFS 文件存储
@@ -22,7 +23,7 @@ public class FastDfsSysFileServiceImpl implements ISysFileService
     @Value("${fdfs.domain}")
     public String domain;
 
-    @Autowired
+    @Resource
     private FastFileStorageClient storageClient;
 
     /**

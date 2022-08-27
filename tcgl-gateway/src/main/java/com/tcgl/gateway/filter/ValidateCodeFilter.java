@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.tcgl.gateway.service.ValidateCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -18,6 +17,8 @@ import com.tcgl.common.core.utils.StringUtils;
 import com.tcgl.gateway.config.properties.CaptchaProperties;
 import reactor.core.publisher.Flux;
 
+import javax.annotation.Resource;
+
 /**
  * 验证码过滤器
  *
@@ -28,10 +29,10 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
 {
     private final static String[] VALIDATE_URL = new String[] { "/auth/login", "/auth/register" };
 
-    @Autowired
+    @Resource
     private ValidateCodeService validateCodeService;
 
-    @Autowired
+    @Resource
     private CaptchaProperties captchaProperties;
 
     private static final String CODE = "code";

@@ -3,8 +3,8 @@ package com.tcgl.common.security.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.tcgl.common.core.constant.CacheConstants;
 import com.tcgl.common.core.constant.SecurityConstants;
@@ -25,7 +25,7 @@ import com.tcgl.system.api.model.LoginUser;
 @Component
 public class TokenService
 {
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     protected static final long MILLIS_SECOND = 1000;

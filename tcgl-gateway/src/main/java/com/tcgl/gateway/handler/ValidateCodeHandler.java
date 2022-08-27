@@ -3,7 +3,6 @@ package com.tcgl.gateway.handler;
 import java.io.IOException;
 
 import com.tcgl.gateway.service.ValidateCodeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -14,6 +13,8 @@ import com.tcgl.common.core.exception.CaptchaException;
 import com.tcgl.common.core.web.domain.AjaxResult;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+
 /**
  * 验证码获取
  *
@@ -22,7 +23,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class ValidateCodeHandler implements HandlerFunction<ServerResponse>
 {
-    @Autowired
+    @Resource
     private ValidateCodeService validateCodeService;
 
     @Override

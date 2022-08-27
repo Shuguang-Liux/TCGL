@@ -1,7 +1,6 @@
 package com.tcgl.gateway.filter;
 
 import java.nio.charset.StandardCharsets;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -25,6 +24,8 @@ import io.netty.buffer.ByteBufAllocator;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+
 /**
  * 跨站脚本过滤器
  *
@@ -35,7 +36,7 @@ import reactor.core.publisher.Mono;
 public class XssFilter implements GlobalFilter, Ordered
 {
     // 跨站脚本的 xss 配置，nacos自行添加
-    @Autowired
+    @Resource
     private XssProperties xss;
 
     @Override

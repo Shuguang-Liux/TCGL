@@ -1,6 +1,5 @@
 package com.tcgl.auth.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.tcgl.common.core.constant.Constants;
 import com.tcgl.common.core.constant.SecurityConstants;

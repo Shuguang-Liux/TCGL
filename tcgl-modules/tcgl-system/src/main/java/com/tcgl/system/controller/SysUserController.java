@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,19 +47,19 @@ import com.tcgl.system.service.ISysUserService;
 @RequestMapping("/user")
 public class SysUserController extends BaseController
 {
-    @Autowired
+    @Resource
     private ISysUserService userService;
 
-    @Autowired
+    @Resource
     private ISysRoleService roleService;
 
-    @Autowired
+    @Resource
     private ISysPostService postService;
 
-    @Autowired
+    @Resource
     private ISysPermissionService permissionService;
 
-    @Autowired
+    @Resource
     private ISysConfigService configService;
 
     /**

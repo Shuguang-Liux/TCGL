@@ -2,7 +2,6 @@ package com.tcgl.gateway.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -21,6 +20,8 @@ import com.tcgl.gateway.config.properties.IgnoreWhiteProperties;
 import io.jsonwebtoken.Claims;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+
 /**
  * 网关鉴权
  * 
@@ -32,10 +33,10 @@ public class AuthFilter implements GlobalFilter, Ordered
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
     // 排除过滤的 uri 地址，nacos自行添加
-    @Autowired
+    @Resource
     private IgnoreWhiteProperties ignoreWhite;
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
 

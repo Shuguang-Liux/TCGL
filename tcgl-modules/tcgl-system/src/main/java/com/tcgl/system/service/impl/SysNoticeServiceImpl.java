@@ -1,11 +1,12 @@
 package com.tcgl.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.system.domain.SysNotice;
 import com.tcgl.system.mapper.SysNoticeMapper;
 import com.tcgl.system.service.ISysNoticeService;
+
+import javax.annotation.Resource;
 
 /**
  * 公告 服务层实现
@@ -15,7 +16,7 @@ import com.tcgl.system.service.ISysNoticeService;
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService
 {
-    @Autowired
+    @Resource
     private SysNoticeMapper noticeMapper;
 
     /**

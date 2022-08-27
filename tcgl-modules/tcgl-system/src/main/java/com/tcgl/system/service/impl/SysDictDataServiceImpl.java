@@ -1,12 +1,13 @@
 package com.tcgl.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.common.security.utils.DictUtils;
 import com.tcgl.system.api.domain.SysDictData;
 import com.tcgl.system.mapper.SysDictDataMapper;
 import com.tcgl.system.service.ISysDictDataService;
+
+import javax.annotation.Resource;
 
 /**
  * 字典 业务层处理
@@ -16,7 +17,7 @@ import com.tcgl.system.service.ISysDictDataService;
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService
 {
-    @Autowired
+    @Resource
     private SysDictDataMapper dictDataMapper;
 
     /**

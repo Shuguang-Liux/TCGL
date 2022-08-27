@@ -2,20 +2,21 @@ package com.tcgl.system.service.impl;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tcgl.system.api.domain.SysUser;
 import com.tcgl.system.service.ISysMenuService;
 import com.tcgl.system.service.ISysPermissionService;
 import com.tcgl.system.service.ISysRoleService;
 
+import javax.annotation.Resource;
+
 @Service
 public class SysPermissionServiceImpl implements ISysPermissionService
 {
-    @Autowired
+    @Resource
     private ISysRoleService roleService;
 
-    @Autowired
+    @Resource
     private ISysMenuService menuService;
 
     /**
