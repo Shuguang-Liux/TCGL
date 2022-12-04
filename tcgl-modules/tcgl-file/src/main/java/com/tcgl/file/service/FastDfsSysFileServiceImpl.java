@@ -11,12 +11,11 @@ import javax.annotation.Resource;
 
 /**
  * FastDFS 文件存储
- * 
+ *
  * @author tcgl
  */
 @Service
-public class FastDfsSysFileServiceImpl implements ISysFileService
-{
+public class FastDfsSysFileServiceImpl implements ISysFileService {
     /**
      * 域名或本机访问地址
      */
@@ -28,14 +27,13 @@ public class FastDfsSysFileServiceImpl implements ISysFileService
 
     /**
      * FastDfs文件上传接口
-     * 
+     *
      * @param file 上传的文件
      * @return 访问地址
      * @throws Exception
      */
     @Override
-    public String uploadFile(MultipartFile file) throws Exception
-    {
+    public String uploadFile(MultipartFile file) throws Exception {
         StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(),
                 FilenameUtils.getExtension(file.getOriginalFilename()), null);
         return domain + "/" + storePath.getFullPath();

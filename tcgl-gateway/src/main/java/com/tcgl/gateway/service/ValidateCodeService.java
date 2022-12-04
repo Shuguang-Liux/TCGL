@@ -1,6 +1,7 @@
 package com.tcgl.gateway.service;
 
 import java.io.IOException;
+
 import com.tcgl.common.core.exception.CaptchaException;
 import com.tcgl.common.core.web.domain.AjaxResult;
 
@@ -9,8 +10,7 @@ import com.tcgl.common.core.web.domain.AjaxResult;
  *
  * @author tcgl
  */
-public interface ValidateCodeService
-{
+public interface ValidateCodeService {
     /**
      * 生成验证码
      */

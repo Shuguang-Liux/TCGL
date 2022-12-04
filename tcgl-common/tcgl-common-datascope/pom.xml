@@ -8,20 +8,20 @@
         <version>3.4.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>tcgl-common-datascope</artifactId>
-	
+
     <description>
         tcgl-common-datascope权限范围
     </description>
 
     <dependencies>
-		
+
         <!-- tcgl Common Security -->
         <dependency>
             <groupId>com.tcgl</groupId>
             <artifactId>tcgl-common-security</artifactId>
         </dependency>
-        
+
     </dependencies>
 </project>

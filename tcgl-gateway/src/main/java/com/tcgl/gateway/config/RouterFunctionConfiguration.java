@@ -12,19 +12,17 @@ import javax.annotation.Resource;
 
 /**
  * 路由配置信息
- * 
+ *
  * @author ruoyi
  */
 @Configuration
-public class RouterFunctionConfiguration
-{
+public class RouterFunctionConfiguration {
     @Resource
     private ValidateCodeHandler validateCodeHandler;
 
     @SuppressWarnings("rawtypes")
     @Bean
-    public RouterFunction routerFunction()
-    {
+    public RouterFunction routerFunction() {
         return RouterFunctions.route(
                 RequestPredicates.GET("/code").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
                 validateCodeHandler);

@@ -2,6 +2,7 @@ package com.tcgl.common.security.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import com.tcgl.common.core.constant.SecurityConstants;
@@ -18,13 +19,10 @@ import com.tcgl.system.api.model.LoginUser;
  *
  * @author tcgl
  */
-public class HeaderInterceptor implements AsyncHandlerInterceptor
-{
+public class HeaderInterceptor implements AsyncHandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
-    {
-        if (!(handler instanceof HandlerMethod))
-        {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (!(handler instanceof HandlerMethod)) {
             return true;
         }
 
@@ -33,11 +31,9 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor
         SecurityContextHolder.setUserKey(ServletUtils.getHeader(request, SecurityConstants.USER_KEY));
 
         String token = SecurityUtils.getToken();
-        if (StringUtils.isNotEmpty(token))
-        {
+        if (StringUtils.isNotEmpty(token)) {
             LoginUser loginUser = AuthUtil.getLoginUser(token);
-            if (StringUtils.isNotNull(loginUser))
-            {
+            if (StringUtils.isNotNull(loginUser)) {
                 AuthUtil.verifyLoginUserExpire(loginUser);
                 SecurityContextHolder.set(SecurityConstants.LOGIN_USER, loginUser);
             }
@@ -47,8 +43,7 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception
-    {
+            throws Exception {
         SecurityContextHolder.remove();
     }
 }

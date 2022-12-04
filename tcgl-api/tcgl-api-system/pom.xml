@@ -8,7 +8,7 @@
         <version>3.4.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>tcgl-api-system</artifactId>
 
     <description>
@@ -16,7 +16,7 @@
     </description>
 
     <dependencies>
-		
+
         <!-- tcgl Common Core-->
         <dependency>
             <groupId>com.tcgl</groupId>
@@ -30,7 +30,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-        
+
     </dependencies>
 
 </project>

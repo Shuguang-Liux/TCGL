@@ -11,12 +11,11 @@ import javax.annotation.Resource;
 
 /**
  * Minio 文件存储
- * 
+ *
  * @author tcgl
  */
 @Service
-public class MinioSysFileServiceImpl implements ISysFileService
-{
+public class MinioSysFileServiceImpl implements ISysFileService {
     @Resource
     private MinioConfig minioConfig;
 
@@ -25,14 +24,13 @@ public class MinioSysFileServiceImpl implements ISysFileService
 
     /**
      * 本地文件上传接口
-     * 
+     *
      * @param file 上传的文件
      * @return 访问地址
      * @throws Exception
      */
     @Override
-    public String uploadFile(MultipartFile file) throws Exception
-    {
+    public String uploadFile(MultipartFile file) throws Exception {
         String fileName = FileUploadUtils.extractFilename(file);
         PutObjectArgs args = PutObjectArgs.builder()
                 .bucket(minioConfig.getBucketName())

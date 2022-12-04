@@ -25,9 +25,8 @@ import javax.annotation.Resource;
  * @author tcgl
  */
 @Component
-public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
-{
-    private final static String[] VALIDATE_URL = new String[] { "/auth/login", "/auth/register" };
+public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object> {
+    private final static String[] VALIDATE_URL = new String[]{"/auth/login", "/auth/register"};
 
     @Resource
     private ValidateCodeService validateCodeService;
@@ -40,33 +39,27 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
     private static final String UUID = "uuid";
 
     @Override
-    public GatewayFilter apply(Object config)
-    {
+    public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
 
             // 非登录/注册请求或验证码关闭，不处理
-            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), VALIDATE_URL) || !captchaProperties.getEnabled())
-            {
+            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), VALIDATE_URL) || !captchaProperties.getEnabled()) {
                 return chain.filter(exchange);
             }
 
-            try
-            {
+            try {
                 String rspStr = resolveBodyFromRequest(request);
                 JSONObject obj = JSONObject.parseObject(rspStr);
                 validateCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
             }
             return chain.filter(exchange);
         };
     }
 
-    private String resolveBodyFromRequest(ServerHttpRequest serverHttpRequest)
-    {
+    private String resolveBodyFromRequest(ServerHttpRequest serverHttpRequest) {
         // 获取请求体
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();

@@ -41,10 +41,10 @@
     <select id="selectDbTableColumnsByName" parameterType="String" resultType="com.tcgl.gen.domain.GenTableColumn">
         select column_name,
                (IF((is_nullable = 'no' <![CDATA[ && ]]> column_key != 'PRI'), '1', null)) as is_required,
-               (IF(column_key = 'PRI', '1', '0'))                           as is_pk,
-               ordinal_position                                             as sort,
+               (IF(column_key = 'PRI', '1', '0'))                               as is_pk,
+               ordinal_position                                                 as sort,
                column_comment,
-               (IF(extra = 'auto_increment', '1', '0'))                     as is_increment,
+               (IF(extra = 'auto_increment', '1', '0'))                         as is_increment,
                column_type
         from information_schema.columns
         where table_schema = (select database())

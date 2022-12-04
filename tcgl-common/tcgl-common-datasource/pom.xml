@@ -8,16 +8,16 @@
         <version>3.4.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>tcgl-common-datasource</artifactId>
-	
+
     <description>
         tcgl-common-datasource多数据源
     </description>
 
     <dependencies>
 
-		<!-- Druid -->
+        <!-- Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -30,7 +30,7 @@
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${dynamic-ds.version}</version>
         </dependency>
-        
+
         <!-- SpringBoot Seata -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

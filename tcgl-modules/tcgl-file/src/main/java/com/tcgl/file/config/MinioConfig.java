@@ -14,8 +14,7 @@ import io.minio.MinioClient;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "minio")
-public class MinioConfig
-{
+public class MinioConfig {
     /**
      * 服务地址
      */
@@ -38,8 +37,7 @@ public class MinioConfig
 
 
     @Bean
-    public MinioClient getMinioClient()
-    {
+    public MinioClient getMinioClient() {
         return MinioClient.builder().endpoint(url).credentials(accessKey, secretKey).build();
     }
 }

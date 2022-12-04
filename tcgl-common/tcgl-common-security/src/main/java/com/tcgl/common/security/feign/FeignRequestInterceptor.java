@@ -2,6 +2,7 @@ package com.tcgl.common.security.feign;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Component;
 import com.tcgl.common.core.constant.SecurityConstants;
 import com.tcgl.common.core.utils.ServletUtils;
@@ -12,33 +13,27 @@ import feign.RequestTemplate;
 
 /**
  * feign 请求拦截器
- * 
+ *
  * @author tcgl
  */
 @Component
-public class FeignRequestInterceptor implements RequestInterceptor
-{
+public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
-    public void apply(RequestTemplate requestTemplate)
-    {
+    public void apply(RequestTemplate requestTemplate) {
         HttpServletRequest httpServletRequest = ServletUtils.getRequest();
-        if (StringUtils.isNotNull(httpServletRequest))
-        {
+        if (StringUtils.isNotNull(httpServletRequest)) {
             Map<String, String> headers = ServletUtils.getHeaders(httpServletRequest);
             // 传递用户信息请求头，防止丢失
             String userId = headers.get(SecurityConstants.DETAILS_USER_ID);
-            if (StringUtils.isNotEmpty(userId))
-            {
+            if (StringUtils.isNotEmpty(userId)) {
                 requestTemplate.header(SecurityConstants.DETAILS_USER_ID, userId);
             }
             String userName = headers.get(SecurityConstants.DETAILS_USERNAME);
-            if (StringUtils.isNotEmpty(userName))
-            {
+            if (StringUtils.isNotEmpty(userName)) {
                 requestTemplate.header(SecurityConstants.DETAILS_USERNAME, userName);
             }
             String authentication = headers.get(SecurityConstants.AUTHORIZATION_HEADER);
-            if (StringUtils.isNotEmpty(authentication))
-            {
+            if (StringUtils.isNotEmpty(authentication)) {
                 requestTemplate.header(SecurityConstants.AUTHORIZATION_HEADER, authentication);
             }
 
