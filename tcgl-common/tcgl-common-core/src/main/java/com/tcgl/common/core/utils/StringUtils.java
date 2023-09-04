@@ -423,7 +423,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param size 字符串指定长度
      * @return 返回数字的字符串格式，该字符串为指定长度。
      */
-    public static final String padl(final Number num, final int size) {
+    public static String padl(final Number num, final int size) {
         return padl(num.toString(), size, '0');
     }
 
