@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -181,11 +182,7 @@ public class ServletUtils {
      * @return 编码后的内容
      */
     public static String urlEncode(String str) {
-        try {
-            return URLEncoder.encode(str, Constants.UTF8);
-        } catch (UnsupportedEncodingException e) {
-            return StringUtils.EMPTY;
-        }
+        return URLEncoder.encode(str, StandardCharsets.UTF_8);
     }
 
     /**
@@ -195,11 +192,7 @@ public class ServletUtils {
      * @return 解码后的内容
      */
     public static String urlDecode(String str) {
-        try {
-            return URLDecoder.decode(str, Constants.UTF8);
-        } catch (UnsupportedEncodingException e) {
-            return StringUtils.EMPTY;
-        }
+        return URLDecoder.decode(str, StandardCharsets.UTF_8);
     }
 
     /**
